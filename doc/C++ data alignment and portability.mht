@@ -1,0 +1,1153 @@
+Content-Type: multipart/related; start=<op.mhtml.1253351241937.a0fb712254393c1e@192.168.1.200>; boundary=----------L6dEbYeAa0GNAvJVPgIP9O
+Content-Location: http://www.codesynthesis.com/~boris/blog/2009/04/06/cxx-data-alignment-portability/
+Subject: =?utf-8?Q?C++=20data=20alignment=20and=20portability?=
+MIME-Version: 1.0
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=default.htm
+Content-Type: text/html; charset=UTF-8; name=default.htm
+Content-Id: <op.mhtml.1253351241937.a0fb712254393c1e@192.168.1.200>
+Content-Location: http://www.codesynthesis.com/~boris/blog/2009/04/06/cxx-data-alignment-portability/
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://w=
+ww.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml" dir=3D"ltr">
+
+<head profile=3D"http://gmpg.org/xfn/11">
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8"=
+ />
+
+<title>  C++ data alignment and portability</title>
+
+<meta name=3D"generator" content=3D"WordPress 2.2.2" /> <!-- leave this =
+for stats -->
+
+<link rel=3D"stylesheet" href=3D"http://codesynthesis.com/~boris/blog/wp=
+-content/themes/plain/style.css" type=3D"text/css" media=3D"screen" />
+<link rel=3D"alternate" type=3D"application/rss+xml" title=3D"A Sense of=
+ Design RSS Feed" href=3D"http://codesynthesis.com/~boris/blog/feed/" />=
+
+<link rel=3D"pingback" href=3D"http://codesynthesis.com/~boris/blog/xmlr=
+pc.php" />
+
+<style type=3D"text/css" media=3D"screen">
+
+	#page { background: url("http://codesynthesis.com/~boris/blog/wp-conten=
+t/themes/plain/images/kubrickbgwide.jpg") repeat-y top; border: none; }
+
+</style>
+
+	<link rel=3D"EditURI" type=3D"application/rsd+xml" title=3D"RSD" href=3D=
+"http://codesynthesis.com/~boris/blog/xmlrpc.php?rsd" />
+</head>
+<body>
+<div id=3D"page">
+
+<div id=3D"header">
+
+</div>
+
+
+<hr />
+
+	<div id=3D"content" class=3D"widecolumn">
+
+	=
+
+		<div class=3D"navigation">
+			<div class=3D"alignleft">&laquo; <a href=3D"http://codesynthesis.com/=
+~boris/blog/2009/03/29/parallel-compilation-command-line/">Parallel comp=
+ilation from the command line</a></div>
+			<div class=3D"alignright"><a href=3D"http://codesynthesis.com/~boris/=
+blog/2009/04/20/code-synthesis-xsde-3-0-x-released/">CodeSynthesis XSD/e=
+ 3.0.x released</a> &raquo;</div>
+		</div>
+
+		<div class=3D"post" id=3D"post-28">
+			<h2><a href=3D"http://codesynthesis.com/~boris/blog/2009/04/06/cxx-da=
+ta-alignment-portability/" rel=3D"bookmark" title=3D"Permanent Link: C++=
+ data alignment and portability">C++ data alignment and portability</a><=
+/h2>
+
+			<div class=3D"entry">
+				<p>The upcoming version of <a href=3D"http://www.codesynthesis.com/p=
+roducts/xsde/">XSD/e</a> adds support for serializing the object model t=
+o a number of binary data representation formats, such as XDR and CDR. I=
+t also supports custom binary formats. One person was beta-testing this =
+functionality with the goal of achieving the fastest serialization/deser=
+ialization possible. He was willing to sacrifice the wider format portab=
+ility across platforms as long as it was interoperable between iPhone OS=
+ and Mac OS X.</p>
+<p>Since both iPhone OS on ARM and Mac OS X on x86 are little-endian and=
+ have compatible fundamental type sizes (e.g., <code>int</code>, <code>l=
+ong</code>, <code>double</code>, etc., except for <code>long double</cod=
+e> which is not used in XSD/e), the natural first optimization was to ma=
+ke the custom format&#8217;s endianess and type sizes to be those of the=
+ target platforms. This allowed optimizations such as reading/writing se=
+quences of fundamental types with a <code>memcpy()</code> call instead o=
+f a <code>for</code> loop. After achieving this improvements he then sug=
+gested what would seem as a natural next optimization. If we can handle =
+fundamental types with <code>memcpy()</code>, why can&#8217;t we do the =
+same for simple classes that don&#8217;t have any pointer members (fixed=
+-length types in the XSD/e object model terms)? When designing a &#8220;=
+raw&#8221; binary format like this, most people are aware of the type si=
+ze and endianess compatibility issues. But there is another issue that w=
+e need to be aware of if we try to do this kind of optimizations: data a=
+lignment compatibility.</p>
+<p>First, a quick introduction to the data alignment and C++ data struct=
+ure padding. For a more detailed treatment of this subject, see, for exa=
+mple, <a href=3D"http://www.ibm.com/developerworks/library/pa-dalign/">D=
+ata alignment: Straighten up and fly right</a>. Modern CPUs are capable =
+of reading data from memory in chunks, for example, 2, 4, 8, or 16 bytes=
+ at a time. But due to the memory organization, the addresses of these c=
+hunks should be multiples of their sizes. If an address satisfies this r=
+equirement, then it is said to be properly aligned. The consequences of =
+accessing data via an unaligned address can range from slower execution =
+to program termination, depending on the CPU architecture and operating =
+system.</p>
+<p>Now let&#8217;s move one level up to C++. The language provides a set=
+ of fundamental types of various sizes. To make manipulating variables o=
+f these types fast, the generated object code will try to use CPU instru=
+ctions which read/write the whole data type at once. This in turn means =
+that the variables of these types should be placed in memory in a way th=
+at makes their addresses suitably aligned. As a result, besides size, ea=
+ch fundamental type has another property: its alignment requirement. It =
+may seem that the fundamental type&#8217;s alignment is the same as its =
+size. This is not generally the case since the most suitable CPU instruc=
+tion for a particular type may only be able to access a part of its data=
+ at a time. For example, a CPU may only be able to read at most 4 bytes =
+at a time so a 64-bit <code>long long</code> type will have a size of 8 =
+and an alignment of 4.</p>
+<p>GNU <code>g++</code> has a language extension that allows you to quer=
+y a type&#8217;s alignment. The following program prints fundamental typ=
+e sizes and alignment requirements of a platform for which it was compil=
+ed:</p>
+<pre>
+#include &lt;iostream&gt;
+&nbsp;
+using namespace std;
+&nbsp;
+template &lt;typename T&gt;
+void print (char const* name)
+{
+&nbsp;&nbsp;cerr &lt;&lt; name
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt; &quot; sizeof =3D &quot; &=
+lt;&lt; sizeof (T)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt; &quot; alignof =3D &quot; =
+&lt;&lt; __alignof__ (T)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt; endl;
+}
+&nbsp;
+int main ()
+{
+&nbsp;&nbsp;print&lt;bool&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;(&quot;bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&quot;);
+&nbsp;&nbsp;print&lt;wchar_t&gt;&nbsp;&nbsp;&nbsp;&nbsp; (&quot;wchar_t&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;);
+&nbsp;&nbsp;print&lt;short&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (&quo=
+t;short int&nbsp;&nbsp;&nbsp;&nbsp; &quot;);
+&nbsp;&nbsp;print&lt;int&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp; (&quot;int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp; &quot;);
+&nbsp;&nbsp;print&lt;long&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;(&quot;long int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;);
+&nbsp;&nbsp;print&lt;long long&gt;&nbsp;&nbsp; (&quot;long long int &quo=
+t;);
+&nbsp;&nbsp;print&lt;float&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (&quo=
+t;float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;);
+&nbsp;&nbsp;print&lt;double&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quo=
+t;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;);
+&nbsp;&nbsp;print&lt;long double&gt; (&quot;long double&nbsp;&nbsp; &quo=
+t;);
+&nbsp;&nbsp;print&lt;void*&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (&quo=
+t;void*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;);
+}
+</pre>
+<p>The following listing shows the result of running this program on a 3=
+2-bit x86 GNU/Linux machine. Notice the size and alignment of the <code>=
+long long</code>, <code>double</code>, and <code>long double</code> type=
+s.</p>
+<pre>
+bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =
+=3D 1&nbsp;&nbsp;alignof =3D 1
+wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 4&nbsp=
+;&nbsp;alignof =3D 4
+short int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 2&nbsp;&nbsp;ali=
+gnof =3D 2
+int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;sizeof =3D 4&nbsp;&nbsp;alignof =3D 4
+long int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =3D 4&nbsp;&nbsp;ali=
+gnof =3D 4
+long long int&nbsp;&nbsp;sizeof =3D 8&nbsp;&nbsp;alignof =3D 4
+float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =
+=3D 4&nbsp;&nbsp;alignof =3D 4
+double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =3D 8&nbsp=
+;&nbsp;alignof =3D 4
+long double&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 12 alignof =3D 4
+void*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =
+=3D 4&nbsp;&nbsp;alignof =3D 4
+</pre>
+<p>[<i>Actually, the above program shows that the alignment of <code>lon=
+g long</code> and <code>double</code> is 8. This is, however, not the ca=
+se since the IA32 ABI specifies that their alignments should be 4. Also,=
+ if you wrap <code>long long</code> or <code>double</code> in a struct a=
+nd take the alignment of the resulting type, it will be 4, not 8.</i>]</=
+p>
+<p>And the following listing is for 64-bit x86-64 GNU/Linux:</p>
+<pre>
+bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =
+=3D 1&nbsp;&nbsp;alignof =3D 1
+wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 4&nbsp=
+;&nbsp;alignof =3D 4
+short int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 2&nbsp;&nbsp;ali=
+gnof =3D 2
+int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;sizeof =3D 4&nbsp;&nbsp;alignof =3D 4
+long int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =3D 8&nbsp;&nbsp;ali=
+gnof =3D 8
+long long int&nbsp;&nbsp;sizeof =3D 8&nbsp;&nbsp;alignof =3D 8
+float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =
+=3D 4&nbsp;&nbsp;alignof =3D 4
+double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sizeof =3D 8&nbsp=
+;&nbsp;alignof =3D 8
+long double&nbsp;&nbsp;&nbsp;&nbsp;sizeof =3D 16 alignof =3D 16
+void*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sizeof =
+=3D 8&nbsp;&nbsp;alignof =3D 8
+</pre>
+<p>The C++ compiler also needs to make sure that member variables in a s=
+truct or class are properly aligned. For this, the compiler may insert p=
+adding bytes between member variables. Additionally, to make sure that e=
+ach element in an array of a user-defined type is aligned, the compiler =
+may add some extra padding after the last data member. Consider the foll=
+owing struct as an example:</p>
+<pre>
+struct foo
+{
+&nbsp;&nbsp;bool a;
+&nbsp;&nbsp;short b;
+&nbsp;&nbsp;long long c;
+&nbsp;&nbsp;bool d;
+};
+</pre>
+<p>The compiler always assumes that an instance of <code>foo</code> will=
+ start at an address aligned to the most strict alignment requirement of=
+ all of <code>foo</code>&#8217;s members, which is <code>long long</code=
+> in our case. This is actually how the alignment requirements of a user=
+-defined types are calculated. Assuming we are on x86-64 with <code>shor=
+t</code> having the alignment of 2 and <code>long long</code> &mdash; of=
+ 8, to make the <code>b</code> member suitably aligned, the compiler nee=
+ds to insert an extra byte between <code>a</code> and <code>b</code>. Si=
+milarly, to align <code>c</code>, the compiler needs to insert four byte=
+s after <code>b</code>. Finally, to make sure the next element in an arr=
+ay of <code>foo</code>s starts at an address aligned to 8, the compiler =
+needs to add seven bytes of padding at the end of struct <code>foo</code=
+>. Here is the actual memory image of this struct with the positions of =
+each member when the object is allocated at an example address 8:</p>
+<pre>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp; // addr&nbsp;&nbsp;alignment
+struct foo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 8&nbsp;&nbsp;&nbsp;&nb=
+sp; 8
+{
+&nbsp;&nbsp;bool a;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 8&=
+nbsp;&nbsp;&nbsp;&nbsp; 1
+&nbsp;&nbsp;char pad1[1];
+&nbsp;&nbsp;short b;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 10&nbsp;&nbs=
+p;&nbsp;&nbsp;2
+&nbsp;&nbsp;char pad2[4]
+&nbsp;&nbsp;long long c;&nbsp;&nbsp; // 16&nbsp;&nbsp;&nbsp;&nbsp;8
+&nbsp;&nbsp;bool d;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 24=
+&nbsp;&nbsp;&nbsp;&nbsp;1
+&nbsp;&nbsp;char pad3[7];
+};&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; // 32&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;(next element i=
+n array)
+</pre>
+<p>Now back to our question about serializing simple classes with <code>=
+memcpy()</code>. It should be clear by now that to be able to save a use=
+r-defined type with <code>memcpy()</code> on one platform and then load =
+it on another, the two platforms not only need to have fundamental types=
+ of the same sizes and be of the same endianess, but they also need to b=
+e <em>alignment-compatible</em>. Otherwise, the positions of members ins=
+ide the type and even the size of the type itself can differ. And this i=
+s exactly what happens if we try to move the data corresponding to <code=
+>foo</code> between x86 and x86-64 even though the types used in the str=
+uct are of the same size. Here is what the padded memory image of <code>=
+foo</code> on x86 looks like:</p>
+<pre>
+struct foo
+{
+&nbsp;&nbsp;bool a;
+&nbsp;&nbsp;char pad1[1];
+&nbsp;&nbsp;short b;
+&nbsp;&nbsp;long long c;
+&nbsp;&nbsp;bool d;
+&nbsp;&nbsp;char pad2[3];
+};
+</pre>
+<p>Because the alignment of <code>long long</code> on this platform is 4=
+, padding between <code>b</code> and <code>c</code> is no longer necessa=
+ry and padding at the end of the struct is 3 bytes instead of 7. The siz=
+e of this struct is 16 bytes on x86 and 24 bytes on x86-64.</p>
+<p>[<i>For those curious about Mac OS X on x86 and iPhone OS on ARM, the=
+y are alignment-compatible, as long as you don&#8217;t use <code>long do=
+uble</code> which has different sizes on the two platforms.</i>]</p>
+
+				=
+
+				<p class=3D"postmetadata alt">
+					<small>
+						This entry was posted
+												on Monday, April 6th, 2009 at 4:05 am						and is filed unde=
+r <a href=3D"http://codesynthesis.com/~boris/blog/category/mobileembedde=
+d/" title=3D"View all posts in Mobile/Embedded" rel=3D"category tag">Mob=
+ile/Embedded</a>,  <a href=3D"http://codesynthesis.com/~boris/blog/categ=
+ory/c-compilers/gcc-g/" title=3D"View all posts in GCC g++" rel=3D"categ=
+ory tag">GCC g++</a>,  <a href=3D"http://codesynthesis.com/~boris/blog/c=
+ategory/c-compilers/" title=3D"View all posts in C++ Compilers" rel=3D"c=
+ategory tag">C++ Compilers</a>,  <a href=3D"http://codesynthesis.com/~bo=
+ris/blog/category/c/" title=3D"View all posts in C++" rel=3D"category ta=
+g">C++</a>.
+						You can follow any responses to this entry through the <a href=3D'=
+http://codesynthesis.com/~boris/blog/2009/04/06/cxx-data-alignment-porta=
+bility/feed/'>RSS 2.0</a> feed.
+
+													Both comments and pings are currently closed.
+
+						=
+
+					</small>
+				</p>
+
+			</div>
+		</div>
+
+	=
+
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are closed. -->
+		<p class=3D"nocomments">Comments are closed.</p>
+
+	=
+
+
+
+	=
+
+	</div>
+
+
+<hr />
+<div id=3D"footer">
+<!-- If you'd like to support WordPress, having the "powered by" link so=
+mewhere on your blog is the best way, it's our only promotion or adverti=
+sing. -->
+	<p>
+		A Sense of Design is proudly powered by
+		<a href=3D"http://wordpress.org/">WordPress</a>
+		<br /><a href=3D"http://codesynthesis.com/~boris/blog/feed/">Entries (=
+RSS)</a>
+		and <a href=3D"http://codesynthesis.com/~boris/blog/comments/feed/">Co=
+mments (RSS)</a>.
+		<!-- 18 queries. 0.686 seconds. -->
+	</p>
+</div>
+</div>
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubr=
+ick/ -->
+
+		</body>
+</html>
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=kubrickbgcolor.jpg
+Content-Type: image/jpeg; name=kubrickbgcolor.jpg
+Content-Location: http://codesynthesis.com/~boris/blog/wp-content/themes/plain/images/kubrickbgcolor.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4AJkFkb2Jl
+AGTAAAAAAQMAFQQDBgoNAAABoQAAAcIAAAIJAAACKv/bAIQABgQEBAUEBgUFBgkG
+BQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8f
+Hx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f
+Hx8fHx8fHx8fHx8fHx8fHx8fHx8f/8IAEQgAPAA8AwERAAIRAQMRAf/EAG8AAQEA
+AAAAAAAAAAAAAAAAAAAHAQEAAAAAAAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAAAA
+AABgEQEAAAAAAAAAAAAAAAAAAABgEgEAAAAAAAAAAAAAAAAAAABgEwEAAAAAAAAA
+AAAAAAAAAABg/9oADAMBAAIRAxEAAAGiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+/9oACAEBAAEFAgH/2gAIAQIAAQUCAf/aAAgBAwABBQIB/9oACAECAgY/AgH/2gAI
+AQMCBj8CAf/aAAgBAQEGPwIB/9oACAEBAwE/IQH/2gAIAQIDAT8hAf/aAAgBAwMB
+PyEB/9oADAMBAAIRAxEAABCSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSST/2gAIAQED
+AT8QAf/aAAgBAgMBPxAB/9oACAEDAwE/EAH/2Q==
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=header.jpg
+Content-Type: image/jpeg; name=header.jpg
+Content-Location: http://codesynthesis.com/~boris/blog/wp-content/themes/plain/images/header.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEASABIAAD/4QAWRXhpZgAATU0AKgAAAAgAAAAAAAD//gAX
+Q3JlYXRlZCB3aXRoIFRoZSBHSU1Q/9sAQwAFBAQEBAMFBAQEBgUFBggNCAgHBwgQ
+CwwJDRMQFBMSEBISFBcdGRQWHBYSEhojGhweHyEhIRQZJCckICYdICEg/9sAQwEF
+BgYIBwgPCAgPIBUSFSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAg/8AAEQgAEQL3AwEiAAIRAQMRAf/EABsAAQEBAQADAQAA
+AAAAAAAAAAAGAQQCAwUI/8QAKxAAAQQCAgECBQQDAAAAAAAAAAIEBRVVkwEDEQYS
+ITJCUXE2UnOzYbHB/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAIB/8QAFhEBAQEAAAAA
+AAAAAAAAAAAAAAEx/9oADAMBAAIRAxEAPwD9Snr7u/obo9/f3I6kcfUtXjg8+efH
+HPP2+Jvp1n0POvsl3PXx29q+xfX1e/jzx1pQrlPw+3PnjnkDguofKNdqRdQ+Ua7U
+lqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq
+6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o1
+2pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D
+5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtS
+WoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAir
+qHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjX
+akXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUP
+lGu1JagCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1J
+agCKuofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKu
+ofKNdqRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNd
+qRdQ+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+
+Ua7UlqAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7Ul
+qAIq6h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqRdQ+Ua7UlqAIq6
+h8o12pF1D5RrtSWoAirqHyjXakXUPlGu1JagCKuofKNdqTr6e/ocI9/R3I7Uc/Uh
+XngqiZ9RM+hn19cu26+OrtR2I6+32ceOOxK1cJ+P35888cgAZ588cf5+IAxfyK/H
+/Dr9Jfpnp/m7/wC5YAH2/p5/Jv2AJutaACkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAABn7gDKqM+nj8nxPVv6Z7v5uj+5AAmDk6/kT+OP9AA0f/Z
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=kubrickfooter.jpg
+Content-Type: image/jpeg; name=kubrickfooter.jpg
+Content-Location: http://codesynthesis.com/~boris/blog/wp-content/themes/plain/images/kubrickfooter.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4AJkFkb2Jl
+AGTAAAAAAQMAFQQDBgoNAAADsgAABMcAAAhIAAAJif/bAIQABgQEBAUEBgUFBgkG
+BQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8f
+Hx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f
+Hx8fHx8fHx8fHx8fHx8fHx8fHx8f/8IAEQgAPwL4AwERAAIRAQMRAf/EAJ8AAQEB
+AQEBAAAAAAAAAAAAAAAEAgMBBwEBAAAAAAAAAAAAAAAAAAAAABAAAwAABgIDAQAA
+AAAAAAAAABIDEGABETMEIAIwkCJAEQADAQACAgMBAQAAAAAAAAAAsTPRAQIQcWAR
+soFBEgEAAAAAAAAAAAAAAAAAAACQEwEBAAMAAQMDBAMAAAAAAAAAEQFhkRAhMaFg
+8FFAUJBxQYHR/9oADAMBAAIRAxEAAAH6IdCwAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAjOYNlgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAABGYBorAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJDIBUAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASgGCoAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAlNg5FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAABOdQTFIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+MUgkPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0rP/aAAgBAQAB
+BQI6nBlvt8GHV4Mt9rgw6vDlvtcOHW4ct9nhw6/FlvscWHX4st9jiwhr+Tf59/5N
+/Lf5d/i3x3N/Dfy3x38N/G+v5w9p6a+6WEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhL
+CWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwl
+hLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYSwlhLCWEsJYS
+wlhLCWPWemnuf//aAAgBAgABBQL6+P/aAAgBAwABBQL6+P/aAAgBAgIGPwI+P//a
+AAgBAwIGPwI+P//aAAgBAQEGPwI499v1z8c599f1x5499v1z8c599f1x5499v1z8
+c599f1x5499n8c599X5/vZ/HP71fn+8v45/eH554/wB455+38c44/wB554+n5++v
+b67FFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRY
+UWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYU
+WFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUWFFhRYUW
+FFhRYUWFFhRYUWFFhRYUWFEffbt99vH/2gAIAQEDAT8hz7Z+ngADHthn2z4gVfF8
+VVVVVVVVVVVVVVVfFVVVVVVVVVVVfFVVVVVVVVVVVVVVVVVVVVVVVVVVVV8QMe2G
+fbLJBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+VWSDHthn2yz+w/zVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+VVVVVVVVVVVVn9h/ix7YZ9ss/T9nrVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+VVVVVVVVVVVVVVVVVVVVVVVVVVn6/s9LHthn2yy9H2+tVVVVVVVVVVVVVVVVVVVV
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWXq+30se2GfZh1Wf3mPjK+FV
+VVVVVVVXwqqqqqqqqqqqqvhVVV8Kqqqqqqq+FVVVVVfCr5Kq+FVVXwq+FVfCqqsO
+qz+s18YY9vGSflMz6/7x/wBb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb
+3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb
+3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb
+3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb3FvcW9xb
+3FvcW9xb3P8Algn4Tc+v+sf88f/aAAgBAgMBPyH+Pj//2gAIAQMDAT8h/j4//9oA
+DAMBAAIRAxEAABASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSQCA
+QQAAAACAAAAAAQAQAAAQAASAAAAAACAAAQAAACAAAQAACAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+SSSSSSSSSSSQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQASSS
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSQAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAT/2gAIAQEDAT8Q+Nn6e8ePjYfGyz8sF8L+oAAABf0YAAF/bAAAAAAA
+GZj42HxspfThAAAAAAAAAAAAAAACwj42HxspfThYQAAAEAAAAIEQSACwv42HxspY
+fpy//wD/AP8A/wD/AP8A/wD/AP8A/wD/AGwr+Nh8bKGD6c//AP8A/wD/AP8A/wD/
+AP8A/wD/AP8A9MD/AI2Huf0xLZgfwX+B+nL/AP3/AP8A33/7/s77d+ZbcD+SfyL2
+P68YsePHox+i7MZxfw/ZgCBAgQIECBAgQIECBAgQIECBAgQIECBAgQIECBAgQIEH
+7KgQIECBAgQIECBAgQIECBAgQIECBAgQIECBAgQIECBAg/QoECBAgQIECBAgQIEC
+BABxY8+PRj9F0Yxi/h4//9oACAECAwE/EP4+P//aAAgBAwMBPxD+Pj//2Q==
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=style.css
+Content-Type: text/css; name=style.css
+Content-Location: http://codesynthesis.com/~boris/blog/wp-content/themes/plain/style.css
+Content-Transfer-Encoding: 8bit
+
+/*  
+Theme Name: Plain
+Description: Simple WordPress theme based on Kubrick.
+*/
+
+/* Begin Typography & Colors */
+body {
+	font-size: 62.5%; /* Resets 1em to 10px */
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	background: #d5d6d7 url('images/kubrickbgcolor.jpg');
+	color: #333;
+	text-align: center;
+	}
+
+#page {
+	background-color: white;
+	border: 1px solid #959596;
+	text-align: left;
+	}
+
+#header {
+	background: url('images/header.jpg') no-repeat bottom center;
+	height: 17px; 
+	width: 759px;
+	}
+
+#content {
+	font-size: 1.2em
+	}
+
+.widecolumn .entry p {
+	font-size: 1.05em;
+	}
+
+.narrowcolumn .entry p {
+	font-size: 1.05em;
+	}
+
+.narrowcolumn .entry, .widecolumn .entry {
+	line-height: 1.4em;
+	}
+
+.widecolumn {
+	line-height: 1.6em;
+	}
+
+.narrowcolumn .postmetadata {
+	text-align: center;
+	}
+
+.alt {
+	background-color: #f8f8f8;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	}
+
+#footer {
+	background: #eee url('images/kubrickfooter.jpg') no-repeat top; 
+	border: none;
+	}
+
+small {
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-size: 0.9em;
+	line-height: 1.5em;
+	}
+
+h1, h2, h3 {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	font-weight: bold;
+	}
+
+h1 {
+	font-size: 4em;
+	text-align: center;
+	font-weight: normal;
+	}
+
+h2 {
+	font-size: 1.6em;
+	font-weight: normal;
+	}
+
+h2.pagetitle {
+	font-size: 1.6em;
+	}
+
+#sidebar h2 {
+	font-family: 'Lucida Grande', Verdana, Sans-Serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	}
+
+h3 {
+	font-size: 1.3em;
+	}
+
+h1, h1 a, h1 a:hover, h1 a:visited {
+	text-decoration: none;
+	color: white;
+	}
+
+h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited {
+	color: #333;
+	}
+
+h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite {
+	text-decoration: none;
+	}
+
+.entry p a:visited {
+	color: #b85b5a;
+	}
+
+.commentlist li, #commentform input, #commentform textarea {
+	font: 0.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	}
+
+.commentlist li {
+	font-weight: bold;
+	}
+
+.commentlist cite, .commentlist cite a {
+	font-weight: bold;
+	font-style: normal;
+	font-size: 1.1em;
+	}
+
+.commentlist p {
+	font-weight: normal;
+	line-height: 1.5em;
+	text-transform: none;
+	}
+
+#commentform p {
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	}
+
+.commentmetadata {
+	font-weight: normal;
+	}
+
+#sidebar {
+	font: 1em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	}
+
+small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
+	color: #777;
+	}
+
+code {
+	/*font: 1.1em 'Courier New', Courier, Fixed;*/
+	font-size: 1.2em;
+	font-weight: bold;
+	}
+
+
+pre {
+	font-size: 1.25em;
+	font-weight: normal;
+	}
+
+
+acronym, abbr, span.caps
+{
+	font-size: 0.9em;
+	letter-spacing: .07em;
+	}
+
+a, h2 a:hover, h3 a:hover {
+	color: #06c;
+	text-decoration: none;
+	}
+
+a:hover {
+	color: #147;
+	text-decoration: underline;
+	}
+
+#wp-calendar #prev a, #wp-calendar #next a {
+	font-size: 9pt;
+	}
+
+#wp-calendar a {
+	text-decoration: none;
+	}
+
+#wp-calendar caption {
+	font: bold 1.3em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	text-align: center;
+	}
+
+#wp-calendar th {
+	font-style: normal;
+	text-transform: capitalize;
+	}
+/* End Typography & Colors */
+
+
+
+/* Begin Structure */
+body {
+	margin: 0 0 20px 0;
+	padding: 0; 
+	}
+
+#page {
+	background-color: white;
+	margin: 20px auto;
+	padding: 0;
+	width: 760px;
+	border: 1px solid #959596;
+	}
+
+.narrowcolumn {
+	float: left;
+	padding: 0 0 20px 45px;
+	margin: 0px 0 0;
+	width: 450px;
+	}
+
+.widecolumn {
+	padding: 10px 0 20px 0;
+	margin: 5px 0 0 150px;
+	width: 450px;
+	}
+
+.post {
+	margin: 0 0 40px;
+	text-align: justify;
+	}
+
+.post hr {
+	display: block;
+	}
+
+.widecolumn .post {
+	margin: 0;
+	}
+
+.narrowcolumn .postmetadata {
+	padding-top: 5px;
+	}
+
+.widecolumn .postmetadata {
+	margin: 30px 0;
+	}
+
+.widecolumn .smallattachment {
+	text-align: center;
+	float: left;
+	width: 128px;
+	margin: 5px 5px 5px 0px;
+}
+
+.widecolumn .attachment {
+	text-align: center;
+	margin: 5px 0px;
+}
+
+.postmetadata {
+	clear: left;
+}
+
+#footer {
+	padding: 0;
+	margin: 0 auto;
+	width: 760px;
+	clear: both;
+	}
+
+#footer p {
+	margin: 0;
+	padding: 20px 0;
+	text-align: center;
+	}
+/* End Structure */
+
+
+
+/*	Begin Headers */
+h1 {
+	padding-top: 70px;
+	margin: 0;
+	}
+
+h2 {
+	margin: 30px 0 0;
+	}
+
+h2.pagetitle {
+	margin-top: 30px;
+	text-align: center;
+}
+
+#sidebar h2 {
+	margin: 5px 0 0;
+	padding: 0;
+	}
+
+h3 {
+	padding: 0;
+	margin: 30px 0 0;
+	}
+
+h3.comments {
+	padding: 0;
+	margin: 40px auto 20px ;
+	}
+/* End Headers */
+
+
+
+/* Begin Images */
+p img {
+	padding: 0;
+	max-width: 100%;
+	}
+
+/*	Using 'class="alignright"' on an image will (who would've
+	thought?!) align the image to the right. And using 'class="centered',
+	will of course center the image. This is much better than using
+	align="center", being much more futureproof (and valid) */
+
+img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+	}
+
+img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+	}
+
+.alignright {
+	float: right;
+	}
+
+.alignleft {
+	float: left
+	}
+/* End Images */
+
+
+
+/* Begin Lists
+
+	Special stylized non-IE bullets
+	Do not work in Internet Explorer, which merely default to normal bullets. */
+
+html>body .entry ul {
+	margin-left: 0px;
+	padding: 0 0 0 30px;
+	list-style: none;
+	padding-left: 10px;
+	text-indent: -10px;
+	} 
+
+html>body .entry li {
+	margin: 7px 0 8px 10px;
+	}
+
+.entry ul li:before, #sidebar ul ul li:before {
+	content: "\00BB \0020";
+	}
+
+.entry ol {
+	padding: 0 0 0 35px;
+	margin: 0;
+	}
+
+.entry ol li {
+	margin: 0;
+	padding: 0;
+	}
+	
+.entry ol li {
+	text-align: justify;
+}
+
+.entry ul li {
+	text-align: justify;
+}
+
+ol.short li {
+	text-align: left;
+}
+
+ul.short li {
+	text-align: left;
+}
+
+
+.postmetadata ul, .postmetadata li {
+	display: inline;
+	list-style-type: none;
+	list-style-image: none;
+	}
+
+#sidebar ul, #sidebar ul ol {
+	margin: 0;
+	padding: 0;
+	}
+
+#sidebar ul li {
+	list-style-type: none;
+	list-style-image: none;
+	margin-bottom: 15px;
+	}
+
+#sidebar ul p, #sidebar ul select {
+	margin: 5px 0 8px;
+	}
+
+#sidebar ul ul, #sidebar ul ol {
+	margin: 5px 0 0 10px;
+	}
+
+#sidebar ul ul ul, #sidebar ul ol {
+	margin: 0 0 0 10px;
+	}
+
+ol li, #sidebar ul ol li {
+	list-style: decimal outside;
+	}
+
+#sidebar ul ul li, #sidebar ul ol li {
+	margin: 3px 0 0;
+	padding: 0;
+	}
+/* End Entry Lists */
+
+
+
+/* Begin Form Elements */
+#searchform {
+	margin: 10px auto;
+	padding: 5px 3px; 
+	text-align: center;
+	}
+
+#sidebar #searchform #s {
+	width: 108px;
+	padding: 2px;
+	}
+
+#sidebar #searchsubmit {
+	padding: 1px;
+	}
+
+.entry form { /* This is mainly for password protected posts, makes them look better. */
+	text-align:center;
+	}
+
+select {
+	width: 130px;
+	}
+
+#commentform input {
+	width: 170px;
+	padding: 2px;
+	margin: 5px 5px 1px 0;
+	}
+
+#commentform textarea {
+	width: 100%;
+	padding: 2px;
+	}
+
+#commentform #submit {
+	margin: 0;
+	float: right;
+	}
+/* End Form Elements */
+
+
+
+/* Begin Comments*/
+.alt {
+	margin: 0;
+	padding: 10px;
+	}
+
+.commentlist {
+	padding: 0;
+	text-align: justify;
+	}
+
+.commentlist li {
+	margin: 15px 0 3px;
+	padding: 5px 10px 3px;
+	list-style: none;
+	}
+
+.commentlist p {
+	margin: 10px 5px 10px 0;
+	}
+
+#commentform p {
+	margin: 5px 0;
+	}
+
+.nocomments {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	}
+
+.commentmetadata {
+	margin: 0;
+	display: block;
+	}
+/* End Comments */
+
+
+
+/* Begin Sidebar */
+#sidebar
+{
+	padding: 20px 0 10px 0;
+	margin-left: 545px;
+	width: 190px;
+	}
+
+#sidebar form {
+	margin: 0;
+	}
+/* End Sidebar */
+
+
+
+/* Begin Calendar */
+#wp-calendar {
+	empty-cells: show;
+	margin: 10px auto 0;
+	width: 155px;
+	}
+
+#wp-calendar #next a {
+	padding-right: 10px;
+	text-align: right;
+	}
+
+#wp-calendar #prev a {
+	padding-left: 10px;
+	text-align: left;
+	}
+
+#wp-calendar a {
+	display: block;
+	}
+
+#wp-calendar caption {
+	text-align: center;
+	width: 100%;
+	}
+
+#wp-calendar td {
+	padding: 3px 0;
+	text-align: center;
+	}
+
+#wp-calendar td.pad:hover { /* Doesn't work in IE */
+	background-color: #fff; }
+/* End Calendar */
+
+
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+	cursor: help;
+	}
+
+acronym, abbr {
+	border-bottom: 1px dashed #999;
+	}
+
+blockquote {
+	margin: 15px 30px 0 10px;
+	padding-left: 20px;
+	border-left: 5px solid #ddd;
+	}
+
+blockquote cite {
+	margin: 5px 0 0;
+	display: block;
+	}
+
+.center {
+	text-align: center;
+	}
+
+hr {
+	display: none;
+	}
+
+a img {
+	border: none;
+	}
+
+.navigation {
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 60px;
+	}
+/* End Various Tags & Classes*/
+
+h2 {
+  text-align: left;
+}
+
+table.std {
+  margin: 2em 0 2em 0;
+
+  border-collapse   : collapse;
+  border            : 1px solid;
+  border-color      : #000000;
+
+  font-size: 0.9em;
+}
+
+table.std th, table.std td {
+  border  : 1px solid;
+  padding : 0.6em 0.8em 0.6em 0.8em;
+}
+
+table.std th {
+  background : #cde8f6;
+}
+
+
+------------L6dEbYeAa0GNAvJVPgIP9O
+Content-Disposition: inline; filename=kubrickbgwide.jpg
+Content-Type: image/jpeg; name=kubrickbgwide.jpg
+Content-Location: http://codesynthesis.com/~boris/blog/wp-content/themes/plain/images/kubrickbgwide.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4AJkFkb2Jl
+AGTAAAAAAQMAFQQDBgoNAAACcQAAArcAAAO1AAAD9P/bAIQABgQEBAUEBgUFBgkG
+BQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8f
+Hx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f
+Hx8fHx8fHx8fHx8fHx8fHx8fHx8f/8IAEQgAKAL4AwERAAIRAQMRAf/EAIEAAQEB
+AQAAAAAAAAAAAAAAAAADBAcBAQAAAAAAAAAAAAAAAAAAAAAQAAMBAQEAAAAAAAAA
+AAAAAGAzBBAAgBEAAgMBAQAAAAAAAAAAAAAAAXEQArJgABIBAAAAAAAAAAAAAAAA
+AAAAgBMBAAMBAQAAAAAAAAAAAAAAAQBgMaGA/9oADAMBAAIRAxEAAAHohU1gAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGQkCprAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAMhIFTWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAZCQKmsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AyEgVNYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkJH/2gAIAQEA
+AQUC6RA3WjJEDdaMkQN1oyRA3WjJEDdaO//aAAgBAgABBQL23//aAAgBAwABBQL2
+3//aAAgBAgIGPwJt/wD/2gAIAQMCBj8Cbf8A/9oACAEBAQY/AvB20ecLroSHbR5w
+uuhIdtHnC66Eh20ecLroSHbR5wuuhH//2gAIAQEDAT8hca8AAGEca8AAGEca8AAG
+Eca8AAGEca8AAGE//9oACAECAwE/Ifbf/9oACAEDAwE/Ifbf/9oADAMBAAIRAxEA
+ABACSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAASSSSSSSSSSSSS
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSQACSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+SSSSSSSSSSSSSSSSAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSQ
+ACSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAf//aAAgBAQMBPxDm
+a948cxOZr3jxzE5mvePHMTma948cxOZr3jxzE//aAAgBAgMBPxD23//aAAgBAwMB
+PxD23//Z
+
+------------L6dEbYeAa0GNAvJVPgIP9O--
