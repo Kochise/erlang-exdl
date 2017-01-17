@@ -1,0 +1,12 @@
+{application, exdl_driver,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { exdl_driver_app, []}},
+  {env, []}
+ ]}.

@@ -1,0 +1,183 @@
+=== .\src\exdl_active.erl ====================================== 
+ 
+=== .\src\exdl_al.erl ====================================== 
+ 
+=== .\src\exdl_alc.erl ====================================== 
+ 
+=== .\src\exdl_alext.erl ====================================== 
+ 
+=== .\src\exdl_alut.erl ====================================== 
+ 
+=== .\src\exdl_audio.erl ====================================== 
+f:/DEVEL/EXDL-1~1.082/src/exdl_audio.erl:247: undefined macro 'PLAY_AUDIO'
+f:/DEVEL/EXDL-1~1.082/src/exdl_audio.erl:26: function play_audio/2 undefined
+ 
+=== .\src\exdl_cdrom.erl ====================================== 
+f:/DEVEL/EXDL-1~1.082/src/exdl_cdrom.erl:126: undefined macro 'CDstatus'
+f:/DEVEL/EXDL-1~1.082/src/exdl_cdrom.erl:18: function status/1 undefined
+ 
+=== .\src\exdl_de.erl ====================================== 
+ 
+=== .\src\exdl_driver.erl ====================================== 
+ 
+=== .\src\exdl_error.erl ====================================== 
+ 
+=== .\src\exdl_events.erl ====================================== 
+ 
+=== .\src\exdl_gen.erl ====================================== 
+ 
+=== .\src\exdl_gfx.erl ====================================== 
+ 
+=== .\src\exdl_gl.erl ====================================== 
+ 
+=== .\src\exdl_gl3.erl ====================================== 
+ 
+=== .\src\exdl_glext.erl ====================================== 
+ 
+=== .\src\exdl_glu.erl ====================================== 
+ 
+=== .\src\exdl_glut.erl ====================================== 
+ 
+=== .\src\exdl_glxext.erl ====================================== 
+ 
+=== .\src\exdl_image.erl ====================================== 
+ 
+=== .\src\exdl_joystick.erl ====================================== 
+f:/DEVEL/EXDL-1~1.082/src/exdl_joystick.erl:18: function eventState/1 undefined
+ 
+=== .\src\exdl_keyboard.erl ====================================== 
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:131: undefined macro 'SDLMod'
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:147: undefined macro 'SDLMod'
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:161: undefined macro 'SDLKey'
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:18: function getKeyRepeat/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:18: function getKeyState/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:18: function getModState/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:18: function setModState/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_keyboard.erl:47: Warning: function getKeyState/0 is unused
+ 
+=== .\src\exdl_mixer.erl ====================================== 
+ 
+=== .\src\exdl_mouse.erl ====================================== 
+ 
+=== .\src\exdl_net.erl ====================================== 
+ 
+=== .\src\exdl_oglblit.erl ====================================== 
+ 
+=== .\src\exdl_pal.erl ====================================== 
+ 
+=== .\src\exdl_rtf.erl ====================================== 
+ 
+=== .\src\exdl_sfml.erl ====================================== 
+ 
+=== .\src\exdl_svg.erl ====================================== 
+ 
+=== .\src\exdl_thread.erl ====================================== 
+ 
+=== .\src\exdl_ttf.erl ====================================== 
+ 
+=== .\src\exdl_util.erl ====================================== 
+ 
+=== .\src\exdl_video.erl ====================================== 
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:151: undefined macro 'EXDL_getSurface'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:197: undefined macro 'EXDL_getPixelFormat'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:266: undefined macro 'EXDL_getPalette'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:314: undefined macro 'EXDL_getPixels'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:333: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:360: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:376: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:399: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:427: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:448: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:549: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:630: undefined macro 'SDL_BlitSurface'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:750: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:760: undefined macro 'mk_rectbins/1'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:804: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:821: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:860: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:905: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:931: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:950: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:981: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1016: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1088: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1126: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1145: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1161: undefined macro 'SDL_LoadBMP'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1192: undefined macro 'SDL_SaveBMP'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1218: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1244: undefined macro 'SDL_SetClipping'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1264: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1289: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1308: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1328: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1348: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1374: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1397: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1417: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1433: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1453: undefined macro 'SDL_WM_GetInfo'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1475: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1491: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1507: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1523: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1550: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1578: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1603: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:1627: undefined macro 'SDL_UTIL_HRL'
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:42: function getPalette/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:42: function getPixelFormat/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:42: function getPixels/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:42: function getSurface/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function createRGBsurface/4 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function createRGBsurface/8 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function createRGBsurfaceFrom/9 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function displayFormat/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function displayFormatAlpha/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function flip/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function freeSurface/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function getGammaRamp/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function getVideoSurface/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function getVideoinfo/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function listModes/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function loadBMP/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function lockSurface/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function mapRGB/4 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function mapRGBA/5 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function saveBMP/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setAlpha/3 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setClipping/5 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setColorKey/3 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setColors/4 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setGamma/3 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setGammaRamp/3 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function setVideoMode/4 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function unlockSurface/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function updateRects/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function videoDriverName/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:50: function videoModeOK/4 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_getCaption/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_getInfo/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_grabInput/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_iconifyWindow/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_isMaximized/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_setCaption/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_setIcon/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:86: function wm_toggleFullScreen/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:98: function getClipRect/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:98: function gl_getAttribute/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:98: function gl_setAttribute/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:98: function gl_swapBuffers/0 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:98: function setClipRect/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:591: function blitSurface2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:598: function blitSurface2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:606: function blitSurface2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:614: function blitSurface2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:727: function fillRect2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:734: function fillRect2/1 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:770: function updateRects/2 undefined
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:517: Warning: function listModesRet/2 is unused
+f:/DEVEL/EXDL-1~1.082/src/exdl_video.erl:870: Warning: function mkbin_colors/2 is unused
+ 
+=== .\src\exdl_vnc.erl ====================================== 
+ 
