@@ -1,0 +1,187 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: exdl_driver - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x40c /fo"output/Release/exdl_driver.res" /i "rsc" /d "NDEBUG" "C:\DEVEL\exdl-1.12.0826\priv\rsc\exdl_driver.rc"" 
+Creating temporary file "C:\Users\Kochise\AppData\Local\Temp\RSP5DB2.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "__WIN32__" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "SDL_DRIVER_EXPORTS" /FR"output/Release/" /Fp"output/Release/exdl_driver.pch" /YX /Fo"output/Release/" /Fd"output/Release/" /FD /c 
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_active.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_al.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_alc.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_alext.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_alut.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_audio.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_cdrom.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_de.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_driver.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_error.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_events.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_gen.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_gfx.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_gl.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_glcorearb.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_glext.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_glu.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_glut.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_glxext.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_image.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_joystick.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_keyboard.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_mixer.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_mouse.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_net.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_oglblit.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_pal.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_rtf.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_sfml.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_spec.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_svg.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_thread.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_ttf.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_util.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_video.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_vnc.c"
+"C:\DEVEL\exdl-1.12.0826\priv\src\exdl_wrapper.c"
+]
+Creating command line "cl.exe @C:\Users\Kochise\AppData\Local\Temp\RSP5DB2.tmp" 
+Creating temporary file "C:\Users\Kochise\AppData\Local\Temp\RSP5DB3.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib SDL.lib /nologo /dll /incremental:no /pdb:"output/Release/exdl_driver.pdb" /machine:I386 /out:"priv/exdl_driver.dll" /implib:"output/Release/exdl_driver.lib" 
+".\output\Release\exdl_active.obj"
+".\output\Release\exdl_al.obj"
+".\output\Release\exdl_alc.obj"
+".\output\Release\exdl_alext.obj"
+".\output\Release\exdl_alut.obj"
+".\output\Release\exdl_audio.obj"
+".\output\Release\exdl_cdrom.obj"
+".\output\Release\exdl_de.obj"
+".\output\Release\exdl_driver.obj"
+".\output\Release\exdl_error.obj"
+".\output\Release\exdl_events.obj"
+".\output\Release\exdl_gen.obj"
+".\output\Release\exdl_gfx.obj"
+".\output\Release\exdl_gl.obj"
+".\output\Release\exdl_glcorearb.obj"
+".\output\Release\exdl_glext.obj"
+".\output\Release\exdl_glu.obj"
+".\output\Release\exdl_glut.obj"
+".\output\Release\exdl_glxext.obj"
+".\output\Release\exdl_image.obj"
+".\output\Release\exdl_joystick.obj"
+".\output\Release\exdl_keyboard.obj"
+".\output\Release\exdl_mixer.obj"
+".\output\Release\exdl_mouse.obj"
+".\output\Release\exdl_net.obj"
+".\output\Release\exdl_oglblit.obj"
+".\output\Release\exdl_pal.obj"
+".\output\Release\exdl_rtf.obj"
+".\output\Release\exdl_sfml.obj"
+".\output\Release\exdl_spec.obj"
+".\output\Release\exdl_svg.obj"
+".\output\Release\exdl_thread.obj"
+".\output\Release\exdl_ttf.obj"
+".\output\Release\exdl_util.obj"
+".\output\Release\exdl_video.obj"
+".\output\Release\exdl_vnc.obj"
+".\output\Release\exdl_wrapper.obj"
+".\output\Release\exdl_driver.res"
+]
+Creating command line "link.exe @C:\Users\Kochise\AppData\Local\Temp\RSP5DB3.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+exdl_active.c
+exdl_al.c
+exdl_alc.c
+exdl_alext.c
+exdl_alut.c
+exdl_audio.c
+exdl_cdrom.c
+exdl_de.c
+exdl_driver.c
+exdl_error.c
+exdl_events.c
+exdl_gen.c
+exdl_gfx.c
+exdl_gl.c
+exdl_glcorearb.c
+exdl_glext.c
+exdl_glu.c
+exdl_glut.c
+exdl_glxext.c
+exdl_image.c
+exdl_joystick.c
+exdl_keyboard.c
+exdl_mixer.c
+exdl_mouse.c
+exdl_net.c
+exdl_oglblit.c
+exdl_pal.c
+exdl_rtf.c
+exdl_sfml.c
+exdl_spec.c
+exdl_svg.c
+exdl_thread.c
+exdl_ttf.c
+exdl_util.c
+exdl_video.c
+exdl_vnc.c
+exdl_wrapper.c
+Linking...
+   Creating library output/Release/exdl_driver.lib and object output/Release/exdl_driver.exp
+Creating temporary file "C:\Users\Kochise\AppData\Local\Temp\RSP685E.tmp" with contents
+[
+/nologo /o"output/Release/exdl_driver.bsc" 
+".\output\Release\exdl_active.sbr"
+".\output\Release\exdl_al.sbr"
+".\output\Release\exdl_alc.sbr"
+".\output\Release\exdl_alext.sbr"
+".\output\Release\exdl_alut.sbr"
+".\output\Release\exdl_audio.sbr"
+".\output\Release\exdl_cdrom.sbr"
+".\output\Release\exdl_de.sbr"
+".\output\Release\exdl_driver.sbr"
+".\output\Release\exdl_error.sbr"
+".\output\Release\exdl_events.sbr"
+".\output\Release\exdl_gen.sbr"
+".\output\Release\exdl_gfx.sbr"
+".\output\Release\exdl_gl.sbr"
+".\output\Release\exdl_glcorearb.sbr"
+".\output\Release\exdl_glext.sbr"
+".\output\Release\exdl_glu.sbr"
+".\output\Release\exdl_glut.sbr"
+".\output\Release\exdl_glxext.sbr"
+".\output\Release\exdl_image.sbr"
+".\output\Release\exdl_joystick.sbr"
+".\output\Release\exdl_keyboard.sbr"
+".\output\Release\exdl_mixer.sbr"
+".\output\Release\exdl_mouse.sbr"
+".\output\Release\exdl_net.sbr"
+".\output\Release\exdl_oglblit.sbr"
+".\output\Release\exdl_pal.sbr"
+".\output\Release\exdl_rtf.sbr"
+".\output\Release\exdl_sfml.sbr"
+".\output\Release\exdl_spec.sbr"
+".\output\Release\exdl_svg.sbr"
+".\output\Release\exdl_thread.sbr"
+".\output\Release\exdl_ttf.sbr"
+".\output\Release\exdl_util.sbr"
+".\output\Release\exdl_video.sbr"
+".\output\Release\exdl_vnc.sbr"
+".\output\Release\exdl_wrapper.sbr"]
+Creating command line "bscmake.exe @C:\Users\Kochise\AppData\Local\Temp\RSP685E.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+exdl_driver.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

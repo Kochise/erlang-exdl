@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="C Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="C Include Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="C Function Pointer Files">
+      <UniqueIdentifier>{449730d0-b069-4939-9cfe-ca247e68de77}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="C Definition Files">
+      <UniqueIdentifier>{599bd41f-dd4c-4f19-8e90-05f41b17dde8}</UniqueIdentifier>
+      <Extensions>def</Extensions>
+    </Filter>
+    <Filter Include="E Source Files">
+      <UniqueIdentifier>{49fea95b-dc16-44dc-8867-4d9f90186430}</UniqueIdentifier>
+      <Extensions>erl</Extensions>
+    </Filter>
+    <Filter Include="E Function Pointer Files">
+      <UniqueIdentifier>{c801bd79-5ef1-4288-ab8d-7c53c29f7bb3}</UniqueIdentifier>
+      <Extensions>hrl</Extensions>
+    </Filter>
+    <Filter Include="E Include Files">
+      <UniqueIdentifier>{568958a8-e62c-45b0-94fa-b6ef9039fe43}</UniqueIdentifier>
+      <Extensions>hrl</Extensions>
+    </Filter>
+    <Filter Include="E Test Files">
+      <UniqueIdentifier>{f7494bfd-74fe-4ba5-8b9d-8fd8663402a6}</UniqueIdentifier>
+      <Extensions>erl</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\exdl.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_active.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_al.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alc.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alext.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alut.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_audio.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_cdrom.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_conv.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_de.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_error.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_events.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gen.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gfx.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gl.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glcorearb.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glext.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glu.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glut.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glxext.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_image.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_joystick.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_keyboard.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_mixer.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_mouse.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_net.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_oglblit.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_pal.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_rtf.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_sfml.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_svg.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_thread.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_tools.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_ttf.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_util.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_video.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_vnc.h">
+      <Filter>C Include Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_active_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_al_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alc_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alext_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_alut_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_audio_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_cdrom_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_de_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_error_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_events_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gen_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gfx_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_gl_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glcorearb_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glext_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glu_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glut_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_glxext_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_image_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_joystick_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_keyboard_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_mixer_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_mouse_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_net_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_oglblit_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_pal_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_rtf_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_sfml_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_svg_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_thread_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_ttf_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_util_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_video_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exdl_vnc_fp.h">
+      <Filter>C Function Pointer Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\exdl_active.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_al.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_alc.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_alext.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_alut.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_audio.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_cdrom.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_de.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_driver.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_error.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_events.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_gen.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_gfx.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_gl.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_glcorearb.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_glext.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_glu.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_glut.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_glxext.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_image.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_joystick.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_keyboard.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_mixer.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_mouse.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_net.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_oglblit.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_pal.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_rtf.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_sfml.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_spec.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_svg.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_thread.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_ttf.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_util.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_video.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_vnc.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exdl_wrapper.c">
+      <Filter>C Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rsc\exdl.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="def\exdl_active.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_al.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_alc.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_alext.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_alut.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_audio.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_cdrom.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_de.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_error.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_events.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_gen.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_gfx.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_gl.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_glcorearb.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_glext.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_glu.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_glut.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_glxext.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_image.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_joystick.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_keyboard.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_mixer.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_mouse.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_net.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_oglblit.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_pal.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_rtf.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_sfml.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_spec.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_svg.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_thread.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_ttf.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_util.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_video.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="def\exdl_vnc.def">
+      <Filter>C Definition Files</Filter>
+    </None>
+    <None Include="..\src\exdl_active.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_al.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alc.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alext.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alut.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_audio.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_cdrom.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_de.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_driver.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_error.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_events.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gen.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gfx.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gl.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glcorearb.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glext.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glu.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glut.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glxext.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_image.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_joystick.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_keyboard.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_mixer.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_mouse.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_net.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_oglblit.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_pal.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_rtf.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_sfml.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_svg.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_thread.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_ttf.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_util.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_video.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_vnc.erl">
+      <Filter>E Source Files</Filter>
+    </None>
+    <None Include="..\src\exdl_active_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_al_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alc_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alext_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_alut_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_audio_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_cdrom_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_de_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_error_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_events_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gen_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gfx_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_gl_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glcorearb_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glext_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glu_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glut_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_glxext_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_image_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_joystick_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_keyboard_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_mixer_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_mouse_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_net_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_oglblit_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_pal_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_rtf_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_sfml_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_svg_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_thread_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_ttf_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_util_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_video_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\src\exdl_vnc_fp.hrl">
+      <Filter>E Function Pointer Files</Filter>
+    </None>
+    <None Include="..\include\exdl.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_active.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_al.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_alc.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_alext.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_alut.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_audio.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_cdrom.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_de.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_define.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_error.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_events.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_gen.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_gfx.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_gl.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_glcorearb.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_glext.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_glu.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_glxext.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_image.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_joystick.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_keyboard.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_mixer.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_mouse.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_net.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_oglblit.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_pal.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_rtf.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_sfml.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_svg.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_thread.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_ttf.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_util.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_video.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\include\exdl_vnc.hrl">
+      <Filter>E Include Files</Filter>
+    </None>
+    <None Include="..\test\erldemo.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testaudio.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testbin.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testgl.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testglutess.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testjoy.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+    <None Include="..\test\testsprite.erl">
+      <Filter>E Test Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
