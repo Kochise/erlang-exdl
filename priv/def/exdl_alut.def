@@ -1,0 +1,17 @@
+ALboolean alutInit(int* argcp, char** argv);
+ALboolean alutInitWithoutContext(int* argcp, char** argv);
+ALboolean alutExit(void);
+ALenum alutGetError(void);
+const char* alutGetErrorString(ALenum error);
+ALuint alutCreateBufferFromFile(const char* fileName);
+ALuint alutCreateBufferFromFileImage(const ALvoid* data, ALsizei length);
+ALuint alutCreateBufferHelloWorld(void);
+ALuint alutCreateBufferWaveform(ALenum waveshape, ALfloat frequency, ALfloat phase, ALfloat duration);
+ALvoid* alutLoadMemoryFromFile(const char* fileName, ALenum* format, ALsizei* size, ALfloat* frequency);
+ALvoid* alutLoadMemoryFromFileImage(const ALvoid* data, ALsizei length, ALenum* format, ALsizei* size, ALfloat* frequency);
+ALvoid* alutLoadMemoryHelloWorld(ALenum* format, ALsizei* size, ALfloat* frequency);
+ALvoid* alutLoadMemoryWaveform(ALenum waveshape, ALfloat frequency, ALfloat phase, ALfloat duration, ALenum* format, ALsizei* size, ALfloat* freq);
+const char* alutGetMIMETypes(ALenum loader);
+ALint alutGetMajorVersion(void);
+ALint alutGetMinorVersion(void);
+ALboolean alutSleep(ALfloat duration);

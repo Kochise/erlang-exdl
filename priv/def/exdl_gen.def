@@ -1,0 +1,5 @@
+int SDL_Init(Uint32 flags);
+int SDL_InitSubSystem(Uint32 flags);
+void SDL_QuitSubSystem(Uint32 flags);
+Uint32 SDL_WasInit(Uint32 flags);
+void SDL_Quit(void);

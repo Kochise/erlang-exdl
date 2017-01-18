@@ -1,0 +1,7 @@
+int vncConnect(tSDL_vnc* vnc, char* host, int port, char* mode, char* password, int framerate);
+int vncBlitFramebuffer(tSDL_vnc* vnc, SDL_Surface* target, SDL_Rect* urec);
+int vncBlitCursor(tSDL_vnc* vnc, SDL_Surface* target, SDL_Rect* trec);
+SDL_Rect vncCursorHotspot(tSDL_vnc* vnc);
+int vncClientKeyevent(tSDL_vnc* vnc, unsigned char downflag, unsigned int key);
+int vncClientPointerevent(tSDL_vnc* vnc, unsigned char buttonmask, unsigned short x, unsigned short y);
+void vncDisconnect(tSDL_vnc* vnc);

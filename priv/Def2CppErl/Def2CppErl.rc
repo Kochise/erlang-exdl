@@ -1,0 +1,210 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// French (France) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+#ifdef _WIN32
+LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 12, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Def2CppErl.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.fra\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Def2CppErl.ico"
+IDI_ICON1               ICON    DISCARDABLE     "res\\icon1.ico"
+IDI_ICON2               ICON    DISCARDABLE     "res\\icon2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DEF2CPPERL_DIALOG DIALOGEX 0, 0, 382, 145
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Exdl's Def files 2 Cpp & Erl converter (version 2.13.04.17)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        " File ",IDC_STATIC,5,5,370,78
+    LTEXT           "Source",IDC_STATIC,10,20,24,8
+    LTEXT           "Extension",IDC_STATIC,10,35,32,8
+    LTEXT           "Destination",IDC_STATIC,10,50,36,8
+    EDITTEXT        IDC_ED_FILE_SRC,50,15,305,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_ED_FILE_TYPE,50,31,320,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ED_FILE_DST,50,47,305,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUT_FIL_SRC,357,15,16,14
+    PUSHBUTTON      "...",IDC_BUT_FIL_DST,357,47,15,14
+    GROUPBOX        " Process ",IDC_STATIC,5,85,370,55
+    LTEXT           "",IDC_STA_WRK_TOT_PROG,10,125,360,11,0,WS_EX_STATICEDGE
+    DEFPUSHBUTTON   "!!!",IDC_BUT_WRK_RUN,355,93,15,14
+    LTEXT           "   ",IDC_STA_WRK_FILE_TXT,10,95,340,12
+    CONTROL         "Linked-In Driver",IDC_RAD_LID,"Button",
+                    BS_AUTORADIOBUTTON,50,65,66,10
+    CONTROL         "Native Implemented Function",IDC_RAD_NIF,"Button",
+                    BS_AUTORADIOBUTTON,150,65,108,10
+    LTEXT           "",IDC_STA_WRK_TOT_FILE,10,110,360,11,0,WS_EX_STATICEDGE
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,13,4,17
+ PRODUCTVERSION 2,13,4,17
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040c04b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "Application MFC Def2CppErl\0"
+            VALUE "FileVersion", "1, 13, 4, 17\0"
+            VALUE "InternalName", "Def2CppErl\0"
+            VALUE "LegalCopyright", "Copyright (C) 2013\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Def2CppErl.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Application Def2CppErl\0"
+            VALUE "ProductVersion", "2, 13, 4, 17\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x40c, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DEF2CPPERL_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 377
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 140
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// 24
+//
+
+1                       24      DISCARDABLE     "res\\xptheme.bin"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR1             CURSOR  DISCARDABLE     "res\\cursor1.cur"
+#endif    // French (France) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRA)
+#ifdef _WIN32
+LANGUAGE 12, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Def2CppErl.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.fra\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,136 @@
+/* GLX_VERSION_1_3 */
+GLXFBConfig* glXGetFBConfigs(Display* dpy, int screen, int* nelements);
+GLXFBConfig* glXChooseFBConfig(Display* dpy, int screen, const int* attrib_list, int* nelements);
+int glXGetFBConfigAttrib(Display* dpy, GLXFBConfig config, int attribute, int* value);
+XVisualInfo* glXGetVisualFromFBConfig(Display* dpy, GLXFBConfig config);
+GLXWindow glXCreateWindow(Display* dpy, GLXFBConfig config, Window win, const int* attrib_list);
+void glXDestroyWindow(Display* dpy, GLXWindow win);
+GLXPixmap glXCreatePixmap(Display* dpy, GLXFBConfig config, Pixmap pixmap, const int* attrib_list);
+void glXDestroyPixmap(Display* dpy, GLXPixmap pixmap);
+GLXPbuffer glXCreatePbuffer(Display* dpy, GLXFBConfig config, const int* attrib_list);
+void glXDestroyPbuffer(Display* dpy, GLXPbuffer pbuf);
+void glXQueryDrawable(Display* dpy, GLXDrawable draw, int attribute, unsigned int* value);
+GLXContext glXCreateNewContext(Display* dpy, GLXFBConfig config, int render_type, GLXContext share_list, Bool direct);
+Bool glXMakeContextCurrent(Display* dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
+GLXDrawable glXGetCurrentReadDrawable(void);
+Display* glXGetCurrentDisplay(void);
+int glXQueryContext(Display* dpy, GLXContext ctx, int attribute, int* value);
+void glXSelectEvent(Display* dpy, GLXDrawable draw, unsigned long event_mask);
+void glXGetSelectedEvent(Display* dpy, GLXDrawable draw, unsigned long* event_mask);
+/* GLX_VERSION_1_4 */
+__GLXextFuncPtr glXGetProcAddress(const GLubyte* procName);
+/* GLX_ARB_get_proc_address */
+__GLXextFuncPtr glXGetProcAddressARB(const GLubyte* procName);
+/* GLX_ARB_multisample */
+/* GLX_ARB_fbconfig_float */
+/* GLX_ARB_framebuffer_sRGB */
+/* GLX_ARB_create_context */
+GLXContext glXCreateContextAttribsARB(Display* dpy, GLXFBConfig config, GLXContext share_context, Bool direct, const int* attrib_list);
+/* GLX_ARB_create_context_profile */
+/* GLX_ARB_create_context_robustness */
+/* GLX_SGIS_multisample */
+/* GLX_EXT_visual_info */
+/* GLX_SGI_swap_control */
+int glXSwapIntervalSGI(int interval);
+/* GLX_SGI_video_sync */
+int glXGetVideoSyncSGI(unsigned int* count);
+int glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int* count);
+/* GLX_SGI_make_current_read */
+Bool glXMakeCurrentReadSGI(Display* dpy, GLXDrawable draw, GLXDrawable read, GLXContext ctx);
+GLXDrawable glXGetCurrentReadDrawableSGI(void);
+/* GLX_SGIX_video_source */
+GLXVideoSourceSGIX glXCreateGLXVideoSourceSGIX(Display* display, int screen, VLServer server, VLPath path, int nodeClass, VLNode drainNode);
+void glXDestroyGLXVideoSourceSGIX(Display* dpy, GLXVideoSourceSGIX glxvideosource);
+/* GLX_EXT_import_context */
+Display* glXGetCurrentDisplayEXT(void);
+int glXQueryContextInfoEXT(Display* dpy, GLXContext context, int attribute, int* value);
+GLXContextID glXGetContextIDEXT(const GLXContext context);
+GLXContext glXImportContextEXT(Display* dpy, GLXContextID contextID);
+void glXFreeContextEXT(Display* dpy, GLXContext context);
+/* GLX_SGIX_fbconfig */
+int glXGetFBConfigAttribSGIX(Display* dpy, GLXFBConfigSGIX config, int attribute, int* value);
+GLXFBConfigSGIX* glXChooseFBConfigSGIX(Display* dpy, int screen, int* attrib_list, int* nelements);
+GLXPixmap glXCreateGLXPixmapWithConfigSGIX(Display* dpy, GLXFBConfigSGIX config, Pixmap pixmap);
+GLXContext glXCreateContextWithConfigSGIX(Display* dpy, GLXFBConfigSGIX config, int render_type, GLXContext share_list, Bool direct);
+XVisualInfo* glXGetVisualFromFBConfigSGIX(Display* dpy, GLXFBConfigSGIX config);
+GLXFBConfigSGIX glXGetFBConfigFromVisualSGIX(Display* dpy, XVisualInfo* vis);
+/* GLX_SGIX_pbuffer */
+GLXPbufferSGIX glXCreateGLXPbufferSGIX(Display* dpy, GLXFBConfigSGIX config, unsigned int width, unsigned int height, int* attrib_list);
+void glXDestroyGLXPbufferSGIX(Display* dpy, GLXPbufferSGIX pbuf);
+int glXQueryGLXPbufferSGIX(Display* dpy, GLXPbufferSGIX pbuf, int attribute, unsigned int* value);
+void glXSelectEventSGIX(Display* dpy, GLXDrawable drawable, unsigned long mask);
+void glXGetSelectedEventSGIX(Display* dpy, GLXDrawable drawable, unsigned long* mask);
+/* GLX_SGI_cushion */
+void glXCushionSGI(Display* dpy, Window window, float cushion);
+/* GLX_SGIX_video_resize */
+int glXBindChannelToWindowSGIX(Display* display, int screen, int channel, Window window);
+int glXChannelRectSGIX(Display* display, int screen, int channel, int x, int y, int w, int h);
+int glXQueryChannelRectSGIX(Display* display, int screen, int channel, int* dx, int* dy, int* dw, int* dh);
+int glXQueryChannelDeltasSGIX(Display* display, int screen, int channel, int* x, int* y, int* w, int* h);
+int glXChannelRectSyncSGIX(Display* display, int screen, int channel, GLenum synctype);
+/* GLX_SGIX_dmbuffer */
+Bool glXAssociateDMPbufferSGIX(Display* dpy, GLXPbufferSGIX pbuffer, DMparams* params, DMbuffer dmbuffer);
+/* GLX_SGIX_swap_group */
+void glXJoinSwapGroupSGIX(Display* dpy, GLXDrawable drawable, GLXDrawable member);
+/* GLX_SGIX_swap_barrier */
+void glXBindSwapBarrierSGIX(Display* dpy, GLXDrawable drawable, int barrier);
+Bool glXQueryMaxSwapBarriersSGIX(Display* dpy, int screen, int* max);
+/* GLX_SUN_get_transparent_index */
+Status glXGetTransparentIndexSUN(Display* dpy, Window overlay, Window underlay, long* pTransparentIndex);
+/* GLX_MESA_copy_sub_buffer */
+void glXCopySubBufferMESA(Display* dpy, GLXDrawable drawable, int x, int y, int width, int height);
+/* GLX_MESA_pixmap_colormap */
+GLXPixmap glXCreateGLXPixmapMESA(Display* dpy, XVisualInfo* visual, Pixmap pixmap, Colormap cmap);
+/* GLX_MESA_release_buffers */
+Bool glXReleaseBuffersMESA(Display* dpy, GLXDrawable drawable);
+/* GLX_MESA_set_3dfx_mode */
+Bool glXSet3DfxModeMESA(int mode);
+/* GLX_OML_sync_control */
+Bool glXGetSyncValuesOML(Display* dpy, GLXDrawable drawable, int64_t* ust, int64_t* msc, int64_t* sbc);
+Bool glXGetMscRateOML(Display* dpy, GLXDrawable drawable, int32_t* numerator, int32_t* denominator);
+int64_t glXSwapBuffersMscOML(Display* dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder);
+Bool glXWaitForMscOML(Display* dpy, GLXDrawable drawable, int64_t target_msc, int64_t divisor, int64_t remainder, int64_t* ust, int64_t* msc, int64_t* sbc);
+Bool glXWaitForSbcOML(Display* dpy, GLXDrawable drawable, int64_t target_sbc, int64_t* ust, int64_t* msc, int64_t* sbc);
+GLXHyperpipeNetworkSGIX* glXQueryHyperpipeNetworkSGIX(Display* dpy, int* npipes);
+int glXHyperpipeConfigSGIX(Display* dpy, int networkId, int npipes, GLXHyperpipeConfigSGIX* cfg, int* hpId);
+GLXHyperpipeConfigSGIX* glXQueryHyperpipeConfigSGIX(Display* dpy, int hpId, int* npipes);
+int glXDestroyHyperpipeConfigSGIX(Display* dpy, int hpId);
+int glXBindHyperpipeSGIX(Display* dpy, int hpId);
+int glXQueryHyperpipeBestAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* attribList, void* returnAttribList);
+int glXHyperpipeAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* attribList);
+int glXQueryHyperpipeAttribSGIX(Display* dpy, int timeSlice, int attrib, int size, void* returnAttribList);
+/* GLX_MESA_agp_offset */
+unsigned int glXGetAGPOffsetMESA(const void* pointer);
+/* GLX_EXT_texture_from_pixmap */
+void glXBindTexImageEXT(Display* dpy, GLXDrawable drawable, int buffer, const int* attrib_list);
+void glXReleaseTexImageEXT(Display* dpy, GLXDrawable drawable, int buffer);
+/* GLX_NV_present_video */
+unsigned int* glXEnumerateVideoDevicesNV(Display* dpy, int screen, int* nelements);
+int glXBindVideoDeviceNV(Display* dpy, unsigned int video_slot, unsigned int video_device, const int* attrib_list);
+/* GLX_NV_video_output */
+int glXGetVideoDeviceNV(Display* dpy, int screen, int numVideoDevices, GLXVideoDeviceNV* pVideoDevice);
+int glXReleaseVideoDeviceNV(Display* dpy, int screen, GLXVideoDeviceNV VideoDevice);
+int glXBindVideoImageNV(Display* dpy, GLXVideoDeviceNV VideoDevice, GLXPbuffer pbuf, int iVideoBuffer);
+int glXReleaseVideoImageNV(Display* dpy, GLXPbuffer pbuf);
+int glXSendPbufferToVideoNV(Display* dpy, GLXPbuffer pbuf, int iBufferType, unsigned long* pulCounterPbuffer, GLboolean bBlock);
+int glXGetVideoInfoNV(Display* dpy, int screen, GLXVideoDeviceNV VideoDevice, unsigned long* pulCounterOutputPbuffer, unsigned long* pulCounterOutputVideo);
+/* GLX_NV_swap_group */
+Bool glXJoinSwapGroupNV(Display* dpy, GLXDrawable drawable, GLuint group);
+Bool glXBindSwapBarrierNV(Display* dpy, GLuint group, GLuint barrier);
+Bool glXQuerySwapGroupNV(Display* dpy, GLXDrawable drawable, GLuint* group, GLuint* barrier);
+Bool glXQueryMaxSwapGroupsNV(Display* dpy, int screen, GLuint* maxGroups, GLuint* maxBarriers);
+Bool glXQueryFrameCountNV(Display* dpy, int screen, GLuint* count);
+Bool glXResetFrameCountNV(Display* dpy, int screen);
+/* GLX_NV_video_capture */
+int glXBindVideoCaptureDeviceNV(Display* dpy, unsigned int video_capture_slot, GLXVideoCaptureDeviceNV device);
+GLXVideoCaptureDeviceNV* glXEnumerateVideoCaptureDevicesNV(Display* dpy, int screen, int* nelements);
+void glXLockVideoCaptureDeviceNV(Display* dpy, GLXVideoCaptureDeviceNV device);
+int glXQueryVideoCaptureDeviceNV(Display* dpy, GLXVideoCaptureDeviceNV device, int attribute, int* value);
+void glXReleaseVideoCaptureDeviceNV(Display* dpy, GLXVideoCaptureDeviceNV device);
+/* GLX_EXT_swap_control */
+int glXSwapIntervalEXT(Display* dpy, GLXDrawable drawable, int interval);
+/* GLX_NV_copy_image */
+void glXCopyImageSubDataNV(Display* dpy, GLXContext srcCtx, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLXContext dstCtx, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
+/* GLX_INTEL_swap_event */
+/* GLX_NV_multisample_coverage */
+/* GLX_EXT_swap_control_tear */

@@ -1,0 +1,5 @@
+void SDL_PumpEvents(void);
+int SDL_PeepEvents(SDL_Event* events, int numevents, SDL_eventaction action, Uint32 mask);
+int SDL_PollEvent(SDL_Event* event);
+int SDL_WaitEvent(SDL_Event* event);
+Uint8 SDL_EventState(Uint8 type, int state);

@@ -1,0 +1,1 @@
+Uint8 SDL_GetAppState(void);

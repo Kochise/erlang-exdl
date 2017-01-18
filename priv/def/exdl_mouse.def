@@ -1,0 +1,8 @@
+Uint8 SDL_GetMouseState(int* x, int* y);
+Uint8 SDL_GetRelativeMouseState(int* x, int* y);
+void SDL_WarpMouse(Uint16 x, Uint16 y);
+SDL_Cursor* SDL_CreateCursor(Uint8* data, Uint8* mask, int w, int h, int hot_x, int hot_y);
+void SDL_SetCursor(SDL_Cursor* cursor);
+SDL_Cursor* SDL_GetCursor(void);
+void SDL_FreeCursor(SDL_Cursor* cursor);
+int SDL_ShowCursor(int toggle);

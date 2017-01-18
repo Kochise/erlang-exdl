@@ -1,0 +1,26 @@
+/* Context Management */
+ALCcontext* alcCreateContext(ALCdevice* device, const ALCint* attrlist);
+ALCboolean alcMakeContextCurrent(ALCcontext* context);
+void alcProcessContext(ALCcontext* context);
+void alcSuspendContext(ALCcontext* context);
+void alcDestroyContext(ALCcontext* context);
+ALCcontext* alcGetCurrentContext(void);
+ALCdevice* alcGetContextsDevice(ALCcontext* context);
+/* Device Management */
+ALCdevice* alcOpenDevice(const ALCchar* devicename);
+ALCboolean alcCloseDevice(ALCdevice* device);
+/* Error support */
+ALCenum alcGetError(ALCdevice* device);
+/* Extension support */
+ALCboolean alcIsExtensionPresent(ALCdevice* device, const ALCchar* extname);
+void* alcGetProcAddress(ALCdevice* device, const ALCchar* funcname);
+ALCenum alcGetEnumValue(ALCdevice* device, const ALCchar* enumname);
+/* Query functions */
+const ALCchar* alcGetString(ALCdevice* device, ALCenum param);
+void alcGetIntegerv(ALCdevice* device, ALCenum param, ALCsizei size, ALCint* data);
+/* Capture functions */
+ALCdevice* alcCaptureOpenDevice(const ALCchar* devicename, ALCuint frequency, ALCenum format, ALCsizei buffersize);
+ALCboolean alcCaptureCloseDevice(ALCdevice* device);
+void alcCaptureStart(ALCdevice* device);
+void alcCaptureStop(ALCdevice* device);
+void alcCaptureSamples(ALCdevice* device, ALCvoid* buffer, ALCsizei samples);

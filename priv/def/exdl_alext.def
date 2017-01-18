@@ -1,0 +1,22 @@
+/* loki */
+ALfloat alcGetAudioChannel_LOKI(ALuint channel);
+void alcSetAudioChannel_LOKI(ALuint channel, ALfloat volume);
+// void alBombOnError_LOKI(void);
+void alBufferi_LOKI(ALuint bid, ALenum param, ALint value);
+void alBufferDataWithCallback_LOKI(ALuint bid, int (*Callback) (ALuint, ALuint, ALshort*, ALenum, ALint, ALint));
+void alBufferWriteData_LOKI(ALuint buffer, ALenum format, ALvoid* data, ALsizei size, ALsizei freq, ALenum internalFormat);
+void alGenStreamingBuffers_LOKI(ALsizei n, ALuint* samples);
+ALsizei alBufferAppendData_LOKI(ALuint buffer, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
+ALsizei alBufferAppendWriteData_LOKI(ALuint buffer, ALenum format, ALvoid* data, ALsizei size, ALsizei freq, ALenum internalFormat);
+/* binary compatibility */
+// ALsizei alBufferAppendData(ALuint buffer, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
+/* Capture api */
+ALboolean alCaptureInit_EXT(ALenum format, ALuint rate, ALsizei bufferSize);
+ALboolean alCaptureDestroy_EXT(void);
+ALboolean alCaptureStart_EXT(void);
+ALboolean alCaptureStop_EXT(void);
+/* Non-blocking device read */
+ALsizei alCaptureGetData_EXT(ALvoid* data, ALsizei n, ALenum format, ALuint rate);
+/* custom loaders */
+ALboolean alutLoadVorbis_LOKI(ALuint bid, const ALvoid* data, ALint size);
+ALboolean alutLoadMP3_LOKI(ALuint bid, ALvoid* data, ALint size);

@@ -1,0 +1,10 @@
+const SDL_version* RTF_Linked_Version(void);
+RTF_Context* RTF_CreateContext(RTF_FontEngine* fontEngine);
+int RTF_Load(RTF_Context* ctx, const char* file);
+int RTF_Load_RW(RTF_Context* ctx, SDL_RWops* src, int freesrc);
+const char* RTF_GetTitle(RTF_Context* ctx);
+const char* RTF_GetSubject(RTF_Context* ctx);
+const char* RTF_GetAuthor(RTF_Context* ctx);
+int RTF_GetHeight(RTF_Context* ctx, int width);
+void RTF_Render(RTF_Context* ctx, SDL_Surface* surface, SDL_Rect* rect, int yOffset);
+void RTF_FreeContext(RTF_Context* ctx);

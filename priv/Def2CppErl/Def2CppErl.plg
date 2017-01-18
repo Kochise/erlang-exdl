@@ -1,0 +1,32 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Def2CppErl - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\Kochise\AppData\Local\Temp\RSP4E2B.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/Def2CppErl.pdb" /debug /machine:I386 /out:"Debug/Def2CppErl.exe" /pdbtype:sept 
+".\Debug\amsWnd.obj"
+".\Debug\CPathSplit.obj"
+".\Debug\Def2CppErl.obj"
+".\Debug\Def2CppErlDlg.obj"
+".\Debug\EditLabel.obj"
+".\Debug\SigUtils.obj"
+".\Debug\SkinProgress.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Def2CppErl.res"
+]
+Creating command line "link.exe @C:\Users\Kochise\AppData\Local\Temp\RSP4E2B.tmp"
+<h3>Output Window</h3>
+Linking...
+
+
+
+<h3>Results</h3>
+Def2CppErl.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

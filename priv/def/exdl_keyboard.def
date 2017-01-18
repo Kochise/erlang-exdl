@@ -1,0 +1,7 @@
+int SDL_EnableUNICODE(int enable);
+int SDL_EnableKeyRepeat(int delay, int interval);
+void SDL_GetKeyRepeat(int* delay, int* interval);
+Uint8* SDL_GetKeyState(int* numkeys);
+SDLMod SDL_GetModState(void);
+void SDL_SetModState(SDLMod modstate);
+char* SDL_GetKeyName(SDLKey key);

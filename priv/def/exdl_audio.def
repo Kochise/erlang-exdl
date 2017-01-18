@@ -1,0 +1,14 @@
+int SDL_AudioInit(const char* driver_name);
+void SDL_AudioQuit(void);
+char* SDL_AudioDriverName(char* namebuf, int maxlen);
+int SDL_OpenAudio(SDL_AudioSpec* desired, SDL_AudioSpec* obtained);
+SDL_audiostatus SDL_GetAudioStatus(void);
+void SDL_PauseAudio(int pause_on);
+SDL_AudioSpec* SDL_LoadWAV_RW(SDL_RWops* src, int freesrc, SDL_AudioSpec* spec, Uint8** audio_buf, Uint32* audio_len);
+void SDL_FreeWAV(Uint8* audio_buf);
+int SDL_BuildAudioCVT(SDL_AudioCVT* cvt, Uint16 src_format, Uint8 src_channels, int src_rate, Uint16 dst_format, Uint8 dst_channels, int dst_rate);
+int SDL_ConvertAudio(SDL_AudioCVT* cvt);
+void SDL_MixAudio(Uint8* dst, const Uint8* src, Uint32 len, int volume);
+void SDL_LockAudio(void);
+void SDL_UnlockAudio(void);
+void SDL_CloseAudio(void);

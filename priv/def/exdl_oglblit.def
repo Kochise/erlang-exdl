@@ -1,0 +1,7 @@
+int OGL_Init(int w, int h, int bpp, Uint32 flags);
+void OGL_FreeTexture(OGL_Texture* texture);
+void OGL_Flip();
+void OGL_Clear();
+void OGL_Blit(OGL_Texture* texture, SDL_Rect* clipping, int x, int y, GLfloat vZoom, GLfloat hZoom, GLfloat rotation);
+OGL_Texture* OGL_FromSurface(SDL_Surface* surface);
+OGL_Texture* OGL_FromSurfaceFree(SDL_Surface* surface);
