@@ -13,9 +13,9 @@ You need the following to get this program working :
 * List of programs
 
 \- Make_E.bat : compile the Erlang driver<br>
-\- \\priv\\exdl_driver.dsw : compile the windows dll<br>
+\- \\priv\\exdl_driver.dsw : compile the windows dll interface<br>
 \- \\priv\\Def2CppErl\\Def2CppErl.dsw : compile the def converter<br>
-\- \\\priv\\def\\ : def files listing function prototypes<br>
+\- \\priv\\def\\ : def files listing function prototypes<br>
 
 * How to use it
 
@@ -23,4 +23,8 @@ Erlang driver, you know your pain.
 
 * Some infos
 
-This was to improve the esdl driver. Never really finished because unable to keep up with the various libraries updates.
+This was to improve the esdl driver.
+
+Never really finished because unable to keep up with the various libraries' updates.
+
+Lack of Vulkan integration.
