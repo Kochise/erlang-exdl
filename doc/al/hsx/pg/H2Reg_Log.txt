@@ -1,0 +1,65 @@
+===============================================================================
+Log File:             	C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg\H2Reg_Log.txt
+Date:                 	2007/10/17 19:31:11
+Operating System:      	Windows XP 5.1 (Build 2600) Service Pack 2
+SysLocale.DefaultLCID: 	0x040C (1036)
+SysLocale.PriLangID:   	0x000C (12)
+SysLocale.SubLangID:   	0x0001 (1)
+DecimalSeparator:      	,
+-------------------------------------------------------------------------------
+EXE Path =          	C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg\H2Reg.exe
+EXE Version =       	1.5.0.0
+Cmdline Param(s) =  	-r | -q
+Actual CmdLine =  	"C:\Program Files\OpenAL\SDK 1.1\\docs\HsX\pg\H2Reg.exe" -r -q
+_RunDir =           	C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg
+_ModuleName =       	H2Reg.exe
+_ModuleDir =        	C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg
+_ModulePath =        	C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg\H2Reg.exe
+Module Version =       	1.5.0.0
+-------------------------------------------------------------------------------
+_hhInstalled =      	YES
+_hhVerStr =         	5.2.3790.2847
+_hhFriendlyVerStr = 	> 1.4a
+-------------------------------------------------------------------------------
+_ieInstalled =      	YES
+_ieVerStr =         	6.0.2900.3157
+_ieFriendlyVerStr = 	Internet Explorer 6 (Windows XP SP2)
+===============================================================================
+MS Help 2.x Runtime Found: NO
+NT Admin Log On: YES
+PC Language ID = fr
+-------------------------------------------------------------------------------
+Quiet Mode (-Q): Yes
+Registration Mode (-R): Yes
+UnRegistration Mode (-U): No
+Append Log Mode (-A): No
+No NT Admin Check (-N): No
+Merge Indexes Mode (-M): No
+Cmd Script File (CmdFile=): C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg\H2Reg.ini
+User Dir 1 (UserDir1=): 
+User Dir 2 (UserDir2=): 
+User Dir 3 (UserDir3=): 
+User Dir 4 (UserDir4=): 
+===============================================================================
+CmdFile = C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg\H2Reg.ini
+<windir> = C:\WINDOWS
+<winsysdir> = C:\WINDOWS\system32
+<programfilesdir> = C:\Program Files
+<exedir> = C:\Program Files\OpenAL\SDK 1.1\docs\HsX\pg
+<exedirparent> = C:\Program Files\OpenAL\SDK 1.1\docs\hsx
+<cmdfiledir> = C:\Program Files\OpenAL\SDK 1.1\docs\hsx\pg
+<cmdfiledirparent> = C:\Program Files\OpenAL\SDK 1.1\docs\hsx
+<userdir1> = 
+<userdir1parent> = 
+<userdir2> = 
+<userdir2parent> = 
+<userdir3> = 
+<userdir3parent> = 
+<userdir4> = 
+<userdir4parent> = 
+-------------------------------------------------------------------------------
+19:31:11   ** Error **MS Help 2.x runtime files are not installed on this PC.
+19:31:11   Program Aborted!!
+
+--END OF FILE--
+

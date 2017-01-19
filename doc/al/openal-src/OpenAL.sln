@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenAL", "OpenAL.vcproj", "{02D8D272-C9E7-4349-BF22-8E5B8553FFAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02D8D272-C9E7-4349-BF22-8E5B8553FFAA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{02D8D272-C9E7-4349-BF22-8E5B8553FFAA}.Debug|Win32.Build.0 = Debug|Win32
+		{02D8D272-C9E7-4349-BF22-8E5B8553FFAA}.Release|Win32.ActiveCfg = Release|Win32
+		{02D8D272-C9E7-4349-BF22-8E5B8553FFAA}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

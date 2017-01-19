@@ -1,0 +1,53 @@
+Name Strings
+
+    cl_amd_device_attribute_query
+
+Contributors
+
+    Benedict Gaster, AMD
+    Laurent Morichetti, AMD
+    Ben Sander, AMD
+
+Contact
+
+    Benedict Gaster (benedict 'dot' gaster 'at' amd 'dot' com)
+
+IP Status
+
+    No known claims.
+
+Version
+
+    Version 1, March 26, 2010
+
+Number
+
+    OpenCL Extension #7
+
+Status
+
+    Complete, shipping as part of ATi Stream SDK 2.1
+
+Extension Type
+
+    OpenCL device extension.
+
+Dependencies
+
+    OpenCL 1.0 is required. This document is written against revision 48
+    of the OpenCL 1.0 Specification.
+
+Overview
+
+    This extension provides a means to query AMD specific device attributes.
+
+New Tokens
+
+    Accepted as the <param_name> parameter of clGetDeviceInfo. Return the
+    offset in nano-seconds between an event timestamp and Epoch.
+
+        CL_DEVICE_PROFILING_TIMER_OFFSET_AMD    0x4036
+
+Revision History
+
+    Version 1, 2010/03/26 (Laurent Morichetti) - initial extension specification.

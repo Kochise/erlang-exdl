@@ -1,0 +1,1018 @@
+Content-Type: multipart/related; start=<op.mhtml.1242744671109.ded3400a6a5169e8@192.168.1.200>; boundary=----------Ifx6nrkwO9EmwofG36aAZ9
+Content-Location: http://opal.sourceforge.net/tutorial2.html
+Subject: =?utf-8?Q?OPAL:=20Open=20Physics=20Abstraction=20Layer?=
+MIME-Version: 1.0
+
+------------Ifx6nrkwO9EmwofG36aAZ9
+Content-Disposition: inline; filename=tutorial2.html
+Content-Type: text/html; charset=windows-1252; name=tutorial2.html
+Content-Id: <op.mhtml.1242744671109.ded3400a6a5169e8@192.168.1.200>
+Content-Location: http://opal.sourceforge.net/tutorial2.html
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="tutorial2_files/filelist.xml">
+<link rel=Edit-Time-Data href="tutorial2_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>OPAL: Open Physics Abstraction Layer</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Tyler Streeter</o:Author>
+  <o:LastAuthor>Tyler Streeter</o:LastAuthor>
+  <o:Revision>128</o:Revision>
+  <o:TotalTime>214</o:TotalTime>
+  <o:Created>2004-06-05T15:20:00Z</o:Created>
+  <o:LastSaved>2005-07-15T18:53:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>420</o:Words>
+  <o:Characters>2394</o:Characters>
+  <o:Company>none</o:Company>
+  <o:Lines>19</o:Lines>
+  <o:Paragraphs>5</o:Paragraphs>
+  <o:CharactersWithSpaces>2809</o:CharactersWithSpaces>
+  <o:Version>10.6714</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentVariables>
+   <w:dgnword-docGUID>{F1FC9714-203F-4FDB-897B-71B72F8764F4}</w:dgnword-docGUID>
+   <w:dgnword-eventsink>10838504</w:dgnword-eventsink>
+  </w:DocumentVariables>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Courier;
+	panose-1:2 7 4 9 2 2 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-format:other;
+	mso-font-pitch:fixed;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:"Book Antiqua";
+	panose-1:2 4 6 2 5 3 5 3 3 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:647 0 0 0 159 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:white;}
+a:link, span.MsoHyperlink
+	{color:#3366FF;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#000066;
+	text-decoration:underline;
+	text-underline:single;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="60418">
+  <o:colormenu v:ext="edit" fillcolor="white"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-US link="#3366FF" vlink="#000066" style='tab-interval:
+.5in' alink="#ffcc33">
+
+<div class=Section1>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width="95%"
+ style='width:95.58%;mso-cellspacing:0in;mso-padding-alt:7.5pt 7.5pt 7.5pt 7.5pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width=1295 valign=top style='width:777.0pt;padding:7.5pt 7.5pt 7.5pt 7.5pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-family:"Book Antiqua";mso-bidi-font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-family:"Book Antiqua";mso-bidi-font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-family:"Book Antiqua";mso-bidi-font-family:Arial;color:#333333'><img
+  width=534 height=129 id="_x0000_i1025" src="files/opal_logo.jpg" border=0><o:p></o:p></span></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-family:"Book Antiqua";mso-bidi-font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-family:"Book Antiqua";mso-bidi-font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-size:22.0pt;font-family:"Book Antiqua";mso-bidi-font-family:Arial;
+  color:black'>Tutorial 2: Solids, Shapes, and Materials<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:16.0pt;font-family:"Book Antiqua";color:black'>Solids<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>A
+  Solid is analogous to a physical object in the real world.&nbsp; It can be
+  static (just a shape, not physically simulated) or dynamic (has a shape,
+  mass, and is physically simulated).&nbsp; The available Shapes are: boxes,
+  spheres, capsule, planes, and triangular meshes.<span
+  style='mso-spacerun:yes'>  </span>A Solid contains no moving parts.&nbsp;
+  Complex objects with moving parts can be built from multiple Solids with
+  Joints.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>Create
+  a Solid by asking a Simulator to create one:<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::Simulator</span></span><span style='font-family:Courier;
+    color:black'>* <span class=SpellE>sim</span> = <span class=SpellE>opal::createSimulator</span>();<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::Solid</span></span><span style='font-family:Courier;
+    color:black'>* solid = <span class=SpellE>sim</span>-&gt;<span
+    class=SpellE>createSolid</span>();<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>Once
+  you have a Solid, you can set its various parameters.<span
+  style='mso-spacerun:yes'>  </span>For example…<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>setLinearDamping</span>(0.2);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>opal::Matrix44r
+    transform;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>transform.translate</span></span><span style='font-family:
+    Courier;color:black'>(1.0, 0.0, 5.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>transform.rotate</span></span><span style='font-family:Courier;
+    color:black'>(45.0, 0.0, 1.0, 0.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>setTransform</span>(transform);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>setStatic</span>(true);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>The
+  last call makes the Solid static, i.e. it will not be physically simulated
+  but still takes part in collision detection.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>You
+  can apply forces and torques to a Solid like this:<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+   mso-border-insideh:.25pt solid windowtext;mso-border-insidev:.25pt solid windowtext'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::Force</span></span><span style='font-family:Courier;
+    color:black'> f;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>f.type</span></span><span style='font-family:Courier;
+    color:black'> = <span class=SpellE>opal::GLOBAL_FORCE</span>;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>f.vec</span></span><span style='font-family:Courier;
+    color:black'> = opal::Vec3r(20.0, 20.0, 40.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>f.duration</span></span><span style='font-family:Courier;
+    color:black'> = 0.1;<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>addForce</span>(f);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>This
+  force will be applied to the Solid until its duration expires.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>When
+  you are done with a Solid, tell the Simulator to destroy it:<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+   mso-border-insideh:.25pt solid windowtext;mso-border-insidev:.25pt solid windowtext'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>sim</span></span><span style='font-family:Courier;color:black'>-&gt;<span
+    class=SpellE>destroySolid</span>(solid);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>If
+  other <span class=GramE>things depends</span> on this Solid, like Joints,
+  Motors, or Sensors, they will automatically be disabled.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:16.0pt;font-family:"Book Antiqua";color:black'>Shapes<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>An
+  important part of creating a Solid is giving it Shapes.<span
+  style='mso-spacerun:yes'>  </span>A Solid can contain any number of
+  Shapes.<span style='mso-spacerun:yes'>  </span>To add box and sphere Shapes
+  to the Solid, do the following:<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+   mso-border-insideh:.25pt solid windowtext;mso-border-insidev:.25pt solid windowtext'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::BoxShapeData</span></span><span style='font-family:Courier;
+    color:black'> <span class=SpellE>boxData</span>;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.dimensions.set</span></span><span style='font-family:
+    Courier;color:black'>(1.0, 1.0, 2.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>addShape</span>(<span class=SpellE>boxData</span>);<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::SphereShapeData</span></span><span style='font-family:
+    Courier;color:black'> <span class=SpellE>sphereData</span>;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>sphereData.radius</span></span><span style='font-family:Courier;
+    color:black'> = 2.0;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>sphereData.offset.translate</span></span><span
+    style='font-family:Courier;color:black'>(4.0, 0.0, 0.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>addShape</span>(<span class=SpellE>sphereData</span>);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>Notice
+  how the sphere’s offset was changed.<span style='mso-spacerun:yes'> 
+  </span>The offset positions the Shape relative to the Solid’s transform.<span
+  style='mso-spacerun:yes'>  </span>Shapes are not offset at all by default.<span
+  style='mso-spacerun:yes'>  </span>Here, we have moved the Sphere away from
+  the Solid’s origin.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:16.0pt;font-family:"Book Antiqua";color:black'>Materials<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>Each
+  Shape can have different Material properties.<span style='mso-spacerun:yes'> 
+  </span>Now for a demonstration of using a custom Material:<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 align=left
+   style='background:silver;border-collapse:collapse;border:none;mso-border-alt:
+   solid windowtext .25pt;mso-table-lspace:9.0pt;margin-left:.1in;mso-table-rspace:
+   9.0pt;margin-right:.1in;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:
+   page;mso-table-left:7.35pt;mso-table-top:12.7pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+   mso-border-insideh:.25pt solid windowtext;mso-border-insidev:.25pt solid windowtext'>
+   <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes;height:22.95pt'>
+    <td width=974 valign=top style='width:584.6pt;border:solid windowtext 1.0pt;
+    mso-border-alt:solid windowtext .25pt;padding:0in 5.4pt 0in 5.4pt;
+    height:22.95pt'>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'><o:p>&nbsp;</o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>opal::BoxShapeData</span></span><span style='font-family:Courier;
+    color:black'> <span class=SpellE>boxData</span>;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.dimensions.set</span></span><span style='font-family:
+    Courier;color:black'>(1.0, 1.0, 2.0);<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.material.hardness</span></span><span style='font-family:
+    Courier;color:black'> = 0.2;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.material.bounciness</span></span><span
+    style='font-family:Courier;color:black'> = 0.6;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.material.friction</span></span><span style='font-family:
+    Courier;color:black'> = 1.0;<o:p></o:p></span></p>
+    <p class=MsoNormal><span class=SpellE><span style='font-family:Courier;
+    color:black'>boxData.material.density</span></span><span style='font-family:
+    Courier;color:black'> = 0.4;<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:Courier;color:black'>solid-&gt;<span
+    class=SpellE>addShape</span>(<span class=SpellE>boxData</span>);<o:p></o:p></span></p>
+    <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'>Note
+  that Material density affects a Solid’s mass (calculated from each Shape’s
+  density and volume).<span style='mso-spacerun:yes'>  </span>The rest of the
+  Material properties are described in the API reference.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-family:"Book Antiqua";color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><span
+style='font-size:10.0pt;font-family:"Book Antiqua";mso-bidi-font-family:Arial;
+color:#333333'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'><span
+style='font-size:8.0pt;font-family:"Book Antiqua";mso-bidi-font-family:Arial;
+color:black'>OPAL is Copyright © 2004-2005 Alan Fischer, Andres Reinot, and
+Tyler Streeter<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>
+
+------------Ifx6nrkwO9EmwofG36aAZ9
+Content-Disposition: inline; filename=opal_logo.jpg
+Content-Type: image/jpeg; name=opal_logo.jpg
+Content-Location: http://opal.sourceforge.net/files/opal_logo.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEAeAB4AAD/4Q9zRXhpZgAATU0AKgAAAAgABwESAAMAAAAB
+AAGyAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAExAAIAAAAb
+AAAAcgEyAAIAAAAUAAAAjYdpAAQAAAABAAAAoQAAAMsAAAB4AAAAAQAAAHgAAAAB
+QWRvYmUgUGhvdG9zaG9wIENTIFdpbmRvd3MAMjAwNTowMjowOSAwMTowMDo1NwAA
+A6ABAAMAAAAB//8AaKACAAQAAAABAAAH/KADAAQAAAABAAAIbQAAAAAABgEDAAMA
+AAABAAYAAAEaAAUAAAABAAABGQEbAAUAAAABAAABIQEoAAMAAAABAAIAAAIBAAQA
+AAABAAABKQICAAQAAAABAAAOQgAAAAAAAABIAAAAAQAAAEgAAAAB/9j/4AAQSkZJ
+RgABAgEASABIAAD/7QAMQWRvYmVfQ00AAv/uAA5BZG9iZQBkgAAAAAH/2wCEAAwI
+CAgJCAwJCQwRCwoLERUPDAwPFRgTExUTExgRDAwMDAwMEQwMDAwMDAwMDAwMDAwM
+DAwMDAwMDAwMDAwMDAwBDQsLDQ4NEA4OEBQODg4UFA4ODg4UEQwMDAwMEREMDAwM
+DAwRDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDP/AABEIAKAAmAMBIgACEQED
+EQH/3QAEAAr/xAE/AAABBQEBAQEBAQAAAAAAAAADAAECBAUGBwgJCgsBAAEFAQEB
+AQEBAAAAAAAAAAEAAgMEBQYHCAkKCxAAAQQBAwIEAgUHBggFAwwzAQACEQMEIRIx
+BUFRYRMicYEyBhSRobFCIyQVUsFiMzRygtFDByWSU/Dh8WNzNRaisoMmRJNUZEXC
+o3Q2F9JV4mXys4TD03Xj80YnlKSFtJXE1OT0pbXF1eX1VmZ2hpamtsbW5vY3R1dn
+d4eXp7fH1+f3EQACAgECBAQDBAUGBwcGBTUBAAIRAyExEgRBUWFxIhMFMoGRFKGx
+QiPBUtHwMyRi4XKCkkNTFWNzNPElBhaisoMHJjXC0kSTVKMXZEVVNnRl4vKzhMPT
+dePzRpSkhbSVxNTk9KW1xdXl9VZmdoaWprbG1ub2JzdHV2d3h5ent8f/2gAMAwEA
+AhEDEQA/APVE6SSSlJJJJKUkkkkpSSSSSlJJJJKUkkkkpSSSSSlJJJJKUkkkkpZJ
+Okkp/9D1VJJJJSkkkklKSSSSUxcSIgTqJ+CT3NY0veYa0EuJ7AKSp9RO5tVMwLXj
+d8G+7/q9iSkOR1GtraiRZc/Ik42Jj62va2N9j3bq21V17mepZbbRj1Psrqut9S6p
+RA6qRI6dhieGvyHbv7ezCsbu/t2Kh03qvSOn1sy8+5tOX1gHKBILtuOCGYVdljGu
+bRUxl9NbfVexl/UMm70v1nKVvD+t31dzQw4ua2z1G1uaA14MXX/s6n2uY13uzf0P
+/B/4X9GkpQ6qa7m43o2YuYQX/ZriDW+tkerZjXM9Suxrf3av01O/1crGrrWpRey+
+sWMmDoQeQR9Jrv6qr9VwBn4bqmkV5FZ9XEujWu5v8zcP+ptZ/hqPVos/RWqr0TKG
+Q1lzW7GZdDLwz90kM3N/s+oyv/rSSnWSSSSUpJJJJSkkkklKSSSSU//R9VSSSSUp
+JJJJSkkkklKVPqI2+jdEhj4d8Haf9XsarijZWy1jq3jcxwhw8ikp5/p3Sul9Sw6M
+XOpZbldH/VdQCfTbt+zuc1422U5WO3Gymf6O7/uzj/o7D/qh0Cwl1mKwvcGNLw1r
+H7KwxlFTbKWV2Mrp9Cj0mMd+j9Guz+cUrOlvZk/aPXdj31t2U5TBIcyS/wBLOrP6
+O2rcfo/8dbi341uQjts64GwBh2+F4fYwf1vs2y//ADftaSl87I/ZeG/KfbZdsaGU
+0HZ+kteRXjUs21tf6t1zmUs9yB0PFOM2qiQ/7Jjspc8cOdDA5zf+2d//AFxSrwjZ
+eMnKtHUMloLamhuzGq3A12Oqp3XfpX1nZZZbdk5P6S2un0ce62taGNjsx6hW3XWX
+OPJJ+MpKSpJJJKUkkkkpSSSSSlJJJJKf/9L1VJJJJSkkkklMJbVWXWOAawFznkwA
+B7iSXH6LVXyc6vHrFuRbXiUuO1jrjDnE/RYxhLfe6PYz+d/4JV+qZDvU9Fo3MpZ6
+1jdfcSdtFY2h3u3t/wA/0kukdLGOxuVlbbeovbtttEltYn+iYe7+aw6tuxn+m2et
+kb7klLHrOAyHWZTqGnizJpfTX/27fXj1/wDgqvC/a5rbYbv0Y8H2uP7v8l/8lGWF
+k9NGFk1V4ga3AulrsckhtFp/m7sRrAfSryP5m2pn81f6F+P6W/L+0JTuqBqqJksa
+T4wEHAyH34wdZ/OsLq7P6zDtn+39NWUlMTu3NA+j3UHXEuLagHFv03HRrf8AyTv5
+Kjm3Opx3OYYeYaw8w5x2h39j6ayGNq6lY9vUNjOmYlnoV0OMMyMga3WX7/56uiz9
+BXjv9n2qvJuu9b08WypKbQ61gO1ry3XtHNmNU+6v/t2mvIr/APBUSvq2O8NfTazM
+pJIdZTBLI7WNaXe//g/53/glZ+24YH89XE7fpDn93/orP6jh4ua/7T0+2pnVWMmq
+wERYwf8AabLDPddiP+j/AN1/5/H/AE6SnVY9ljA9hDmuEtcNQQpLJ6NmNuaxzA5t
+OUz1WMf9Jjv8LW7/AITcf0v/AA1Vy1klKSSSSUpJJJJT/9P1VJJJJSkkkklOF1gP
+GQ5zJ3sfj3Eh22KWXUuv3P8A3HMqs9qr9f8Aq3b1fJ9WnJvxmNx344FO2QXNyKXe
+k519Wxr/ALQ2zMr9L9a+x4H6er0FsdRxX2AX0gm2sFrmCPfW76dbt/tdx+d/39VM
+SzO6bSyq1j+oYXNeTUd91Yn+ZyKnfpcttP0K8qnflW/9qMX1K7MrISnLx/qpn4eZ
+XlYedkNFb6nMovAvraymq3Erp92XVc79DlX+q71Pff6Nv+B9Ja/V333YrKq2OryX
+ZFAYA8NdtFtdtpD2u/Ppou9qKes0ERTj5d1h+jWMa6sk+Hq5VePj1/8AXrqlUso6
+tdlMyb3CuyxpZRh1uBbS0mXXZDyP091m1u+6v+if0TF9b1rsq9KbvSQ37O8tG1ps
+O0fANY7/AKbXK8hY2OzGoZSzUMHJ5JPue938p7vcipKafUwfRrd2bY0n5hzB/wBJ
+yo9Nrfd0TNw6rzjZDbcyo3tEuqfZZddVkbTt93pX05TP6617qm3VOqfw4RI5Hg4f
+1VgW15mJlutoaHXWBteViTtF7W+2rIxXu9teXU32s9T9DbT+q5no+hRkVJTQ/wCa
+vWX0WbvrFlU3Gj0mbHXenWH2W23WNZk325ORZ6djKMa+3K9en/SPr9DHp3ehY3Us
+ZmQzPzG5u+11tbgyxjm+oTZZVtvuv/QMcduL6f0KU37Sp/w9WVVa3/B/Zbnw4Hd9
+OhmRRd/1i6xiFY3K6i19T2PxOnPG2+639HZbX3x8eiTbi13btl2Rkelksq/Q42P6
+ltebjJSPobhb6FzNWXWZORWf+Cttvupd/bryKXreVXDxKqnOtrYa2kBlVfZrB+63
+/Bbv9F+Yz01aSUpJJJJSkkkklP8A/9T1VJJJJSkkkklLSPuUHUsLi9sseeXNMT/W
+H0Xf2k72ENfs+m4fjEIAY/8AMa5o2+7kE6j2+5x9+3d70lJvSf3tfH9kfkYnZWyu
+dognk8k/1nH3OWX1WrrD8B46K70cjfWZcWtc5gdNzaXZFWVTTc+v2+pdi3V/8H/h
+ll04n+MSu9llubh5Fbrg66jb6bW1Nb6bqqLPQfY77Q+37R+m/mPslNfr2+vckp6t
+JU+j/tL9mYzeqhv29jAzJcwhzXvb7HXN2Mqa3149X0/T/R/QVxJSlCytlgG8TtMt
+PBBjbLXD3N9pUiQIB78J0lI/SeOLXgf2T/1TEhSwODnEvcOC4zH9Vv0G/wBlESSU
+pJJJJSkkkklKSSSSU//V9VSSSSUpJJJJSkkNxextjyd0Alo+CF61jfzg6WzOkDUD
+f7XO/R+5JTZSWR1nqHUsLBdZgU/arw+trjsfZ6bHu2W3uxsX9YyfSb7/AEaP0yya
+vrN9axZWcnom2qy6HMqsFj66Q307LbXBwrf+t21ei6n+kY2Pn2+j6dPrvSnrUlQ6
+V1P7X03Gyctv2TJsqa7Ix7Q6t1dkRdXsvDLNjLdzWWf4X+cr9ivcpKUWgxPbVBsc
+RXv3QSQCZ0brHEj6KOoljSSY55SU1y9wlod7QQN5PGk7dPaqHW87quJ071ul45zL
+xZtghz/bsc9n6Kp9bnerkirC9Vv6PF9f7Zd+gxrVr+myIjTw7JbG/wCpSU8lb1v6
+7Vtc79jNfL8rYGPe4tYwPp6e24OfVvfkZba3WWY77P1L9P6VC6bCuGXiVZGy2n1G
+ya7Wure092vqs9zEfY3/AFJS2N/1JSUtG14AJ1mQTPH5ymmDWjUDU906SlJJJJKf
+/9b1VJJJJSkkkklKUQxgmGgTzASEyZ47fBZDPrb0VxeS+1lQqffVe6mwV3V1lrbL
+MN+z9a+mzb6H87/OU+pUkp1wxjW7Q0BvgBooiigcVtECB7RwqVXX+k2X144uc2+2
+11DarK7K3+oxjMh7LGW1sdV+htpex9vst9an0/52tW8TLx83Gqy8Z/qUXtD6nwRL
+XatdteGuSUy9Ckgj02weRAREkklKSUQXAuLoDRwfyymF1TgSHDQSfh+8kpmkhnIo
+DS9z2taNCXGI/wA5ROZhiZvr9ujve3SA6zXX9yux/wDYSUmSTAhwBBkHUEcQnSUp
+JJJJSkkkklP/1/VUkkklKSSSSUsQCCDqDyFz7vqdjfZPsj8m/KxqqX4+HjXOaK6a
+7IY9jHVVNtt20D7PU/K+0enR+j/wlq6FJJTg2fVfGstFgpqphtYY2kuqbU6u37b6
+2NVW30m2vy213Wutbb632ej1la6b07P6dQ3GpuFmOyG1V2wfTY36NdbqqqHu/wCv
+eqtRJJSKn7TLvX2RPs2Txr9LcipJJKY2M3scyY3CJQjTY4y4gEAQNSJkO13f1UdJ
+JTSvwbL/AEnhzK7aHiypxaXhp22Ve330+7ZfZX7/APB/mKp/zepDBUz0mVsn0gK3
+y3Q1s9/r/mVudV/xNuRV/h3rYSSU1KqM+tgYL6i1oIbNTp/k6+v+arFQtDALnNe/
+u5jSwf5rn2/9WppJKUkkkkpSSSSSn//Q9VSTSEpCSl0k0hKQkpdJNISkJKXSTSEp
+CSl0k0hKQkpdJNISkJKXSTSEpCSl0k0hKQkpdJNISkJKXSTSEklP/9n/2wBDAAEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCACBAhYDASIA
+AhEBAxEB/8QAHwABAAICAgMBAQAAAAAAAAAAAAgJAQcGCgIFCwQD/8QAUhAAAAYB
+AwEFBAcEAwsKBwEAAQIDBAUGBwAIEQkSEyExQRRRYfAKFRZxgZGhGLHB0RcZIiMk
+JTI4OVd4mNXhMzQ1Qll3tba38SY3RVViZGeV/8QAFAEBAAAAAAAAAAAAAAAAAAAA
+AP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AO/xpppoGmmmgaaa
+aBpppoGmmmgaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaBpppoGm
+mmgaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaBpppoGmmmgaaaaB
+pppoGmmmgaaaaBpppoGmmmgaaaaBrHIB5iAeY/l5/l6+711gxikATGEClKAmMYwg
+BSgHmIiIgAAAeIiPHh9w6gjZ93NlyLaJbGezmitMyWaEeBGWvK8+9Wh8B4+dmHsG
+I/s7U3tt6lGxhIorX6X3qyzY5nLORd+yvWqYTv5/l+nPj7vx/lzqmz54wfSXIs7n
+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
+VymaDJws3BWijsXGRqxZ21UNONphJ40ulUSh7rXJSJjncJNNkjP2r3mu2jbri7aV
+gLEu2rCsOtA4uwvSoejU9i7XI8klWEUjw4l5t8mg2TkrFYJJR7P2OUBq3+s52SkZ
+AW6JnIkLvLTQY4/H7/Hjx58Px4H4cBxpx8/Prx4c+nj+GdNBgQ9w8fd8/fz6+PPI
+CACDj4/u/l6/l8NZ00GBDn148/L4/wAQHxDnn8/HTj58ff6ePh5iH3cB5BxrOmgw
+AcCI8+I/PI+8f4AAAAacfPI/f7/f+nIeQ6zpoMcePPPpx+vP/Dx5+HHI8uPiP6e8
+B93rx+Hpx4cZ00GOPj/P55/D044049ef5fH4h+A/nrOmgxwHp8f18/zHxHjjkdOA
++fXnnz/P7/wEec6aDHHiA8j4Dz6fxD7/AI+Ih5aCH7+fhyHjzx9/6+IcD46zpoMc
+B8/eA+fn48Bz9we7TgOefX8/d7+fkR9R1nTQY48fT58x+/4/f79ZAPP4jz8/P5Bw
+Gmmgxx4ceHHuEA4/IOPX5DVdG7Dp6Mt5WdsDXrMmf8nvNuuBrhRcuMNnMRBY3YYr
+vuc8azFhlqZkTIdx+ySuUrHDRppmPFzjJza/sM+e1qIkDxyR15dGSsY00GOA8fj4
+/P8APz/TTj54/AfzDw1nTQY4+P7/AA/X7/EfXj3azppoGmmmgaaaaBpppoGmmmga
+aaaBrHHj+f5+Hj+H8dZ00GOPH3fdz/Pjj3+HiPj58cBDn1/Tx9f4iAhyAh4eXjyG
+dNA8vLTTTQNNNNA0000DTTTQNY4/n+Pp8PD4gPkA+gazpoH3fPz/AMNNNNA0000D
+TTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNN
+A0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTT
+TQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0
+000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQNNNNA0000DTTTQ
+NNNNB//Z
+
+------------Ifx6nrkwO9EmwofG36aAZ9--

@@ -1,0 +1,2681 @@
+Content-Type: multipart/related; start=<op.mhtml.1226260789406.56b78d753857bf60@10.2.5.116>; boundary=----------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/tutorial1.html
+Subject: =?utf-8?Q?Xadeck=20on=20Ode:=20Tutorial=201?=
+MIME-Version: 1.0
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=tutorial1.html
+Content-Type: text/html; charset=iso-8859-1; name=tutorial1.html
+Content-Id: <op.mhtml.1226260789406.56b78d753857bf60@10.2.5.116>
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/tutorial1.html
+Content-Transfer-Encoding: 8bit
+
+
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="EN">
+
+<head>
+ <title>Xadeck on Ode: Tutorial 1</title>
+ <link rel="shortcut icon" href="/images/favicon.ico" />
+ <link rel="stylesheet" href="/css/artis.ie.css" type="text/css" />
+ <link rel="stylesheet" href="css/common.css" type="text/css" />
+ <link rel="stylesheet" href="/people/Xavier.Decoret/css/geshi.css" type="text/css" />
+ <link rel="stylesheet" href="/css/artis-print.css" type="text/css" media="print" />
+</head>
+
+<body>
+<div id="content">
+
+<h1>ODE Tutorial</h1>
+
+<p>This tutorial explains the basics of ODE through the construction
+of a simple applications that displays cubes falling on the
+ground.</p>
+
+<ul>
+  <li><a href="#A">Preliminary setup</a>
+    <ul>
+      <li><a href="#A1">Discovering the QGLViewer</a></li>
+      <li><a href="#A2">Compiling with qmake in a nutshell</a></li>
+      <li><a href="#A3">Testing our example</a></li>
+    </ul>
+  </li>
+  <li><a href="#B">ODE in a nutshell</a>
+    <ul>
+      <li><a href="#B1">Dynamics</a></li>
+      <li><a href="#B2">Collision</a></li>
+      <li><a href="#B3">Joints</a></li>
+    </ul>
+  </li>    
+  <li><a href="#C1">Preparing for the show</a>
+    <ul>
+      <li><a href="#C11">Object class</a></li>
+      <li><a href="#C12">Bounding box</a></li>
+      <li><a href="#C13">Plane rendering</a></li>
+    </ul>
+  </li>
+  <li><a href="#C2">The full monthy</a>
+    <ul>
+      <li><a href="#C21">Viewer</a></li>
+      <li><a href="#C22">Simulation</a></li>
+      <li><a href="#C23">Collision handling</a></li>
+      <li><a href="#C24">Result</a></li>
+    </ul>
+  </li>
+  <li><a href="#D">Going further</a></li>
+</ul>
+
+
+<a name="A"></a>
+<h2>Preliminary setup</h2>
+
+<a name="A1"></a>
+<h3>Discovering the QGLViewer</h3>
+
+<p>We are going to use ODE for the physics and a very handy library
+for OpenGL display of the physic simulation, named QGLViewer.  This
+library is based on Qt and encapsulates a viewer for rendering and
+manipulating (flying through, rotating with a trackball,...) a 3D
+scene.  There are excellent tutorials on the web site, so I just
+present here the very fundamentals of the library.</p>
+
+<ul>
+
+  <li> Create a class <tt>Viewer</tt> that derives from
+  <tt>QGLViewer</tt></li>
+
+  <li>Override the method <tt>QGLViewer::init()</tt> to indicate the
+  OpenGL setup, such as enabling states (e.g. alpha blending) or
+  creating context dependent objects (e.g. texture objects, frame
+  buffers or vertex buffer objects).</li>
+
+  <li>In the overidden <tt>QGLViewer::init()</tt>, you also specify
+  the &quot;size&quot; of the scene, so that the viewer can optimally
+  compute the near and far plane of the OpenGL camera used to render
+  the scene.  You can also tell the viewer to initially setup the
+  camera so that the whole scene is encompassed by the camera
+  frustum.  Finally, you can position the camera to the position it
+  occupied when the application was last quit (yes, the QGLViewer
+  saves its state in a <tt>.qglviewer.xml</tt> file!).</li>
+  
+  <li>Overidde the method <tt>QGLViewer::draw()</tt> to indicate what
+  OpenGL command must be issued to render the scene.</li>
+
+  <li>Overidde the method <tt>QGLViewer::animate()</tt> to indicate
+  how to animate the scene.  This function is called regularly by the
+  viewer, using a timer whose frequency is set with
+  <tt>QGLViewer::setAnimationPeriod()</tt> (default is every 30ms).</li>
+
+</ul>    
+
+<p>Here is for example a simple viewer that shows a ball whose color
+is changing over the time.</p>
+
+<div class="mention">
+This section corresponds to code in <tt>tutorial1/A</tt> of the snippets directory.
+It contains the following files.
+<ul>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/A/main.cpp">main.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/A/viewer.cpp">viewer.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/A/viewer.h">viewer.h</a></li>
+</ul>
+Click a file to see the whole code in another window.
+Click <a href='tutorial1/D/ode-1-A1.0.0.tar.gz'>here</a> to download a tarball.
+</div>
+
+<table>
+  <tr>
+    <td>
+      <div class="caption"><a href="tutorial1/A/viewer.h">tutorial1/A/viewer.h</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#ifndef VIEWER_H</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#define VIEWER_H</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="co2">#include &lt;QGLViewer/qglviewer.h&gt;</span></div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">class Viewer : <span class="kw2">public</span> QGLViewer</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1">&nbsp; Q_OBJECT;</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1"><span class="kw2">public</span>:</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; Viewer<span class="br0">&#40;</span>QWidget *parent=<span class="kw2">NULL</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; ~Viewer<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1"><span class="kw2">protected</span>:</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> init<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> animate<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">17</td><td><div class="de1"><span class="kw2">private</span>:</div></td></tr>
+<tr><td class="line">18</td><td><div class="de1">&nbsp; <span class="kw4">float</span> _t;</div></td></tr>
+<tr><td class="line">19</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">20</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">21</td><td><div class="de1"><span class="co2">#endif // VIEWER_H</span></div></td></tr>
+<tr><td class="line">22</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+    <td rowspan="2">
+      <div class="caption"><a href="tutorial1/A/viewer.cpp">tutorial1/A/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#include &quot;viewer.h&quot;</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#include &lt;GL/glut.h&gt;</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> qglviewer;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">7</td><td><div class="de1">Viewer::<span class="me2">Viewer</span><span class="br0">&#40;</span>QWidget *parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1">&nbsp; : QGLViewer<span class="br0">&#40;</span>QGLFormat<span class="br0">&#40;</span>QGL::<span class="me2">SampleBuffers</span> |</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DoubleBuffer</span> |</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DepthBuffer</span> |</div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">Rgba</span> |</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">AlphaChannel</span> |</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">StencilBuffer</span><span class="br0">&#41;</span>,parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; , _t<span class="br0">&#40;</span><span class="nu0">0</span>.0f<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">15</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">16</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">17</td><td><div class="de1">Viewer::~Viewer<span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">18</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">19</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">20</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">21</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">22</td><td><div class="de1">&nbsp; <span class="co1">// Indicate the size of the scene</span></div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; setSceneRadius<span class="br0">&#40;</span><span class="nu0">2</span>.0f<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp; setSceneCenter<span class="br0">&#40;</span>Vec<span class="br0">&#40;</span><span class="nu0">0</span>.0f,<span class="nu0">0</span>.0f,<span class="nu0">0</span>.0f<span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">25</td><td><div class="de1">&nbsp; <span class="co1">// Try to restore previous state or focus the whole scene</span></div></td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>!restoreStateFromFile<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; &nbsp; showEntireScene<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">29</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">30</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">31</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">animate</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">32</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">33</td><td><div class="de1">&nbsp; _t += animationPeriod<span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">1000</span>.0f;</div></td></tr>
+<tr><td class="line">34</td><td><div class="de1">&nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>_t&gt;<span class="nu0">1</span><span class="br0">&#41;</span> _t = <span class="nu0">0</span>.0f;</div></td></tr>
+<tr><td class="line">35</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">36</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">draw</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">37</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">38</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">const</span> Vec red&nbsp; <span class="br0">&#40;</span><span class="nu0">1</span>.0f,<span class="nu0">0</span>.0f,<span class="nu0">0</span>.0f<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">39</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">const</span> Vec green<span class="br0">&#40;</span><span class="nu0">0</span>.0f,<span class="nu0">1</span>.0f,<span class="nu0">0</span>.0f<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">40</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">41</td><td><div class="de1">&nbsp; glColor3fv<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">1</span>-_t<span class="br0">&#41;</span>*red+_t*green<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">42</td><td><div class="de1">&nbsp; glutSolidSphere<span class="br0">&#40;</span><span class="nu0">0</span>.5f,<span class="nu0">30</span>,<span class="nu0">30</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">43</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">44</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+  </tr>
+  <tr>
+    <td>
+      <div class="caption"><a href="tutorial1/A/main.cpp">tutorial1/A/main.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#include &quot;viewer.h&quot;</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#include &lt;QApplication&gt;</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1"><span class="co2">#include &lt;GL/glut.h&gt;</span></div></td></tr>
+<tr><td class="line">4</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="kw4">int</span> main<span class="br0">&#40;</span><span class="kw4">int</span> argc,<span class="kw4">char</span> **argv<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp; glutInit<span class="br0">&#40;</span>&amp;argc,argv<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; QApplication application<span class="br0">&#40;</span>argc,argv<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; Viewer viewer;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; viewer.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; <span class="kw1">return</span> application.<span class="me1">exec</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">17</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">18</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>    
+  </tr>
+</table>
+
+<a name="A2"></a>
+<h3>Compiling with qmake in a nutshell</h3>
+
+<p>Qt has a very nice tool to manage compilation, called
+<tt>qmake</tt>. You write a simple project file describing the sources
+and some configuration, and <tt>qmake</tt> generates the appropriate
+<tt>Makefile</tt> for your platform.  Here is such a <tt>.pro</tt> for
+our simple example abobe:</p> 
+
+<div class="caption"><a href="tutorial1/A/ode-1-A.pro">tutorial1/A/ode-1-A.pro</a></div>
+<div class="bash"><table><tr><td class="line">1</td><td><div class="de1">CONFIG&nbsp; *= qglviewer glut ode</div></td></tr>
+<tr><td class="line">2</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">HEADERS *=&nbsp; viewer.h</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1">SOURCES *= &nbsp;viewer.cpp main.cpp </div></td></tr></table></div>
+<p>If you notice the first line, I indicate that I want the project to
+use <tt>qglviewer</tt> and <tt>glut</tt> configuration.  These are non
+standard Qt configuration, so I need to tell Qt what to do when they
+are presents. For that, I define a <tt>qglviewer.prf</tt> and a
+<tt>glut.prf</tt> files that I put in some directory pointed by the
+environment variable <tt>QMAKEFEATURES</tt>.  Here are what it looks
+like on my linux desktop:</p>
+
+<table>
+  <tr>
+    <td>
+      <div class="caption"><a href="qmakefeatures/qglviewer.prf">qmakefeatures/qglviewer.prf</a></div>
+<div class="bash"><table><tr><td class="line">1</td><td><div class="de1">CONFIG *= qt </div></td></tr>
+<tr><td class="line">2</td><td><div class="de1">QT&nbsp; &nbsp; &nbsp;*= opengl xml</div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1">LIBS&nbsp; &nbsp; &nbsp; &nbsp; *= -lQGLViewer</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+    <td>
+      <div class="caption"><a href="qmakefeatures/glut.prf">qmakefeatures/glut.prf</a></div>
+<div class="bash"><table><tr><td class="line">1</td><td><div class="de1">QT&nbsp; &nbsp; &nbsp;*= opengl </div></td></tr>
+<tr><td class="line">2</td><td><div class="de1">LIBS&nbsp; &nbsp;*= -lglut</div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+  </tr>
+</table>
+
+<p>I let you adapt this to you particular machine setup. The cool
+thing about the &quot;feature&quot; mechanism is that it separates
+machine-dependent configuration (where a particular library is
+installed) from project-dependent configuration (which file to
+compile, which library to link with).</p>
+
+<a name="A3"></a>
+<h3>Testing our example</h3>
+
+<p>Ok, now we can run our example. It displays a simple sphere. Use
+the three mouse button (+wheel) to turn around the sphere.  This is
+the trackball metaphor. You can press space to switch to a fly
+metaphor. Press enter to toggle the animation. Quit and re-run the
+application: the viewpoint is restored! If you want to find more about
+the existing keybindings, press H, or (better) read the QGLViewer
+excellent documentation.</p>
+
+<a name="B"></a>
+<h2>ODE in a nutshell</h2>
+
+<p>There are many things to know to use ODE correctly, because a lot
+of magical parameters have to be tuned for your particular application
+to run as you want.  Fortunately, the documentation is quite verbose
+about this.  Conversely (and unfortunately), it lacks a gentle
+introduction.  Let's remedy to this.  Here are what you need to know
+to begin.</p>
+
+<a name="B1"></a>
+<h3>Dynamics</h3>
+
+<p>ODE has a number of base concepts.  Let's start with the two
+fundamental ones:</p>
+
+<ul>
+  <li><b>Body</b>: this is a solid rigid body whose dynamics will be
+  computed by ODE during simulation.  As so, it does not have a
+  &quot;shape&quot; or a visual appearance. It is just a position and
+  orientation (a &quot;local frame&quot; placed on the center of
+  gravity if you will), a linear and angular velocity (how fast it
+  moves and spins), and a mass together with an intertia tensor (how
+  the mass is distributed in the object).</li>
+
+  <li><b>World</b>: this is what holds a bunch of bodies (dynamic and
+  static) along with forces, and a current time.  Running the physical
+  simulation is just advancing the world's time by small steps and
+  updating each bodies dynamics according to the existing forces and
+  the fundamental law of dynamics.</li>
+</ul>
+
+<p>So basically, here is how you create a physical simulation.</p>
+
+<div class="caption"><a href="tutorial1/B/body.cpp">tutorial1/B/body.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1">&nbsp; dWorldID world = dWorldCreate<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">2</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp; <span class="co1">// Create a body</span></div></td></tr>
+<tr><td class="line">4</td><td><div class="de1">&nbsp; dBodyID body = dBodyCreate<span class="br0">&#40;</span>_world<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">&nbsp; dMass mass;</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1">&nbsp; dMassSetBox<span class="br0">&#40;</span>&amp;mass,<span class="nu0">1</span>,<span class="nu0">1</span>,<span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">8</td><td><div class="de1">&nbsp; dMassAdjust<span class="br0">&#40;</span>&amp;mass,<span class="nu0">0</span>.2f<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; dBodySetMass<span class="br0">&#40;</span>body,&amp;mass<span class="br0">&#41;</span>; </div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; dBodySetPosition<span class="br0">&#40;</span>body,<span class="nu0">0</span>,<span class="nu0">6</span>,<span class="nu0">0</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; <span class="co1">// Create another body</span></div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; <span class="co1">// ...&nbsp; </span></div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp;</div></td></tr></table></div>
+<p>Here, we create just a cube but you can add as many objects as you
+want.  We'll see more about this later on.  For the moment, notice how
+we specified the mass.  We used helper functions.  Indeed, what the
+dynamics need is not the mass as you usually think of it (I weight
+xxx), but the mass inertia matrix, which also gives you how the weight
+is distributed over the body (it drives how the body spins).  This
+inertia matrix is inintuitive to specify in matrix form.  Luckily, for
+specific cases, such as a uniformly dense cube or sphere, it is easy
+to compute from the box/sphere dimensions and density.  This is what
+the helper functions do for you. You can find more in <a
+href='http://www.ode.org/ode-latest-userguide.html#sec_9_2_0'>section 9.2.0</a>
+of the ODE manual.</p>
+
+<a name="B2"></a>
+<h3>Collision</h3>
+
+<p>I said above that dynamics simulation itself does not need to know
+the shape of each body.  Well, that is true only if you consider that
+objects do not interact with each other.  In reality, a physical
+simulation is interesting if bodies interact, namely if they collide,
+bounce and push each other.  To compute such interactions, you know
+need to know the shape of objects, because this is what commands
+when/where/how bodies interact.  Thus, ODE has two other concepts.</p>
+
+<ul>
+  <li><b>Geom</b>: this is what describe the shape (the
+  <em>geometry</em>) of a body.  It can be a canonical shape such as a
+  cube or a sphere, or a polygonal object described by a triangulation
+  of its surface (known as a B-rep).</li>
+
+  <li><b>Space</b>: this is what holds a bunch of geoms and manages the
+  collision detection more or less intelligently.  ODE comes with
+  several flavor of space, as we will see in a moment.</li>
+</ul>
+
+<p>So here is how we would define a geom in ODE, continuing the body
+example of above.</p>
+
+<div class="caption"><a href="tutorial1/B/geom.cpp">tutorial1/B/geom.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1">&nbsp; dSpaceID space = dHashSpaceCreate<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">2</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp; <span class="co1">// Create a geom</span></div></td></tr>
+<tr><td class="line">4</td><td><div class="de1">&nbsp; dGeomID geom = dCreateBox<span class="br0">&#40;</span>space,<span class="nu0">1</span>,<span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp; <span class="co1">// Bind together our previously created body and the geom</span></div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">&nbsp; dGeomSetBody<span class="br0">&#40;</span>geom,body<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1">&nbsp;</div></td></tr></table></div>
+<p>The important thing to notice is that we &quot;bind&quot; together
+a body and a geom.  Once this is done, changing the position or
+orientation of one will change that of the other, that is we can call
+indifferently <tt>dBodySetPosition(body,0,6,0);</tt> or
+<tt>dGeomSetPosition(body,geom,6,0);</tt>.</p>
+
+<p>The interest of separating the body from the (collision) geometry
+is that we can create &quot;static&quot; geometry.  For that, we just
+create a geom in the space, and not associated body in the world.
+Typically, this is used to create a ground plane.</p>
+
+<a name="B3"></a>
+<h3>Joints</h3>
+
+<p>Bodies do not interact only because of collision.  They can also
+interact because they are &quot;attached&quot; together.  In ODE
+terminology, such an attachment is called a <em>joint</em>.  I will
+not describe here the types of join and how to create them, because in
+this tutorial, we will only consider indpendent objects (e.g. falling
+cubes on a plane).  Moreover, you will find detailed information in
+the ODE manual.</p>
+
+<p>However, I will describe a particular type of joints: contact ones.
+Indeed, we have seen that the space manages the collision detection
+based on the given geoms.  However, once collisions are detected, the
+dynamics must account for them.  It turns out that collision/contact
+interaction can be described as <em>temporary</em> joints that exists
+only during the time of the contact.  Thus, during simulation, we
+will:</p>
+
+<ul>
+  <li>detect collision,</li>
+  <li>create contact objects (indicating physical
+parameters such as friction coefficients or bouncyness),</li>
+  <li>create joints from these contacts,</li>
+  <li>attach this joint two the two bodies involved.</li>
+</ul>
+
+<p>We will see more about how to do this in a moment.</p>
+
+<a name="C1"></a>
+<h2>Preparing for the show</h2>
+
+<p>Before we go to the full monthy and a working example, we should
+prepare the terrain a little bit, so that the code is organized
+cleanly and you can quickly identify where to put additional codes to
+extend the tutorial example. This involves some code engineering that
+I describe shortly here.</p>
+
+<a name="C11"></a>
+<h3>Object class</h3>
+
+<p>Since bodies and geoms are tightly linked in a normal ODE
+application, we will encapsulate them together in a bigger entity
+called <em>object</em>.  We will also encapsulate how to render the
+object to make our application more sexy.  For the moment, we will
+make a very crude encapsulation; we will see later how to make a
+better object based one.</p>
+
+<p>An object owns a body and a geom, publicly accessible for
+simplicity.  It can also be required to render itself (using OpenGL),
+and finally, it can be placed at a given position.  The interface and
+implementation are:</p>
+
+<table>
+  <tr>
+    <td>
+      <div class="caption"><a href="tutorial1/C/object.h">tutorial1/C/object.h</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#ifndef OBJECT_H</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#define OBJECT_H</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="co2">#include &lt;ode/ode.h&gt;</span></div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">class Object</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1"><span class="kw2">public</span>:</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp; dBodyID body;</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; dGeomID geom;</div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> ~Object<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; <span class="kw4">void</span> render<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span>;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; <span class="kw4">void</span> setPosition<span class="br0">&#40;</span>dReal x,dReal y,dReal z<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1"><span class="kw2">protected</span>:</div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> renderInLocalFrame<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span> = <span class="nu0">0</span>;</div></td></tr>
+<tr><td class="line">17</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">18</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">19</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">20</td><td><div class="de1"><span class="co2">#endif // OBJECT_H</span></div></td></tr>
+<tr><td class="line">21</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+    <td>
+      <div class="caption"><a href="tutorial1/C/object.cpp">tutorial1/C/object.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#include &quot;object.h&quot;</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#include &lt;GL/gl.h&gt;</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">Object::~Object<span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">9</td><td><div class="de1"><span class="kw4">void</span> Object::<span class="me2">render</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span></div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; glPushMatrix<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; <span class="kw4">const</span> dReal *p = dBodyGetPosition<span class="br0">&#40;</span>body<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; <span class="kw4">const</span> dReal *r = dBodyGetRotation<span class="br0">&#40;</span>body<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp; <span class="kw4">float</span> m<span class="br0">&#91;</span><span class="nu0">16</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; m<span class="br0">&#91;</span> <span class="nu0">0</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">0</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">1</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">4</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">2</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">8</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">3</span><span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></td></tr>
+<tr><td class="line">17</td><td><div class="de1">&nbsp; m<span class="br0">&#91;</span> <span class="nu0">4</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">1</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">5</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">5</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">6</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">9</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">7</span><span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></td></tr>
+<tr><td class="line">18</td><td><div class="de1">&nbsp; m<span class="br0">&#91;</span> <span class="nu0">8</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">2</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span> <span class="nu0">9</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span> <span class="nu0">6</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span> = r<span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span> = <span class="nu0">0</span>;</div></td></tr>
+<tr><td class="line">19</td><td><div class="de1">&nbsp; m<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span> = p<span class="br0">&#91;</span> <span class="nu0">0</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span><span class="nu0">13</span><span class="br0">&#93;</span> = p<span class="br0">&#91;</span> <span class="nu0">1</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span><span class="nu0">14</span><span class="br0">&#93;</span> = p<span class="br0">&#91;</span> <span class="nu0">2</span><span class="br0">&#93;</span>;m<span class="br0">&#91;</span><span class="nu0">15</span><span class="br0">&#93;</span> = <span class="nu0">1</span>;</div></td></tr>
+<tr><td class="line">20</td><td><div class="de1">&nbsp; glMultMatrixf<span class="br0">&#40;</span>m<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">21</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">22</td><td><div class="de1">&nbsp; renderInLocalFrame<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; glPopMatrix<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">25</td><td><div class="de1"><span class="kw4">void</span> Object::<span class="me2">setPosition</span><span class="br0">&#40;</span>dReal x,dReal y,dReal z<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">26</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; <span class="co1">// Equivalent to dGeomSetPosition(geom,x,y,z);</span></div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; dBodySetPosition<span class="br0">&#40;</span>body,x,y,z<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">29</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">30</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+  </tr>
+</table>
+
+<p>The <tt>render()</tt> function does some fiddling to pass
+from ODE representation (a position and rotation) to OpenGL
+representation (a general 4x4 matrix) of transformations.  After that
+matrix is added to OpenGL model view matrix, and object can render
+itself by using coordinates in its local frame.  That's the purpose of
+the pure virtual function <tt>renderInLocalFrame()</tt>.</p>
+
+<p>We can now subclass <tt>Object</tt> for various shapes we want to
+handle.  Here is what we could come up with for a cube, for example:</p>
+
+<table>
+  <tr>
+    <td>
+      <div class="caption"><a href="tutorial1/C/cube.h">tutorial1/C/cube.h</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#ifndef CUBE_H</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#define CUBE_H</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="co2">#include &quot;object.h&quot;</span></div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">class Cube : <span class="kw2">public</span> Object</div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1"><span class="kw2">public</span>:</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp; Cube<span class="br0">&#40;</span>dWorldID world,dSpaceID space,dReal width,dReal height,dReal depth,dReal mass<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; <span class="kw4">unsigned</span> <span class="kw4">char</span> color<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td class="line">11</td><td><div class="de1"><span class="kw2">protected</span>:</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> renderInLocalFrame<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span>;</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">16</td><td><div class="de1"><span class="co2">#endif // CUBE_H</span></div></td></tr>
+<tr><td class="line">17</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+    <td>
+      <div class="caption"><a href="tutorial1/C/cube.cpp">tutorial1/C/cube.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">1</td><td><div class="de1"><span class="co2">#include &quot;cube.h&quot;</span></div></td></tr>
+<tr><td class="line">2</td><td><div class="de1"><span class="co2">#include &lt;GL/glut.h&gt;</span></div></td></tr>
+<tr><td class="line">3</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">4</td><td><div class="de1"><span class="kw2">using</span> <span class="kw2">namespace</span> std;</div></td></tr>
+<tr><td class="line">5</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">6</td><td><div class="de1">Cube::<span class="me2">Cube</span><span class="br0">&#40;</span>dWorldID world,dSpaceID space,dReal width,dReal height,dReal depth,dReal mass<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">7</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">8</td><td><div class="de1">&nbsp; body = dBodyCreate<span class="br0">&#40;</span>world<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">9</td><td><div class="de1">&nbsp; geom = dCreateBox<span class="br0">&#40;</span>space,width,height,depth<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; dMass m;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp; dMassSetBox<span class="br0">&#40;</span>&amp;m,<span class="nu0">1</span>.0f,width,height,depth<span class="br0">&#41;</span>;&nbsp; &nbsp; </div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; dMassAdjust<span class="br0">&#40;</span>&amp;m,mass<span class="br0">&#41;</span>;&nbsp;&nbsp;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; dBodySetMass<span class="br0">&#40;</span>body,&amp;m<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp;</div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; dGeomSetBody<span class="br0">&#40;</span>geom,body<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">17</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">18</td><td><div class="de1"><span class="kw4">void</span> Cube::<span class="me2">renderInLocalFrame</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw4">const</span></div></td></tr>
+<tr><td class="line">19</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">20</td><td><div class="de1">&nbsp; dVector3 lengths;</div></td></tr>
+<tr><td class="line">21</td><td><div class="de1">&nbsp; dGeomBoxGetLengths<span class="br0">&#40;</span>geom,lengths<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">22</td><td><div class="de1">&nbsp; glScalef<span class="br0">&#40;</span>lengths<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>,lengths<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>,lengths<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; glColor3ubv<span class="br0">&#40;</span>color<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp;&nbsp;glutSolidCube<span class="br0">&#40;</span><span class="nu0">1</span>.0f<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">25</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp;</div></td></tr></table></div>    </td>  
+  </tr>
+</table>
+
+<a name="C12"></a>
+<h3>Bounding box</h3>
+
+<p>As we said earlier, the QGLViewer needs to know the size of the
+world to correclty setup the camera for rendering.  Here is a helper
+function that takes a vector of objects and compute their axis aligned
+bounding box.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1"><span class="kw2">namespace</span></div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; <span class="kw4">void</span> getAABB<span class="br0">&#40;</span><span class="kw4">const</span> QVector&lt;Object *&gt;&amp; objects,dReal aabb<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">12</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; &nbsp; dGeomGetAABB<span class="br0">&#40;</span>objects<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>-&gt;geom,aabb<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; &nbsp; foreach <span class="br0">&#40;</span>Object *o,objects<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">15</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dReal aabb<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td class="line">17</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dGeomGetAABB<span class="br0">&#40;</span>o-&gt;geom,aabb<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">18</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>;i&lt;<span class="nu0">3</span>;++i<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">19</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">20</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; aabb<span class="br0">&#91;</span>&nbsp; i<span class="br0">&#93;</span> = min<span class="br0">&#40;</span>aabb<span class="br0">&#91;</span>&nbsp; i<span class="br0">&#93;</span>,aabb<span class="br0">&#91;</span>&nbsp; i<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">21</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; aabb<span class="br0">&#91;</span><span class="nu0">3</span>+i<span class="br0">&#93;</span> = max<span class="br0">&#40;</span>aabb<span class="br0">&#91;</span><span class="nu0">3</span>+i<span class="br0">&#93;</span>,aabb<span class="br0">&#91;</span><span class="nu0">3</span>+i<span class="br0">&#93;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">22</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">43</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Note that the <tt>foreach</tt> is a Qt helper construction, very
+handy. If you are adapting this code to be Qt independent, just use a
+for loop.</p>
+
+<a name="C13"></a>
+<h3>Plane rendering</h3>
+
+<p>Finally, we need a little helper function to render an infinite
+plane, such as the ground plane.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1"><span class="kw2">namespace</span></div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">25</td><td><div class="de1">&nbsp; <span class="kw4">void</span> renderPlane<span class="br0">&#40;</span>dVector4 equation,<span class="kw4">float</span> size<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; &nbsp; Vec z = Vec<span class="br0">&#40;</span>equation<span class="br0">&#41;</span>.<span class="me1">unit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; &nbsp; Vec o = equation<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>*z;</div></td></tr>
+<tr><td class="line">29</td><td><div class="de1">&nbsp; &nbsp; Vec x = z.<span class="me1">orthogonalVec</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">unit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">30</td><td><div class="de1">&nbsp; &nbsp; Vec y = <span class="br0">&#40;</span>z^x<span class="br0">&#41;</span>.<span class="me1">unit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">31</td><td><div class="de1">&nbsp; &nbsp; glBegin<span class="br0">&#40;</span>GL_QUADS<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">32</td><td><div class="de1">&nbsp; &nbsp; glNormal3fv<span class="br0">&#40;</span>z<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">33</td><td><div class="de1">&nbsp; &nbsp; glVertex3fv<span class="br0">&#40;</span>o-size*x-size*y<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">34</td><td><div class="de1">&nbsp; &nbsp; glVertex3fv<span class="br0">&#40;</span>o+size*x-size*y<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">35</td><td><div class="de1">&nbsp; &nbsp; glVertex3fv<span class="br0">&#40;</span>o+size*x+size*y<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">36</td><td><div class="de1">&nbsp; &nbsp; glVertex3fv<span class="br0">&#40;</span>o-size*x+size*y<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">37</td><td><div class="de1">&nbsp; &nbsp; glEnd<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">38</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">43</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<a name="C2"></a>
+<h2>The full monthy</h2>
+
+<div class="mention">
+This section corresponds to code in <tt>tutorial1/C</tt> of the snippets directory.
+It contains the following files.
+<ul>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/object.h">object.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/object.cpp">object.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/cube.h">cube.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/cube.cpp">cube.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/viewer.cpp">viewer.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/viewer.h">viewer.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/C/main.cpp">main.cpp</a></li>
+</ul>
+Click a file to see the whole code in another window.
+</div>
+
+<a name="C21"></a>
+<h3>Viewer</h3>
+
+<p>We create our <tt>Viewer</tt> class that extends the
+<tt>QGLViewer</tt>. We make the world and space be private members.
+We also add members for storing objects, and additional static
+collision geoms.  Here we will just use planes.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.h">tutorial1/C/viewer.h</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1">class Viewer : <span class="kw2">public</span> QGLViewer</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; Q_OBJECT;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1"><span class="kw2">public</span>:</div></td></tr>
+<tr><td class="line">13</td><td><div class="de1">&nbsp; Viewer<span class="br0">&#40;</span>QWidget *parent=<span class="kw2">NULL</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">14</td><td><div class="de1">&nbsp; ~Viewer<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">17</td><td><div class="de1"><span class="kw2">protected</span>:</div></td></tr>
+<tr><td class="line">18</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> init<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">19</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> startAnimation<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">20</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> animate<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">21</td><td><div class="de1">&nbsp; <span class="kw2">virtual</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">22</td><td><div class="de1"><span class="kw2">private</span>:</div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; dWorldID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_world;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp; dSpaceID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_space;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp; QVector&lt;Object*&gt; _objects;</div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; QVector&lt;dGeomID&gt; _planes;</div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; dReal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _aabb<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">30</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>In the constructor, we create the world, space, objects and static planes.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">45</td><td><div class="de1">Viewer::<span class="me2">Viewer</span><span class="br0">&#40;</span>QWidget *parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">46</td><td><div class="de1">&nbsp; : QGLViewer<span class="br0">&#40;</span>QGLFormat<span class="br0">&#40;</span>QGL::<span class="me2">SampleBuffers</span> |</div></td></tr>
+<tr><td class="line">47</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DoubleBuffer</span> |</div></td></tr>
+<tr><td class="line">48</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DepthBuffer</span> |</div></td></tr>
+<tr><td class="line">49</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">Rgba</span> |</div></td></tr>
+<tr><td class="line">50</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">AlphaChannel</span> |</div></td></tr>
+<tr><td class="line">51</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">StencilBuffer</span><span class="br0">&#41;</span>,parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">52</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">53</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">54</td><td><div class="de1">&nbsp; <span class="co1">// Create world, collision space and contact group</span></div></td></tr>
+<tr><td class="line">55</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">56</td><td><div class="de1">&nbsp; _world = dWorldCreate<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">57</td><td><div class="de1">&nbsp; _space = dHashSpaceCreate<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">58</td><td><div class="de1">&nbsp; <span class="co1">// Set up gravity force</span></div></td></tr>
+<tr><td class="line">59</td><td><div class="de1">&nbsp; dWorldSetGravity <span class="br0">&#40;</span>_world,<span class="nu0">0</span>,<span class="nu0">0</span>,-<span class="nu0">9</span>.<span class="nu0">81</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">60</td><td><div class="de1">&nbsp; <span class="co1">// Create contact group</span></div></td></tr>
+<tr><td class="line">61</td><td><div class="de1">&nbsp; _contactgroup = dJointGroupCreate<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>; &nbsp; </div></td></tr>
+<tr><td class="line">62</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">63</td><td><div class="de1">&nbsp; <span class="co1">// Creating objects</span></div></td></tr>
+<tr><td class="line">64</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////s</span></div></td></tr>
+<tr><td class="line">65</td><td><div class="de1">&nbsp; Cube *cube = <span class="kw3">new</span> Cube<span class="br0">&#40;</span>_world,_space,<span class="nu0">0</span>.<span class="nu0">3</span>,<span class="nu0">0</span>.<span class="nu0">3</span>,<span class="nu0">0</span>.<span class="nu0">3</span>,<span class="nu0">1</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">66</td><td><div class="de1">&nbsp; cube-&gt;setPosition<span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">67</td><td><div class="de1">&nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">68</td><td><div class="de1">&nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">69</td><td><div class="de1">&nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">70</td><td><div class="de1">&nbsp; _objects.<span class="me1">push_back</span><span class="br0">&#40;</span>cube<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">71</td><td><div class="de1">&nbsp; <span class="co1">// Create static planes</span></div></td></tr>
+<tr><td class="line">72</td><td><div class="de1">&nbsp; _planes.<span class="me1">push_back</span><span class="br0">&#40;</span>dCreatePlane<span class="br0">&#40;</span>_space,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">73</td><td><div class="de1">&nbsp; <span class="co1">// Compute the bounding box</span></div></td></tr>
+<tr><td class="line">74</td><td><div class="de1">&nbsp; getAABB<span class="br0">&#40;</span>_objects,_aabb<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">75</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>In the destructor, we clean up everything. Note that world and
+space take care of deleting the bodies and geoms create inside
+them.  The <tt>qDeleteAll()</tt> is a handy Qt algorithm: it calls
+<tt>delete</tt> on each element of the container.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">76</td><td><div class="de1">Viewer::~Viewer<span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">77</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">78</td><td><div class="de1">&nbsp; <span class="co1">//////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">79</td><td><div class="de1">&nbsp; <span class="co1">// Deleting objects</span></div></td></tr>
+<tr><td class="line">80</td><td><div class="de1">&nbsp; <span class="co1">//////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">81</td><td><div class="de1">&nbsp; qDeleteAll<span class="br0">&#40;</span>_objects<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">82</td><td><div class="de1">&nbsp; <span class="co1">//////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">83</td><td><div class="de1">&nbsp; <span class="co1">// Terminate with ODE</span></div></td></tr>
+<tr><td class="line">84</td><td><div class="de1">&nbsp; <span class="co1">//////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">85</td><td><div class="de1">&nbsp; dSpaceDestroy<span class="br0">&#40;</span>_space<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">86</td><td><div class="de1">&nbsp; dWorldDestroy<span class="br0">&#40;</span>_world<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">87</td><td><div class="de1">&nbsp; dCloseODE<span class="br0">&#40;</span><span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">88</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>For the viewer initialization, we use the computed bounding box to
+set up scene center and radius. We stick the center to the ground
+plane because it feels more natural for the trackball. We also setup
+OpenGL lighting.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">89</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">90</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">91</td><td><div class="de1">&nbsp; Vec min<span class="br0">&#40;</span>_aabb<span class="br0">&#41;</span>; </div></td></tr>
+<tr><td class="line">92</td><td><div class="de1">&nbsp; Vec max<span class="br0">&#40;</span>_aabb+<span class="nu0">3</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">93</td><td><div class="de1">&nbsp; Vec center = <span class="br0">&#40;</span>min+max<span class="br0">&#41;</span>/<span class="nu0">2</span>.0f;</div></td></tr>
+<tr><td class="line">94</td><td><div class="de1">&nbsp; center.<span class="me1">z</span> = <span class="nu0">0</span>.0f;</div></td></tr>
+<tr><td class="line">95</td><td><div class="de1">&nbsp; setSceneRadius<span class="br0">&#40;</span><span class="br0">&#40;</span>max-min<span class="br0">&#41;</span>.<span class="me1">norm</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">96</td><td><div class="de1">&nbsp; setSceneCenter<span class="br0">&#40;</span>center<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">97</td><td><div class="de1">&nbsp; <span class="co1">// Try to restore previous state or focus the whole scene</span></div></td></tr>
+<tr><td class="line">98</td><td><div class="de1">&nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>!restoreStateFromFile<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">99</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">100</td><td><div class="de1">&nbsp; &nbsp; showEntireScene<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">101</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">102</td><td><div class="de1">&nbsp; <span class="co1">// Setup OpenGL</span></div></td></tr>
+<tr><td class="line">103</td><td><div class="de1">&nbsp; GLfloat ambient<span class="br0">&#91;</span><span class="br0">&#93;</span> = <span class="br0">&#123;</span> <span class="nu0">0</span>.3f, <span class="nu0">0</span>.3f, <span class="nu0">0</span>.3f <span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">104</td><td><div class="de1">&nbsp; GLfloat diffuse<span class="br0">&#91;</span><span class="br0">&#93;</span> = <span class="br0">&#123;</span> <span class="nu0">0</span>.1f, <span class="nu0">0</span>.1f, <span class="nu0">0</span>.1f , <span class="nu0">1</span>.0f<span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">105</td><td><div class="de1">&nbsp; GLfloat specular<span class="br0">&#91;</span><span class="br0">&#93;</span> = <span class="br0">&#123;</span> <span class="nu0">0</span>.0f, <span class="nu0">0</span>.0f, <span class="nu0">0</span>.0f , <span class="nu0">1</span>.0f<span class="br0">&#125;</span>;</div></td></tr>
+<tr><td class="line">106</td><td><div class="de1">&nbsp; glLightfv<span class="br0">&#40;</span>GL_LIGHT0, GL_AMBIENT, ambient<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">107</td><td><div class="de1">&nbsp; glLightfv<span class="br0">&#40;</span>GL_LIGHT0, GL_DIFFUSE, diffuse<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">108</td><td><div class="de1">&nbsp; glLightfv<span class="br0">&#40;</span>GL_LIGHT0, GL_SPECULAR, specular<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">109</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Finally, the drawing just traverses the objects and planes to
+render them.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">110</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">draw</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">111</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">112</td><td><div class="de1">&nbsp; <span class="co1">// Draw the objects</span></div></td></tr>
+<tr><td class="line">113</td><td><div class="de1">&nbsp; foreach <span class="br0">&#40;</span>Object *o,_objects<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">114</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">115</td><td><div class="de1">&nbsp; &nbsp; o-&gt;render<span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">116</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">117</td><td><div class="de1">&nbsp; <span class="co1">// Draw the planes</span></div></td></tr>
+<tr><td class="line">118</td><td><div class="de1">&nbsp; qglColor<span class="br0">&#40;</span>Qt::<span class="me2">white</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">119</td><td><div class="de1">&nbsp; foreach <span class="br0">&#40;</span>dGeomID g,_planes<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">120</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">121</td><td><div class="de1">&nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span>dGeomGetClass<span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">122</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">123</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dVector4 equation;</div></td></tr>
+<tr><td class="line">124</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dGeomPlaneGetParams<span class="br0">&#40;</span>g,equation<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">125</td><td><div class="de1">&nbsp; &nbsp; &nbsp; renderPlane<span class="br0">&#40;</span>equation,sceneRadius<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">126</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">127</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">128</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<a name="C22"></a>
+<h3>Simulation</h3>
+
+<p>For the simulation, we must be carreful with time management.
+Between two <tt>QGLViewer::animate()</tt> calls, a certain amount of
+time has elapsed.  Naively, we would advance the world time of that
+amount.  But because ODE uses a numerical integration of the
+underlying differential equation, we cannot make big steps, or the
+simulation will be innacurate, or even worse, unstable.  So instead,
+we make &quot;enough&quot; small steps to cover the time delta.  For
+measuring the elapsed time between two successive calls, we use the
+handy Qt class <tt>QTime</tt>, of which we store an occurence
+<tt>_time</tt> in the viewer.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.h">tutorial1/C/viewer.h</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1">class Viewer : <span class="kw2">public</span> QGLViewer</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">22</td><td><div class="de1"><span class="kw2">private</span>:</div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; dWorldID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_world;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp; dSpaceID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_space;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp; QVector&lt;Object*&gt; _objects;</div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; QVector&lt;dGeomID&gt; _planes;</div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; dReal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _aabb<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td class="line">29</td><td class="ln-xtra"><div class="de1">&nbsp; QTime&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _time;</div></td></tr>
+<tr><td class="line">30</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Since the use can toggle the animation (by pressing the Return
+key), we need to &quot;start&quot; this time in the
+<tt>QGLViewe::startAnimation()</tt> function.  Then, at the end of
+<tt>QGLViewer::animate()</tt>, we restart it, so that next time we are
+in <tt>animate()</tt>, the value <tt>_time.elapsed()</tt> is what we
+want.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">129</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">startAnimation</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">130</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">131</td><td class="ln-xtra"><div class="de1">&nbsp; _time.<span class="me1">start</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">132</td><td><div class="de1">&nbsp; QGLViewer::<span class="me2">startAnimation</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">133</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">134</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">animate</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">135</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">136</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">float</span> nbSecondsByStep = <span class="nu0">0</span>.001f; </div></td></tr>
+<tr><td class="line">137</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">138</td><td><div class="de1">&nbsp; <span class="co1">// Find the time elapsed between last time</span></div></td></tr>
+<tr><td class="line">139</td><td class="ln-xtra"><div class="de1">&nbsp; <span class="kw4">float</span> nbSecsElapsed = _time.<span class="me1">elapsed</span><span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">1000</span>.0f;</div></td></tr>
+<tr><td class="line">140</td><td><div class="de1">&nbsp; <span class="co1">// Find the corresponding number of steps that must be taken</span></div></td></tr>
+<tr><td class="line">141</td><td><div class="de1">&nbsp; <span class="kw4">int</span> nbStepsToPerform = static_cast&lt;int&gt;<span class="br0">&#40;</span>nbSecsElapsed/nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">142</td><td><div class="de1">&nbsp; <span class="co1">// Make these steps to advance world time</span></div></td></tr>
+<tr><td class="line">143</td><td><div class="de1">&nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>;i&lt;nbStepsToPerform;++i<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">144</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">147</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Step world</span></div></td></tr>
+<tr><td class="line">148</td><td><div class="de1">&nbsp; &nbsp; dWorldQuickStep<span class="br0">&#40;</span>_world, nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">149</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Remove all temporary collision joints now that the world has been stepped</span></div></td></tr>
+<tr><td class="line">150</td><td><div class="de1">&nbsp; &nbsp; dJointGroupEmpty<span class="br0">&#40;</span>_contactgroup<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">151</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">152</td><td><div class="de1">&nbsp; <span class="co1">// Restart the elapsed time counter</span></div></td></tr>
+<tr><td class="line">153</td><td class="ln-xtra"><div class="de1">&nbsp; _time.<span class="me1">restart</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">154</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+
+<a name="C23"></a>
+<h3>Collision handling</h3>
+
+<p>The last thing we need to do is to handle collision.  The way ODE
+does it (in a nutshell, collision detection can be managed manually
+completely) is by calling <tt>dSpaceCollide</tt>. This function finds
+all collision between geoms of the space, and invoke a callback
+function on each pair of colliding geoms.  Callbacks must be
+&quot;global&quot; functions.  But the callback will need to access
+world and space, which are private members of the viewer.  Luckily,
+the callback accept a <tt>void *</tt> data pointer, so we can pass a
+pointer to the viewer.  We add the following public method to the
+viewer.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.h">tutorial1/C/viewer.h</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1">class Viewer : <span class="kw2">public</span> QGLViewer</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">11</td><td><div class="de1">&nbsp; Q_OBJECT;</div></td></tr>
+<tr><td class="line">12</td><td><div class="de1"><span class="kw2">public</span>:</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">16</td><td><div class="de1">&nbsp; <span class="kw4">void</span> handleCollisionBetween<span class="br0">&#40;</span>dGeomID o0, dGeomID o1<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">30</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Then, we define the callback as a global function local to the
+<tt>viewer.cpp</tt> file.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1"><span class="kw2">namespace</span></div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">39</td><td><div class="de1">&nbsp; <span class="kw4">void</span> nearCallback<span class="br0">&#40;</span><span class="kw4">void</span> *data, dGeomID o0, dGeomID o1<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">40</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">41</td><td><div class="de1">&nbsp; &nbsp; reinterpret_cast&lt;Viewer*&gt;<span class="br0">&#40;</span>data<span class="br0">&#41;</span>-&gt;handleCollisionBetween<span class="br0">&#40;</span>o0,o1<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">42</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span>&nbsp;</div></td></tr>
+<tr><td class="line">43</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Now we can invoke the collision detection prior to doing small step
+in the world simulation.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">134</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">animate</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">135</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">136</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">float</span> nbSecondsByStep = <span class="nu0">0</span>.001f; </div></td></tr>
+<tr><td class="line">137</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">138</td><td><div class="de1">&nbsp; <span class="co1">// Find the time elapsed between last time</span></div></td></tr>
+<tr><td class="line">139</td><td><div class="de1">&nbsp; <span class="kw4">float</span> nbSecsElapsed = _time.<span class="me1">elapsed</span><span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">1000</span>.0f;</div></td></tr>
+<tr><td class="line">140</td><td><div class="de1">&nbsp; <span class="co1">// Find the corresponding number of steps that must be taken</span></div></td></tr>
+<tr><td class="line">141</td><td><div class="de1">&nbsp; <span class="kw4">int</span> nbStepsToPerform = static_cast&lt;int&gt;<span class="br0">&#40;</span>nbSecsElapsed/nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">142</td><td><div class="de1">&nbsp; <span class="co1">// Make these steps to advance world time</span></div></td></tr>
+<tr><td class="line">143</td><td><div class="de1">&nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>;i&lt;nbStepsToPerform;++i<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">144</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">145</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Detect collision</span></div></td></tr>
+<tr><td class="line">146</td><td class="ln-xtra"><div class="de1">&nbsp; &nbsp; dSpaceCollide<span class="br0">&#40;</span>_space,<span class="kw3">this</span>,&amp;nearCallback<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">147</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Step world</span></div></td></tr>
+<tr><td class="line">148</td><td><div class="de1">&nbsp; &nbsp; dWorldQuickStep<span class="br0">&#40;</span>_world, nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">151</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">152</td><td><div class="de1">&nbsp; <span class="co1">// Restart the elapsed time counter</span></div></td></tr>
+<tr><td class="line">153</td><td><div class="de1">&nbsp; _time.<span class="me1">restart</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">154</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>The next thing is to create a joint group to hold temporary
+joints.  Remember that we said that ODE handles collision by creating
+temporary, local joints that &quot;repulses&quot; colliding objects.
+We add a private member to the viewer:</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.h">tutorial1/C/viewer.h</a></div>
+<div class="cpp"><table><tr><td class="line">9</td><td><div class="de1">class Viewer : <span class="kw2">public</span> QGLViewer</div></td></tr>
+<tr><td class="line">10</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">22</td><td><div class="de1"><span class="kw2">private</span>:</div></td></tr>
+<tr><td class="line">23</td><td><div class="de1">&nbsp; dWorldID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_world;</div></td></tr>
+<tr><td class="line">24</td><td><div class="de1">&nbsp; dSpaceID&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;_space;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">26</td><td><div class="de1">&nbsp; QVector&lt;Object*&gt; _objects;</div></td></tr>
+<tr><td class="line">27</td><td><div class="de1">&nbsp; QVector&lt;dGeomID&gt; _planes;</div></td></tr>
+<tr><td class="line">28</td><td><div class="de1">&nbsp; dReal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _aabb<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span>;</div></td></tr>
+<tr><td class="line">29</td><td><div class="de1">&nbsp; QTime&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; _time;</div></td></tr>
+<tr><td class="line">30</td><td><div class="de1"><span class="br0">&#125;</span>;</div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>We create this member in the constructor.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">45</td><td><div class="de1">Viewer::<span class="me2">Viewer</span><span class="br0">&#40;</span>QWidget *parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">46</td><td><div class="de1">&nbsp; : QGLViewer<span class="br0">&#40;</span>QGLFormat<span class="br0">&#40;</span>QGL::<span class="me2">SampleBuffers</span> |</div></td></tr>
+<tr><td class="line">47</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DoubleBuffer</span> |</div></td></tr>
+<tr><td class="line">48</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DepthBuffer</span> |</div></td></tr>
+<tr><td class="line">49</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">Rgba</span> |</div></td></tr>
+<tr><td class="line">50</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">AlphaChannel</span> |</div></td></tr>
+<tr><td class="line">51</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">StencilBuffer</span><span class="br0">&#41;</span>,parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">52</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">60</td><td><div class="de1">&nbsp; <span class="co1">// Create contact group</span></div></td></tr>
+<tr><td class="line">61</td><td><div class="de1">&nbsp; _contactgroup = dJointGroupCreate<span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>; &nbsp; </div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>And in the simulation loop, we empty this group after every
+step.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">134</td><td><div class="de1"><span class="kw4">void</span> Viewer::<span class="me2">animate</span><span class="br0">&#40;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">135</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">136</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">float</span> nbSecondsByStep = <span class="nu0">0</span>.001f; </div></td></tr>
+<tr><td class="line">137</td><td><div class="de1">&nbsp; </div></td></tr>
+<tr><td class="line">138</td><td><div class="de1">&nbsp; <span class="co1">// Find the time elapsed between last time</span></div></td></tr>
+<tr><td class="line">139</td><td><div class="de1">&nbsp; <span class="kw4">float</span> nbSecsElapsed = _time.<span class="me1">elapsed</span><span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">1000</span>.0f;</div></td></tr>
+<tr><td class="line">140</td><td><div class="de1">&nbsp; <span class="co1">// Find the corresponding number of steps that must be taken</span></div></td></tr>
+<tr><td class="line">141</td><td><div class="de1">&nbsp; <span class="kw4">int</span> nbStepsToPerform = static_cast&lt;int&gt;<span class="br0">&#40;</span>nbSecsElapsed/nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">142</td><td><div class="de1">&nbsp; <span class="co1">// Make these steps to advance world time</span></div></td></tr>
+<tr><td class="line">143</td><td><div class="de1">&nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=<span class="nu0">0</span>;i&lt;nbStepsToPerform;++i<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">144</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">145</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Detect collision</span></div></td></tr>
+<tr><td class="line">146</td><td><div class="de1">&nbsp; &nbsp; dSpaceCollide<span class="br0">&#40;</span>_space,<span class="kw3">this</span>,&amp;nearCallback<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">147</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Step world</span></div></td></tr>
+<tr><td class="line">148</td><td><div class="de1">&nbsp; &nbsp; dWorldQuickStep<span class="br0">&#40;</span>_world, nbSecondsByStep<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">149</td><td><div class="de1">&nbsp; &nbsp; <span class="co1">// Remove all temporary collision joints now that the world has been stepped</span></div></td></tr>
+<tr><td class="line">150</td><td class="ln-xtra"><div class="de1">&nbsp; &nbsp; dJointGroupEmpty<span class="br0">&#40;</span>_contactgroup<span class="br0">&#41;</span>;&nbsp; </div></td></tr>
+<tr><td class="line">151</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">152</td><td><div class="de1">&nbsp; <span class="co1">// Restart the elapsed time counter</span></div></td></tr>
+<tr><td class="line">153</td><td><div class="de1">&nbsp; _time.<span class="me1">restart</span><span class="br0">&#40;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">154</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>The last thing we have to do is to implement
+<tt>handleCollisionBetween()</tt>. We borrow the code and comments of
+another tutorial on the web.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Now we set the joint properties of each contact. Going into the full
+details here would require a tutorial of its own. I'll just say that
+the members of the dContact structure control the joint behaviour,
+such as friction, velocity and bounciness. See <a
+href='http://www.ode.org/ode-latest-userguide.html#sec_7_3_7'>section
+7.3.7</a> of the ODE manual and have fun experimenting to learn more.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">161</td><td><div class="de1">&nbsp; &nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">0</span>; i &lt; MAX_CONTACTS; i++<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">162</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">163</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">mode</span> = dContactBounce | dContactSoftCFM;</div></td></tr>
+<tr><td class="line">164</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">mu</span> = dInfinity;</div></td></tr>
+<tr><td class="line">165</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">mu2</span> = <span class="nu0">0</span>;</div></td></tr>
+<tr><td class="line">166</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">bounce</span> = <span class="nu0">0</span>.<span class="nu0">8</span>;</div></td></tr>
+<tr><td class="line">167</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">bounce_vel</span> = <span class="nu0">0</span>.<span class="nu0">1</span>;</div></td></tr>
+<tr><td class="line">168</td><td><div class="de1">&nbsp; &nbsp; &nbsp; contact<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">surface</span>.<span class="me1">soft_cfm</span> = <span class="nu0">0</span>.<span class="nu0">01</span>;</div></td></tr>
+<tr><td class="line">169</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Here we do the actual collision test by calling dCollide. It
+returns the number of actual contact points or zero if there were
+none. As well as the geom IDs, max number of contacts we also pass the
+address of a dContactGeom as the fourth parameter. dContactGeom is a
+substructure of a dContact object so we simply pass the address of the
+first dContactGeom from our array of dContact objects and then pass
+the offset to the next dContactGeom as the fifth paramater, which is
+the size of a dContact structure.</p>
+
+<div class="caption"><a href="tutorial1/C/viewer.cpp">tutorial1/C/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">170</td><td><div class="de1">&nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw4">int</span> numc = dCollide<span class="br0">&#40;</span>o0, o1, MAX_CONTACTS, &amp;contact<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">geom</span>, <span class="kw3">sizeof</span><span class="br0">&#40;</span>dContact<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">171</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">172</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="co1">// Get the dynamics body for each geom</span></div></td></tr>
+<tr><td class="line">173</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dBodyID b1 = dGeomGetBody<span class="br0">&#40;</span>o0<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">174</td><td><div class="de1">&nbsp; &nbsp; &nbsp; dBodyID b2 = dGeomGetBody<span class="br0">&#40;</span>o1<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">175</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="co1">// To add each contact point found to our joint group we call dJointCreateContact which is just one of the many</span></div></td></tr>
+<tr><td class="line">176</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="co1">// different joint types available.&nbsp; </span></div></td></tr>
+<tr><td class="line">177</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i = <span class="nu0">0</span>; i &lt; numc; i++<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">178</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">179</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">// dJointCreateContact needs to know which world and joint group to work with as well as the dContact</span></div></td></tr>
+<tr><td class="line">180</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">// object itself. It returns a new dJointID which we then use with dJointAttach to finally create the</span></div></td></tr>
+<tr><td class="line">181</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">// temporary contact joint between the two geom bodies.</span></div></td></tr>
+<tr><td class="line">182</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; dJointID c = dJointCreateContact<span class="br0">&#40;</span>_world, _contactgroup, contact + i<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">183</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; dJointAttach<span class="br0">&#40;</span>c, b1, b2<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">184</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">185</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#125;</span>&nbsp;</div></td></tr>
+<tr><td class="line">186</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<a name="C24"></a>
+<h3>Collision handling</h3>
+
+<p>That's it, we can run the program and we will see a single cube
+falling on the ground.</p>
+
+<div class="centeredimg">
+  <img src="img/snapshot-C2-a-small.jpg" alt="Start"/>
+  <img src="img/snapshot-C2-b-small.jpg" alt="End"/>
+</div>
+
+<a name="D"></a>
+<h2>Going further</h2>
+
+<div class="mention">
+This section corresponds to code in <tt>tutorial1/D</tt> of the snippets directory.
+It contains the following files.
+<ul>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/object.h">object.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/object.cpp">object.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/cube.h">cube.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/cube.cpp">cube.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/viewer.cpp">viewer.cpp</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/viewer.h">viewer.h</a></li>
+<li><a href="http://artis.imag.fr/~Xavier.Decoret/php/codepage.php?file=/var/www/artis/people/Xavier.Decoret/resources/ode/.//tutorial1/D/main.cpp">main.cpp</a></li>
+</ul>
+Click a file to see the whole code in another window.
+Click <a href='tutorial1/D/ode-1-D1.0.0.tar.gz'>here</a> to download a tarball.
+</div>
+
+<p>Now we have a skeleton to play with. For example, we can now add
+more cubes and a second plane to our scene.</p>
+
+<div class="caption"><a href="tutorial1/D/viewer.cpp">tutorial1/D/viewer.cpp</a></div>
+<div class="cpp"><table><tr><td class="line">45</td><td><div class="de1">Viewer::<span class="me2">Viewer</span><span class="br0">&#40;</span>QWidget *parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">46</td><td><div class="de1">&nbsp; : QGLViewer<span class="br0">&#40;</span>QGLFormat<span class="br0">&#40;</span>QGL::<span class="me2">SampleBuffers</span> |</div></td></tr>
+<tr><td class="line">47</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DoubleBuffer</span> |</div></td></tr>
+<tr><td class="line">48</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">DepthBuffer</span> |</div></td></tr>
+<tr><td class="line">49</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">Rgba</span> |</div></td></tr>
+<tr><td class="line">50</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">AlphaChannel</span> |</div></td></tr>
+<tr><td class="line">51</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; QGL::<span class="me2">StencilBuffer</span><span class="br0">&#41;</span>,parent<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">52</td><td><div class="de1"><span class="br0">&#123;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+<tr><td class="line">62</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////</span></div></td></tr>
+<tr><td class="line">63</td><td><div class="de1">&nbsp; <span class="co1">// Creating objects</span></div></td></tr>
+<tr><td class="line">64</td><td><div class="de1">&nbsp; <span class="co1">////////////////////////////////////////////////////////////s</span></div></td></tr>
+<tr><td class="line">65</td><td><div class="de1">&nbsp; <span class="kw4">static</span> <span class="kw4">const</span> <span class="kw4">int</span> nb = <span class="nu0">5</span>;</div></td></tr>
+<tr><td class="line">66</td><td><div class="de1">&nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> k=<span class="nu0">0</span>;k&lt;<span class="nu0">3</span>;++k<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">67</td><td><div class="de1">&nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">68</td><td><div class="de1">&nbsp; &nbsp; <span class="kw4">float</span> z = <span class="nu0">2</span>.<span class="nu0">0</span>+<span class="nu0">0</span>.<span class="nu0">15</span>*k;</div></td></tr>
+<tr><td class="line">69</td><td><div class="de1">&nbsp; &nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i=-nb;i&lt;=nb;++i<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">70</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">71</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="kw4">float</span> x = <span class="nu0">0</span>.<span class="nu0">15</span>*i+<span class="br0">&#40;</span>k%<span class="nu0">2</span><span class="br0">&#41;</span>*<span class="nu0">0</span>.<span class="nu0">01</span>;</div></td></tr>
+<tr><td class="line">72</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j=-nb;j&lt;=nb;++j<span class="br0">&#41;</span></div></td></tr>
+<tr><td class="line">73</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span></div></td></tr>
+<tr><td class="line">74</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw4">float</span> y = <span class="nu0">0</span>.<span class="nu0">15</span>*j+<span class="br0">&#40;</span>k%<span class="nu0">2</span><span class="br0">&#41;</span>*<span class="nu0">0</span>.<span class="nu0">01</span>;</div></td></tr>
+<tr><td class="line">75</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; Cube *cube = <span class="kw3">new</span> Cube<span class="br0">&#40;</span>_world,_space,<span class="nu0">0</span>.<span class="nu0">1</span>,<span class="nu0">0</span>.<span class="nu0">1</span>,<span class="nu0">0</span>.<span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">76</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; cube-&gt;setPosition<span class="br0">&#40;</span>x,y,z<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">77</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">78</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">79</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; cube-&gt;color<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> = qrand<span class="br0">&#40;</span><span class="br0">&#41;</span>%<span class="nu0">255</span>;</div></td></tr>
+<tr><td class="line">80</td><td><div class="de1">&nbsp; &nbsp; &nbsp; &nbsp; _objects.<span class="me1">push_back</span><span class="br0">&#40;</span>cube<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">81</td><td><div class="de1">&nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">82</td><td><div class="de1">&nbsp; &nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">83</td><td><div class="de1">&nbsp; <span class="br0">&#125;</span></div></td></tr>
+<tr><td class="line">84</td><td><div class="de1">&nbsp; <span class="co1">// Create static planes</span></div></td></tr>
+<tr><td class="line">85</td><td><div class="de1">&nbsp; _planes.<span class="me1">push_back</span><span class="br0">&#40;</span>dCreatePlane<span class="br0">&#40;</span>_space,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">86</td><td><div class="de1">&nbsp; _planes.<span class="me1">push_back</span><span class="br0">&#40;</span>dCreatePlane<span class="br0">&#40;</span>_space,<span class="nu0">1</span>,<span class="nu0">0</span>,<span class="nu0">1</span>,<span class="nu0">0</span>.<span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">87</td><td><div class="de1">&nbsp; <span class="co1">// Compute the bounding box</span></div></td></tr>
+<tr><td class="line">88</td><td><div class="de1">&nbsp; getAABB<span class="br0">&#40;</span>_objects,_aabb<span class="br0">&#41;</span>;</div></td></tr>
+<tr><td class="line">89</td><td><div class="de1"><span class="br0">&#125;</span></div></td></tr>
+<tr><td colspan="2" class="sep">............................</td></tr>
+</table></div>
+<p>Running the simulation is a bit slower, but here is the result.</p>
+
+<div class="centeredimg">
+  <img src="img/snapshot-D-a-small.jpg" alt="Start"/>
+  <img src="img/snapshot-D-b-small.jpg" alt="Middle"/>
+  <img src="img/snapshot-D-c-small.jpg" alt="End"/>
+</div>
+
+<p>From now, it is probably time to read the ODE manual in more
+details. I suggest in particular the following sections.</p>
+
+<ul>
+  <li><a
+  href="http://www.ode.org/ode-latest-userguide.html#sec_11_0_0">ODE
+  Manual 11.0.0: How To Make Good Simulations</a></li>
+</ul>
+
+</div>
+
+<div id="footer">
+  <span style="margin-right:5%">Last modified on Wednesday December 20th, 2006</span>
+  <span style="margin:5%">
+  <script type="text/javascript">
+  <!--
+  n='*@.+';
+  document.write('<');document.write('a hr');document.write('ef="m');document.write('ail');document.write('to:');
+  document.write('Xavier.Decoret');document.write(n.charAt(1));document.write('imag');document.write(n.charAt(2));document.write('fr');
+  document.write('">E-mail</a>');
+  //-->
+  </script>
+  any comment
+  </span>
+  <span style="margin-left:5%">&copy; <a href="/">Artis</a> 2005</span>
+
+  <p>
+
+  <span>
+    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fartis.imag.fr%2FMembres%2FXavier.Decoret%2Fresources%2Fode%2Ftutorial1.html">
+      <img src="/images/valid-xhtml10.png" alt="Valid XHTML 1.0!" width="88" height="31" />
+    </a>
+    <a href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Fartis.imag.fr%2FMembres%2FXavier.Decoret%2Fresources%2Fode%2Ftutorial1.html">
+      <img src="/images/vcss.png" alt="Valid CSS!" width="88" height="31" />
+    </a>
+  </span></p>
+</div>
+
+</body>
+</html>
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=favicon.ico
+Content-Type: image/x-icon; name=favicon.ico
+Content-Location: http://artis.imag.fr/images/favicon.ico
+Content-Transfer-Encoding: Base64
+
+AAABAAEAEBAAAAAAAABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAQAMAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD3ysbmuLEAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD6ycGYWlCjZVrltKoAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD3ycKkU0T/oo7/n4uvX07ltKoA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2ysOaVEf/oo7/lHr/lHr/oYqlX1Lg
+tK0AAAAAAAAAAAAAAAAAAAAAAAAAAAD1ycKfUkL/oo79lX7/lX3/lX32k33tnI2c
+XlbXtLAAAAAAAAAAAAAAAAAAAAD1ycKaVEf/o4z/lX3/lHz9lX75lH7pkYDdlY3c
+qKiFaW+9sLgAAAAAAAAAAAD6ycGkVEP/oYv8lH3/lX3/ln76ln7rk4Lalo/Em6Ku
+nrCtr81tdI+wq7oAAADuxL+ZXFL/oo7/k3n/lX39ln3/lnv0lH3hlojNm5uvnrOX
+o8eEpNWXtOGAgprBtcH71tKIUUj/o4//lH38lH36lH3/moHyl4LZlo2+maGgoL6D
+otVxq+2Hu/d1gZ3Lws8AAAD/3daXSjr/ppH7n4z/qZbqjHnei3zlqaPPrbe/vdqk
+vuyMvvpJeKytudEAAAAAAAAAAAD/4tt/RDq5c2ZxJxuNQz9VEA28g4F7U1UxHSpS
+TWJqc461wNYAAAAAAAAAAAAAAAAAAADlxcCYaWH/8u3/4OP/+Px4SknowsL/+/+y
+oKelmKAAAAAAAAAAAAAAAAAAAAAAAAAAAADoz8vkxcL/+/z/6Ov//Pz//fzkztDI
+tbgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGt7XOubv/+Pr/8/TYyMm3paYA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADItrXYw8Ln0tG3paYAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADeycfWvLwAAAAAAAAA
+AAAAAAAAAAAAAAAAAAD+f////D////gf///wD///4Af//8AD//+AAf//AAD//wAA
+//+AAf//wAP//+AH///wD///+B////w////+f///
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=artis.ie.css
+Content-Type: text/css; charset=iso-8859-1; name=artis.ie.css
+Content-Location: http://artis.imag.fr/css/artis.ie.css
+Content-Transfer-Encoding: 8bit
+
+body {
+  font-family:trebuchet ms,luxi sans,sans-serif;
+  font-size:small;
+  color:#333;
+  background-color:#F4F4FF; /*#FFF3EA */
+  padding:0px;
+  margin: 0px 8px;
+}
+h1 { 
+  font-size:xx-large;
+  color: #228;
+  font-weight: bold; 
+  text-align: center;
+  margin: 15px 0px;
+  padding: 0px;
+}
+h2 { 
+  font-size:x-large;
+  color: #004;
+  margin: 50px 0px 3px 4px;
+  border-bottom: 2px solid #BBC;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-align: left;
+}
+h3 {
+  font-size: large;
+  color: #007;
+  margin: 20px 0px 6px 30px;
+  border-bottom: 1px solid #CCD;
+  letter-spacing: 1px;
+  font-weight: normal; 
+  text-align: left; 
+}
+a {
+  color:#06A;
+  text-decoration:none;
+  font-weight:600;
+}
+a:hover {
+  color:#FF9C00;
+}
+img {
+  border:none;
+}
+code {
+  font-size:medium;
+}
+pre {
+  font-size:medium;
+  background-color: #EFEFFF;
+  border: 1px solid #77A;
+  padding: 4px 6px;
+  margin: 8px 3%;
+}
+#banner {
+  text-align: center;
+  font-weight: bold;
+  border: none;
+}
+#banner a {
+  color:#228;
+  margin: 2px 3%;
+  vertical-align: bottom;
+  font-size:large;
+}
+#banner a:hover {
+  color:#FF9c00;
+}
+#content {
+  margin: 2px 0px;
+  padding: 5px 10px 14px 10px;
+  border:1px solid #66A;
+  background-color:#FFF;
+}
+#footer {
+  text-align: center;
+  font-size: small;
+  margin: 0px 0px 30px 0px;
+  padding: 0px;
+}
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=C++.gif
+Content-Type: image/gif; name=C++.gif
+Content-Location: http://artis.imag.fr/people/Xavier.Decoret/images/borders/C++.gif
+Content-Transfer-Encoding: Base64
+
+R0lGODlhfwB8AOcAAP////7+/v39/fz8/Pv7+/r6+vn5+fj4+Pf39/b29vX19fT0
+9PPz8/Ly8vHx8fDw8O/v7+7u7u3t7ezs7Ovr6+np6ejo6Ofn5+bm5uXl5eTk5OPj
+4+Li4uHh4eDg4N/f397e3t3d3dzc3Nvb29ra2tnZ2djY2NfX19bW1tXV1dTU1NPT
+09LS0tHR0dDQ0M/Pz87Ozs3NzczMzMvLy8rKysnJycjIyMfHx8bGxsXFxcTExMPD
+w8LCwsHBwcDAwL+/v76+vr29vby8vLu7u7q6urm5ubi4uLe3t7a2trW1tbS0tLOz
+s7KysrGxsbCwsK+vr66urq2traysrKurq6qqqqmpqaioqKenp6ampqWlpaSkpKOj
+o6KioqGhoaCgoJ+fn56enp2dnZycnJubm5qampmZmZiYmJeXl5aWlpWVlZSUlJOT
+k5KSkpGRkZCQkI+Pj46Ojo2NjYyMjIuLi4qKiomJiYiIiIeHh4aGhoWFhYSEhIOD
+g4KCgoGBgYCAgH9/f35+fn19fXx8fHt7e3p6enl5eXh4eHd3d3Z2dnV1dXR0dHNz
+c3JycnFxcXBwcG9vb25ubm1tbWxsbGtra2pqamlpaWhoaGdnZ2ZmZmVlZWRkZGNj
+Y2JiYmFhYWBgYF9fX15eXl1dXVxcXFtbW1paWllZWVhYWFdXV1ZWVlVVVVRUVFNT
+U1JSUlFRUVBQUE9PT05OTk1NTUxMTEtLS0pKSklJSUhISEdHR0ZGRkVFRUREREND
+Q0JCQkFBQUBAQD8/Pz4+Pj09PTw8PDs7Ozo6Ojk5OTg4ODc3NzY2NjU1NTQ0NDMz
+MzIyMjExMTAwMC8vLy4uLi0tLSwsLCsrKyoqKikpKSgoKCcnJyYmJiUlJSQkJCMj
+IyIiIiEhISAgIB8fHx4eHh0dHRwcHBsbGxoaGhkZGRgYGBcXFxYWFhUVFRQUFBMT
+ExISEhERERAQEA8PDw4ODg0NDQwMDAsLCwoKCgkJCQgICAcHBwYGBgUFBQQEBAMD
+AwICAgEBAQAAAP///ywAAAAAfwB8AAAI/gB3CBxIsKDBgwgTKlzIsGARgUIECTNi
+ME6wRGF2SBFmh8fAHg1DihxJsuRCIGrmGOwBy5MUgU1sNeLhw8gcMmQomtzJsydP
+IAa/CJMDkkcaYG92VNHEqxQiQ2J8EDyyg0cQn1izahXIg5MtLAKdfMIlZMcYYXWU
+eDmkCInAIGkayVrExuPWu3hD9ogkaswVMKhQJd2BpJUpqj24JNkB5I8sWGkIfRr1
+I6/lywaVvDEVCVcrMpV58BjTS5WVj2h+QVIiNQifh5hjYz7C5skUgVK2CIzyqlYT
+gU9OtdI5UKrs47K9wIpT9iwhgWiEwTHoEehAmsizYyXSJxWdKnxw/jXa0eOPL9gE
+g+gRA1IgISzGtcsvCYTNpkylXFWpKukUkYI8PNGLIMZdEYwdPXhU1nwMiuRFFTrx
+kEgt1g0EhB69SOERD5S4kgVjb/DhQxD/NWhiSFoIA4ZdAinRyiRDQIQLIVclQYow
+pwBiyBeVnehjQoJ8UkUY//mQhjBhtPcGLGCQd6QtcfBByihJ/PADiz9mSQQhojRy
+hg9AdCJKiT5U4shiRWTiihdArYKKD3cIclWWdIZlRg8J4iJJWUxMUUkaPPSwBTBz
+SAXFIG3sEIgwdTZK0A+CrIJGIoOQscZvQTSSyxIDGQEUIbREIdAPX1TRnqMnGoFI
+JIAoQkaM/jswUcsiFQrkgx+3wDoILgSimiVVXIja4iBUnMpVH7gEYQQdvUAiLBFN
+bHGbrwe1sMMHmPHQ41sICdKKE4HcMglEYUACzCOSlEHtQDrY4Uo72+QyCh0+1gGM
+IsEI4tYOa6jyihdb/AHLFesqMk4/8YSzTDb++BPLfg3eIUwsicBGxCbCEFKFDz+4
+AoivGxjiTzyF7PcCDyo4ck88XzTIBSZ2LCaQFa5U8ognhmzxSx/tCWEGHpz6+Ic9
+4JSxYaCBehCLP3bQYQoN8v3GYhS+pKHUIaTA8oZdR8TyCxs/nuOPE1WJhufZISDD
+Tj/+3OCjD6os0uMRYChh4SOidGHs/nxt+JNL2Xj6wLGVOyjhzz6sYNmgGq+IwUTQ
+Bj1xkBKwHmeLPzoE2gPHQAAxZxE/wFMPFgmyuGFVyAFRxyiLcKLInAuRkcnHyCGj
+juY/eD5EjFb4cFs99QCBp2jEI126aLI1gccdaMjcwxJ2H9SHMKVELxsz86SwORBC
+DGHEEUsoQAAGTzwCSxDCn40nHIHkgggfXgSKXHw7aCHKJAsW5IQgXxAXGzP4yAGY
+hEAEIyihCQYAAAAGILkjEEEIQPiBD0hQh3DUgx/RWIc/+oGNMSjuONGJxW8QQr/Y
+oMEfguDeEMDHBENMQoEAcIAWhoCEIgwBgkuzBiNc8IMT5EAU/v7IByOQN5I1zKAE
+JgnCHcYAuxPxIB7nOIH3lOCEJoBhHi9QYACEkAQmKOEIRpCEP5rBgyKUJQtK6AEQ
+XuGPTOyNIevIhzASwQSGFI94xxtIF9QAueOIpg77QEYOjsCEKFyBCaHYBQEUiAAx
+GAEKTYhDPJQhBbtJIQsA6IDkgHAKf6jhgwoBgxqeMTJRaAKUIvnBKnahB+2YzRT+
+QIYRnEAFLXShC+KAAgxdkIUqTGEZ/jBDEZRAhgco8ABAeCAQyrENVC6kCX/wBzwU
+0ZMfLMIVeXAlnn7wB3fIQxZrYMMZvHCKbUTgmGCAAhfMIY0kqGEGMARAAS7AhAdW
+wh9Z/nDmQpLxjm3xBCzyCZQPhNAFW4iNHveYBz38gQcYciANbKgHLJgQTwNYQAp1
+8N4QquCPPyTIIFgQRR7SoJuD9MMV61pIoH4QhCLAwAlfGAUsOkGLRuwjBAoUwBWc
+Fs8APKAIpaCGGpqABCIcwR+W+GAT2KaPhvWCKgSphT+0kFKFrBQIRUgCFLAQhpTo
+IQ7I6AQMJeCBeCpgBYigBirO4AQnKKEIZvAHJYzVAlvUgw1liAITZOGPckxHIBvw
+BzOqatXtEUEJUPiLGurgh0A04h26jCcAEMABOCDjF4GwAhasAAUlGKGTWvjoDpog
+NmoUhAPH8IchBIKIfmSTsAgR/iiJEMvVNdghEIfAAy1MEE8BdAALtpDGJtQwBjJ0
+gbNKwAE62gGCjyqBYYI4iAlysQ9rqQMcKIDtQczG0mFGIQtiaMPyGLEGySpQE/nw
+GBziQFwuVOEJLvJHJIZ3gl7wg5oJaUcssoBU7W53e97rkxbKcIYQjcC8AGiAJvzx
+DUHgIQ5pAEMWphCDPPjDHCMonRz48YoNKKQQ9QjHPEo0n9OdbiRm8xwRkkBLLWDh
+DkCI5wE+QISchkAU85gHLuSghidUIQ614IczyOCDj5piHwRbSMNkEVCuHK90qLOj
+5sC0wkImAQ1YiCcBJBAFW+yDtwAIQMCUkQ9+qEMd6aDH/j5CEYMflK4Dv0AHCxby
+AnLQwwuuxKP6zkZElQoUCFOEwhTEcIB4NoAGliDHMdQKQwrAzxCIcEUyJAGJgQKh
+yHZZBzmspRAU5IMZHi7IBlRwCEwgYxF9GEMHsGK2wFmpyIKDslU1x70VNyEKW4hn
+AkbQh2pAAxafSMU8egDDIbxBDWDAAhSWYIQhXBrKG7jGPFatEDv4ww8GsUEo3OEP
+fGhDbP54BkAB1JBW9yB3npMKEHjwbFmj7mhmo7IRlgCFJ6AiCfK8wBiCQQ1XYOIT
+pfBEMJzBAAUuYA22rAJRnV1kY11uhAlRhjhUUBAUMIMfvMjmDVRwBFDsIx6QuE5V
+/j5qlw+2GkwqLFwURoQ+NxNv5HfEHYmQ0IQpNIEVp4CBEViRjVYw4hGY4IQnOlEJ
+c5wBhikow4SZYAQhuBxLZPAHShMyhn54wiC4SIcfRGCQIKTCH7fQ3J6H12eu/DkI
+QyhCEawgggKEAHTOdvPY5869rNISC2qIBiqwMQtE9EERjogEJS6BCUmkgh0YUGAB
+tFDIJRQhCJhWnDnsQbaD+MEc9ZDZQPKQD1zEtgd8hUPgBBdrTBtryrr7XhISIAAA
+HIAHRR1CEKy0uc29Wu6C89wwWzwFSdTiEG3Igx8EQQi2NMIRjgDENBoBwweUwQmO
+h7xoCcLfdZBNBTX4gAzU/vAuf3ieIDFghj/kkYqWXWfK3EBH54LA/pZLkOyAOzeg
+j/BFPHQhgQHAABKMYIQHom/9nnNpjGEldcdiU6AFoiQGaRAHdVAHeaAHfOAHg1B8
+guAI9sACBicES8B0TocnB+EG8KAOjpAPz7AO6QAPu7AP7qAGBYEE9xAL0NAwypAH
+L3A2nDMI/mAFQ0AEabcDMRIE58Zn8QZoBtQETfAIqpBFrscDUYAE+0cEPAiFRPAQ
+Q5AE/xcEQlAENGdIXPAFZYAGasAGbeAG61UHd6AHfvAHcZALsgAAMfAGXvAEHOhy
+CBEFyDAPXkAKi8AHY7AB9CANBgEH/rAHAvF1/gAO/puQBJ7TPU7gD6DQPUfgA1iQ
+A4zXOe/XarmzQvQWBWlgC33gAApkAUtQRUuQBEmABKZYZGTQAWLgg0KAhQWkBLZx
+BVvwBWAwBsU1BmZwBmrQBnFAB3hAB3SADpSwCrGgBlLAbBBUZAkRA+ghEH3gD91w
+BhxAEIXgD2TgZIWADv5wD7VwBvwXBf6wCVtABDWgAwuAAAFgA93TgerTXVREBVlw
+BY+QCz/QegGwA1cABVJQb27VA2SQA6FYBWiHhWmHBKMoBfKYBVrQkFmwBVxwi2iw
+But1BplgDJnwBlUgBRx4aWW3EDDACw1jDDAwEByFBqgXBGXgDA3TDI6wCPjA/gYN
+kACSpQJBUFSz13BqlIWIdQVdAAZtQAuQwAEKRAFQsAVacAVWYARiEAU9ZQQ8wINC
+0D1aeEBPEAVRIAVZyY9TcAUISAZnkAZoAAZ/0AVK2Vk2lD76dBApAArKQBA9YA/D
+YHu1ZkBAEAvxQAyosAAIBgAYsAUa1W4DNG9RgAVgcAZm4AjAQAWLBAA48AVfQAVd
+UAaFBkMNYANhwH83ZJBFYARIoAQb+DhKAJpNIGhXEJFiQAZjkAVdgAVT4ARJ8Hhq
+yWq9EEwq5JlKUEhIoAIQEE8FAAC9CUNUMG9N127cY0CX1FVuYAexIAonoEARYAVm
+EAckYFYnEAjYwEdF/gVBiwiFncl//deZn1mamgWRXeBiUwAFTHAEsvd0PUE8RyAP
+59AEWjiKejUDFMBIAOACewAGrYAHjdAEFCAAFhAGVUgEOckxLaUEyakGdFAHjlAM
+b4AACvQCOyBjGqAGw7ALfPAEsGlGnROiWNg9WNh+O4iQThAFVFAFVkAFUvAETRCb
+yzh9O+Fq1iYPaBADUDAEUVBWCxQBTwAJ9uAM74AM7mAN9OAHGCAA86aMl6agwwQF
+WiAGa1AHfCAwtWAE5kUAEbAEqzANktAFUPBeSVCcEjQ4lihBanqbXeQETwAFVaQE
+ZRp3w/OeeKI7cZAO9lALtUSTAKAANVAJ5FAM/pSQCYFACH9QCZhADXXAABRwBUbV
+nlCqBN8VXncQCIXACMwgkPHkADRQCdvQCnbwBWPABVYAX8UZa3Nng52TdkfwmaOZ
+BEcAonL3RihmezPHBEkgDOHgB/G0B9qwC4uwBn5wB3uwB3ogB2+gCrPwAwRQBUyA
+kxF0nEsQBVowBm6AB30QCIGgApK1AXYgDcLgCG1wbGOwBWQKokLIZ0+We2g3hUZQ
+BDzYcvC3E7RGQFtoBUAQAo25AWzkD7ZAB3qwB3zQB33AB3gAB3UQC5rgCmHwof9H
+hDXHBWXQBm1ACEeAYBXAC6bgB3uQB3CABmEwYUSFoHIXc+82cmg6oq8Y/kG1upYJ
+QTwKamsK2QUyAEMWsAuqkAaLYIZ3sDx3cAdNEwdkgAjZUAmv+VayB4ssZgXnSQdk
+0FMOoAGLVABL0AeIegdtYAZm2VnN9mwvF1vksTmcY4k6+ZG3em5oR3NTkAVcQAPx
+1AiZgAZ1QAdzIAdxkLdwAAdu0AZqYAZocAYMGqM21D0FxARS0ARZ4AYVEE8L8AJI
+6K0AIAFrQAh6QAdqEAZaYHNI0J555Gd7drYwO2vyt0I1l5RO0JgAMAakoAd1MAdw
+0AZroAZnELiIWQZjEAZbYAXpqQQ1xIOBBgVGFE8I8AHhmg3WUAcKoEA1MAd28AZl
+0AVVALFqObpl/tNqZoO2JJFimliYX6AFv6lACQAKDCgHbkC7ZBAGYPAFXeAFt4SU
+V0AFkFSmNhSLTjAFFAVDBUABXoAL3tALoUAMu2ADAQAABJAFc3AGEqaeXxt523u9
+UWanahulV/AFYSC5CgQFfxCMbZAGZPAFXDCPVmAFVVDCVDAFUSCH9Ls7RUBIUVAF
+a6ADCuQAPxAK5OALoOAJpKAK0YAIMCQCYcC109u5EeRuPvJnVdgEVdAFZhAGvnkI
+dnAHcKAGYtCaVRAFkFRFWtwEXvSEu+M9SVBzYFALnMABKJAI2PALm+AIm+AJn7AJ
+tnAMSjAACjQEX3AF+Nt0T2e9srFNyrIE/lJwrW6QsfGUCHtAB2tgXFcQBW5Vpkjw
+qpAMRsBrkAb0BLV0B8lwCclADJbgB4rwCJRQCZlwCZowDJwgAjAkpV47ezR6xHdK
+Q09gBWCQBnNwTjDkAX2wB3FwBnesnmUKvF/8xVP5f91TyVWQBWfACdWwCXRwqcW3
+CIwQCZHgCKGADGMQviuAv28lfdrLICu1oIFsBr0oWShwCo+AB2mgBRzpQNwZou6c
+pq1qQPdrS2zwBmbQzAPrB4AwCIWACIdgCLPACi1wTEQQBdvsnj9Ca6ZbBaLEXpLl
+A9AgDbaACU4bm52jk2RLehmtYmzrk2BQBmHYBus1B/isz36wCMOw/gcGAAJCoGxM
+x8q26s2vrFVaQAZwIAhLIFkfoAy6oAvMQAuZ8AVDUKsJsqrbNH+IVUs/OQZlUAZm
+YAZpkAYi3cx5QAehoAt3cAmrMAZ6pcdGnBAxrRWyNUxT0AVnMAeNMNCSRQuAoMmc
+YAyPALbvFnNDmIU0BwVU4JW2xAW35AVgIAbi7AZyAAd3gAvDwAp+sMieNaMFsQVK
+4GYFYQV3wAXPuBUrJQRGwARV8AVscAeRcLPxJAGmwAa68ApRkAuYcGl28MGVl7LF
+o0ZE2KZSMAVUsKK0ndesGcRhaAZ9MAhlMAXIVZx1ugNFQAmIgAuVgAeRDQjCYD13
+cdlH4ARX/iAGb7AHn2AD5lUHlGAMg6AGxaAHTSALpPALv4AJJFYhG3JuLFVASXBA
+TVBFXGyEV2kFWWDBOGEGWhDCr5kED+SeUKAHn5AGPrAGuzAIp/IDd+AK/iTWgQJo
+SPAEWEAGctAHpoCBknUCvnAMdNAKqoAFjTAMsHAEYmALpnAlZlEJ0TOEaCeeqCin
+R/DiBiSLXWlL7hvC8rsE7FnEH4UGjNCKLeISBLEKdWAZ3IsEUnrPflAKbFDA8TQA
+cuALmpAMo0AFuXAKs/ALhIAHuGAFRdAHn8ALUHA0O8hSVEkRzSavX8zepTkFVXAF
+SpmehOt0DmwHjWAsrnAGA/EEjMKM/njR4DR0lGdQB4QQCnmwpSWwWLMwClegC+S7
+CLAgDMKwBTzgCJDuB1pgBGCCBpAQCOw5hUCQBWYke+58olYJBabOxXOq48jTB4zw
+KK3wEgJBCbWwCn+AZ8/t51q1BYEuCJzgCqoLQwqgBGCw2UtwCGixBXUwCJFAHn9w
+EbgADIJQBD4AB7hgC1vQmUKgAwagA9xz0ZxTzO29gaVYQ6LuwDvABbkgBSDxA9o9
+Qj8gDGbABYjgC3EASj0QByV1qw4upYE+CJdwDUpoXmLgS7mJL7RQCbbQMk8wCq1w
+BE8wB3/gKUhw8FAQm1JAk1cCQe93p+/6nf2nTGDLIj5QCI/A/gV1wAa10CTQSAoD
+YQWs4D8mGQy5ENbbtVJ/rgVmMAeEsAjEwAi/rkAGIANl8ARP0LlfcAed8AdLwANr
+IAxtECizRyJsMAyfMAdsoAQXMAACEJuea4O5Y5C707KXqDhHQAiYUAimgOejwgtc
+MBBF8AldYCELIgSLgAh8DDg/IATRHeFyEAiPgAqw8JzmJQAThr8OFEFQ2QNwIAxv
+QAQRhHZNsAnHsAvHEAsyUMATEAWzynChi24huvFfLRBL0EdmAQsFQQq2XjiVEAi3
+UQR3/xEjYgRKHAZu4AeNAArMwAYJhGBuAKfr6WxPGgW00AuOwAl5UEBkUAyWIAZu
+UOgJ/hYJYZzjZxu6tVevDaEEn7AKsJIYuxAfRjAGiPAKoWB+JYEnLbUEU+AFa6AH
+iWAJw3ALMMDkkkUBSQDq0WpGLUsFhBALrqAISzAGAHHJV5kpGwwAALAG06E6aZQE
++dGDx8SJPSxelMhjx0aOHT1uxOJIEh0rWs5UmuPxx5EztKx8hAmTRw8gQ5RE0YKm
+DqFIqKgFeoBQKMIABsJQYXJkiREjRIoYOWJkCxUyupSpcpJBAEIovYLtQqZrjxAg
+PiYKYSIxo0aNMd1uLFJlUyNHqtgA+eijDqWYbd/u6PFDyBEnWMbE+dMIU7BkbwIM
+HUohxZkrQpQsVZJZiRMmTSCJ/kIzASEBJ8KIlUIjhlOxOWV7+AgiiFAcIzv8/v3r
+A4wUJzGfZDrjMQmZOVJwA4ZthMmULmvwHKJUalq1HpAhu8jBBEyRKUCkEKmSRIwT
+GBiGYsEVStiYKlCUsNokRAiaLWAUidqViMhx/m99rAEFL47CsMQRVE5xRAjcaBoi
+CSi0KCMOQBrJZBVsoqHhIOuESqCDI3ioogoshJgiAgSGSgCScyaBxBk2qnBCiVJE
+oaISWYShhY00hMlDwP5+7AgJR/boaAhX2HhihyUkeaSHv3gQzIgmqvhijTsMkQQU
+WMSZRYkNh9qqgAESEEDDoZhwBRg71IjDGFrOWGOPXST5/uMXQ7JYxJdUXskCyB+b
+4MiHL0RRoiM+cPFEjiR28EEXHzdCotCOaCLCwSzIgMMPRTDZRJdyvKlhqy9HRcgF
+SZwJJQw21CCjjlySqWWYS84AxZK2LhGGkCF2+GGHRf10S4hAXtoBiEIY8agSPtBw
+RJRE2pBkiY6oiCSS4DryQQgjlmDuDDoCoTCUWrTRJhTzSB3qMRDmYCaXRuyIg40z
+wMiiizYaOUOKIWp5pNcdBsFFDB6egOSTSb5wwklgVeqDFzyCMIMTLTxKBI8djgBD
+EFYuAXSHjNXYoQxc7JgUCCSQeOKKL9SwQxBHMCHlFWrcOSYR0QbY8DECNkDhkHyE
+/tEkEHjbOEMMLqp4QgkjyBqikmDIwAKLWyhZlI9dIsHFFkosXvgjLzhhBRM+fPBo
+i1a6cLKHKLjotQhV3khyh0sCaQtQIQ5ZQ4kHxWjjjkEcyWQTV4LZJh5y7BCDCABG
+AEADAE5gwAo/LDlHGlAS8YOOOdpIrYsroEhqCCAiWkIUYdT7hcge7BAmkB06EYaN
+rmFCogk2yP5IDk/aIANtjtLQpAiOBNkC90xa8YMRMraV4lLnwLXEk05cISYadsYZ
+B5lSbpkEGFWYUWeZYkKpIxA87pCD6DG4uCKKJo4gIgggMgpiCj5aESaRHdrwo3tO
+BAEFEmYHpB+4IROAOAQr/jiiCT1MCncbwUMwhlGJJEhJCloYAxvoAAhERCJwoEgF
+KoixDGaIAxrkSAYzcKEJTwyCD4DYgx3ksIZ5ccEKoEPCEMhikYl0hA17QAIuhGGG
+PLRCFVEY4MKgEAUBMkoUYHgLEwjhB1AQoxNWYEIUshAGNchBD4NQhCQugQlPbAIU
+neDEJzBxCUocYhGCGIQf8kCHN7DqC1qgAhSWAD+ImKWHHylCJ3qRCjQcYohJTGIP
+0IAKJ/BAC0j0SB0QkbAkHMIQR2CCFLDwhTK8gQ5+GAQiGhGJSVSCEpSoliMWcQhC
+/CGGcaBhGDw3hRg1RX48dIuTqsCJXsRiFExAZCIL/lGIKLyhE5LayBIqRrbXAIEI
+ypGCF7ZgBjTAYQ578INsDnGIRBjiEIMIRB/0QId4pcYLWWhPEyoouh/4ICO4KUIQ
+yLCE2wRzYUgARBugsIMg+DARW9jITHxQEyMoYhajKEQXyJAGNnjSDnnIgx7wgIc6
+kLMNajBDGM5ZBfcp4Qg6dI1E7DnSHynIIz7AQyIUZptm0gEXTSjEKGTxrjCQ4Qxq
+UAMb2HBRNZyhDGL4whbQ6b49GoGd7vwjSZUKrDWQAgpT4MhMfkAITQyhCEjwxBCv
+cAUtdKELX/gCGLwgTS1coQpSgEITijoE+UWEh/VcalxxwwRLQGIRmAAUD45A/gYv
+rKIUZxjCHSCBlCdAQQpSoMIUqjCFKaDVCU1QQgWNSha3vlOul/2RGOjABqjuwAyK
+UEIPABGKOFDhCU85QqQuwwQmLCEzSYgKEUA6OndaFrO37c/8djCEPKyHBz4Ywyq6
+AwT5DMGqT3kKEWSrQ/mF1La48RdupSuENzwiEVVQmib20M4f/AAIQJBfeL/73XZe
+hCJwfQsRWAEIk0r3tkoQRCkQ8YlLsAEj7vRBfvP7Gow8F0haAEUwGkEF9+JWCnrA
+ghcCOhO19HcttkGkHIThC1e8ocC3XSmEbdNDigTUnkZYxC528AZZvAG9F8bsie0J
+BlwogiNHQHGMLwuE/kEIQ1pRlXGOSVoFVYyiIzwgA6AeqGMi+4kHdRDGFzpShVpo
+Qg1uAMOjijzlvyjhE7bwyCCC8QtSSM8NVAbzX9YADD50ZAmoeIUajKCES7SiUDRR
+cZhzLIQ+/EJ4HJEDLcpcLETgogg8+Cwy5UzlHnwhDdjqBCqAuQMs0CITF4uEMNiy
+g/YOmsjR3QEaclEItuhBGC8JQy4OsZEfoAEPlbb0lNugCS5sJAqlOAUPgCAIYfRm
+B0YYRSr284MgDJkjUk41ZsET0DcIow2MZgUoAvoFYayhV154hIJtvREf9OEKwUZx
+EOqAionEIRhY2IgQHBELJUDJD0BDhR4CISkygQRDDXHG9lKXYBwesEEYuz5DL/rQ
+zyugwhaViIMferEGJ5FCFdeOt4yh4ApCKGIRwrBFFGZCB2HAQXh1AMahoyAMPswk
+4THmwRcoIYhMCOMR/WQCJ2jBETr0QYCI+EUm1jAHK2T44+4N7SG0QLYx56EjwvNB
+LoJhCk5gQhRx61pAAAA7
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=common.css
+Content-Type: text/css; charset=iso-8859-1; name=common.css
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/css/common.css
+Content-Transfer-Encoding: 8bit
+
+body
+{
+  margin-left           : 130px;
+  background-image      : url(/people/Xavier.Decoret/images/borders/C++.gif);
+  background-repeat     : repeat-y;
+  background-position   : top left;
+  text-align            : justify;
+}
+pre {
+  background-color: inherit;
+  margin : 0px;
+  font-size : inherit;
+  border : none;
+}
+
+body {
+  width : 800px;
+}
+
+div.centeredimg {
+  text-align: center;
+}
+div.centeredimg img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.mention {
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: #FFFF99;
+  border: solid 2px yellow;
+}
+
+table td {
+  vertical-align: top;
+}
+div.quotation
+{
+  margin-left: 20px;
+  padding: 5px;
+  border: 1px solid #990066;
+  background-color:  #F1C0FF;
+}
+div.floatingright  {
+  float : right;
+  margin-left: 10px;
+  margin-right: 0px;
+}
+div.cpp {
+		margin-bottom:5px;
+}
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=geshi.css
+Content-Type: text/css; charset=iso-8859-1; name=geshi.css
+Content-Location: http://artis.imag.fr/people/Xavier.Decoret/css/geshi.css
+Content-Transfer-Encoding: 8bit
+
+.de1, .de2 {font-weight:normal;background:transparent;color:#000; padding-left: 5px;}
+.kw1 {color: #a1a100;}
+.kw2 {color: #000; font-weight: bold;}
+.kw3 {color: #000066;}
+.kw4 {color: #f63333;}
+.co1, .co2, .coMULTI  {color: #808080;}
+.es0 {color: #000033; font-weight: bold;}
+.br0 {color: #66cc66;}
+.st0 {color: #ff0000;}
+.nu0 {color: #ff33ff;}
+.me0 {color: #006600;}
+
+[class~="ln-xtra"] {	
+  color: #cc0; background-color: #ffcc33;	
+}
+
+
+pre.xml, div.xml {
+  font-family: monospace;
+  font-size: normal;
+  background-color: #EEEEEE;
+}
+div.xml table {
+  border-collapse: collapse;
+}
+div.xml table td.line {
+  text-align: right;
+  padding-right: 10px;
+  color: #0000CC;
+}
+pre.xml {
+  white-space:pre;
+}		
+[class~="ln-xtra"] {	
+  color: #cc0; background-color: #ffcc33;	
+}
+
+
+div.caption {
+  background-color: #BBBBBB;
+  font-family: monospace;
+  font-size: normal;
+}
+
+pre.cpp, div.cpp, pre.c, div.c {
+  font-family: monospace;
+  font-size: normal;
+  background-color: #EEEEEE;
+}
+div.cpp table {
+  border-collapse: collapse;
+}
+div.cpp table td.line {
+  text-align: right;
+  padding-right: 10px;
+  color: #0000CC;
+}
+pre.cpp {
+  white-space:pre;
+}		
+
+pre.java, div.java {
+  font-family: monospace;
+  font-size: normal;
+  background-color: #EEEEEE;
+}
+div.java table {
+  border-collapse: collapse;
+}
+div.java table td.line {
+  text-align: right;
+  padding-right: 10px;
+  color: #0000CC;
+}
+pre.java {
+  white-space:pre;
+}		
+
+pre.bash, div.bash {
+  font-family: monospace;
+  font-size: normal;
+  background-color: #EEEEEE;
+}
+div.bash table {
+  border-collapse: collapse;
+}
+div.bash table td.line {
+  text-align: right;
+  padding-right: 10px;
+  color: #0000CC;
+}
+pre.bash {
+  white-space:pre;
+}		
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=artis-print.css
+Content-Type: text/css; charset=iso-8859-1; name=artis-print.css
+Content-Location: http://artis.imag.fr/css/artis-print.css
+Content-Transfer-Encoding: 8bit
+
+body {
+  font-family:serif;
+  font-size:small;
+  color:#333;
+  background-color:#F0F0FF;
+  padding:0px;
+  margin: 10px;
+}
+h1 { 
+  font-size:xx-large;
+  color: #448;
+  font-weight: bold; 
+  text-align: center;
+  margin: 10px 0px;
+  padding: 0px;
+}
+h2 { 
+  font-size:x-large;
+  color: #006;
+  margin : 25px 0px 4px 6px;
+  border-bottom:2px solid #CCD;
+  letter-spacing:2px;
+  font-weight: normal;
+  text-align: left;
+}
+h3 {
+  font-size: large;
+  color: #003;
+  margin : 20px 0px 6px 30px;
+  border-bottom:1px solid #CCD;
+  letter-spacing:1px;
+  font-weight: normal; 
+  text-align: left; 
+}
+a {
+  color:#0090C0;
+  text-decoration:none;
+  font-weight:600;
+}
+img {
+  border-width:0px;
+}
+pre {
+  font-size:medium;
+  background-color: #EFEFFF;
+  border: 1px solid #DDE;
+  padding: 6px 6px 2px 6px;
+  margin: 8px 3%;
+}
+#banner {
+  display: none;
+}
+#content {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background-color:#FFF;
+}
+#footer {
+  display: none;
+}
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=snapshot-C2-a-small.jpg
+Content-Type: image/jpeg; name=snapshot-C2-a-small.jpg
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/img/snapshot-C2-a-small.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUE
+BAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQIC
+AgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
+CgoKCgoKCgoKCgoKCgr/wAARCADIASwDASIAAhEBAxEB/8QAHQABAAICAwEBAAAA
+AAAAAAAAAAEDAggEBgcJBf/EAEYQAAEDAgQDBQYDBAcGBwAAAAECAxEABAUSITEG
+B0ETIlFhcQgJFIGRoSMysSRCUtEVM0NicsHwFjRzdJLhF1RVlKKyxP/EABkBAQEB
+AAMAAAAAAAAAAAAAAAAGBwEDBP/EACQRAQACAQMEAgMBAAAAAAAAAAABAgQDBREG
+ITFBElFhcbHB/9oADAMBAAIRAxEAPwD5l0pSgUpSgUpSgUpSgUpSgUpSgUpSgUpS
+gUqJFSCDtQKUmokUE0pSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpS
+gUpSgUpSgUpSgUpSgVCtqmoVtQfg4xzDwHBr5zDLhFyp5peVxKGRA0kEEkSK/MuO
+blqCPhsCdUJMl18D9Aa67zNbVb8a3C889o20sAdBlAj7Vxhbsp1DIj0mta2HpLZc
+/B09a9ZmZrEzzaeOZj8cJTO3bM0NaaVniImfUf67E1zbvzcIL2DsdkD+IltxWYjy
+J0FdqwPiLCuIWC7hz0qT/WNOJhaPUf57V5qEJA0AGnhXZ+WP+/3c/wDlx/8Aauep
++ktqxNpvlaNfhakevE94jvzz9m27tlauVXSvPMT9+nc07VNQnaprJFWUpSgUpSgU
+pSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgVB2qaGg8z5vtI
+RxO24kQV2SCrXcgqH6AV+e2SUAn+EE13nj3gs8U2iLqzcKbu3QQ0lSu6tMyUnwPg
+a6fZYHjTraWkYTclaQELT2J0Pga2rordMO+2xS14iaRETzPH68o3ecXWrk/KK8xM
++lAiJrsXLZShjTyMxg2xJA8lD+dcS34G4mfGtgGxvLroSa7Bwlwjf4DfuX13cMqC
+migJbk7kGZI8q9PVG97NqbNr6Fdetr2rxERMT35j65dW2YOZXMpeaTERPme39diT
+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
+BSlKBSlKBSlKD//Z
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=snapshot-C2-b-small.jpg
+Content-Type: image/jpeg; name=snapshot-C2-b-small.jpg
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/img/snapshot-C2-b-small.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUE
+BAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQIC
+AgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
+CgoKCgoKCgoKCgoKCgr/wAARCADIASwDASIAAhEBAxEB/8QAHQABAAICAwEBAAAA
+AAAAAAAAAAEDAggEBwkGBf/EAEYQAAEDAgQDBQcBBQcCBAcAAAECAxEABAUSITEG
+B0EIEyJRYQkUMnGBkaEjJEJSsdEVM0NicsHwFnQXc5LhJTRVgpSixP/EABsBAQAB
+BQEAAAAAAAAAAAAAAAAEAgMFBgcI/8QAKxEBAAEDAgIIBwAAAAAAAAAAAAECAwQF
+ETFRBgcSEyEyYbEUUnGBodHh/9oADAMBAAIRAxEAPwDzLpSlApSlApSlApSlApSl
+ApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSl
+ApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSl
+ApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApSlApTakg0ClKUClKUC
+lKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKEgUClRImKFQSMyjA8zQTSr
+sMwvFcdeFvgWF3V8spUoIsrZbxKU/EYQDoOp6da++4f7I/aV4lcCLHk5jLA71TZc
+xJtFolKkpzEEvKTGhEGIJIAM6UHXdJitgeFfZwc8sZDT3EmO8P4K2taO8S5dLuXU
+IUmSrK0nKSk+EpzjXYkCa+/4Z9mLwrbNsvca828QunIbU+xhOGtsImT3iAt0rUQR
+ELyiDMpNBp+DNYuONtj9RxKP9SgK9AeE/Z+dm/BltKuODcUxtaICzieLOqS5LgKS
+UtZEgwAjaCCZBJmuxsF5C8n+CouOFOWPDVgg973a0YWx3qQ4qHEEqCldPhmANUiD
+QeZ/DvL/AI+4veSxwpwRjOJrWtSECwwt50FSU5lJlKSJCdSJmNa7A4U7Evaa4sLK
+2uXC8OaeW2A/jd8zahKVpzBZSpRXljchJIJggGvRcuIbS4y/iHepWFEpSFKGeQJE
+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
+UpSgUpSgUpSgUpSg/9k=
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=snapshot-D-a-small.jpg
+Content-Type: image/jpeg; name=snapshot-D-a-small.jpg
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/img/snapshot-D-a-small.jpg
+Content-Transfer-Encoding: Base64
+
+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
+/9k=
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=snapshot-D-b-small.jpg
+Content-Type: image/jpeg; name=snapshot-D-b-small.jpg
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/img/snapshot-D-b-small.jpg
+Content-Transfer-Encoding: Base64
+
+/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUE
+BAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQIC
+AgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK
+CgoKCgoKCgoKCgoKCgr/wAARCACgAPADASIAAhEBAxEB/8QAHQABAAIBBQEAAAAA
+AAAAAAAAAAEDAgUGBwgJBP/EAEAQAAIBAwIEAwYDBwMCBgMAAAECAwAEEQUGBxIh
+MQhBURMiMmFxgRSRoQkVI0JSsdEzwfAWYiQlNFNygnOT4f/EABsBAQEAAgMBAAAA
+AAAAAAAAAAAFAQQCAwYH/8QALBEAAgICAQMDAwQCAwAAAAAAAQIAAwQRBQYSIRMx
+QRQiUQcjMmEWQjNDUv/aAAwDAQACEQMRAD8A8y6UpSIpSlIilMjOKhmCjmY4Hqel
+Ik0q/StK1bXrgWug6XdX0pIAjsrZ5myTgdEB8yB9639tfwjeJfd6iTSeDWsxxsoZ
+ZtQiW0QjGR1mZaROOqV2L2x+zK476sytubcW3dGjPxA3cl1IOp/ljQL6H4vOuRNr
+fsstnW/s5t68WdUvGH+pDpWnx26Ht0DSF2x3HbzHbFInTD5CsTIocRlhzE4C56n7
+V6K7Y8AHhd24ii42Jcas47yaxqs0uehHwoUXz9O4Brkfa3CLhVsgJ/0hw20HTSnw
+yWmkxK46g/Hy83cA96RPMXa3CXipvcp/0hw117Ulf4ZLTSpWQ9Afj5eXsQe9cjbZ
+8AHij3Hyvc7HttJQnBbWNWiiI79eRC7eXp5ivRY8xQRlzygYC56D7VAUKMAUidLd
+v/ssd63ELPuri/pNm/L7kdhps1wM9MczOydO+cA9vOuuPEbh3uzhRvO+2FvXTWtr
++wlKuCDyyofglQn4kce8reY+YIHrCRXD3i78Lml+IfZovNISG23RpUTNpF6ygfiF
+wSbWRvJGPVW/kbr2LAonnJSr9V0rVNA1W50LXNPltLyzneC7tbhOWSGRThkYeRBG
+KopEUpSkRSlKRFKUpEUpSkRSlKRFKUpEx9onOI+Ycx7Lnqft3rc21eDfFzfLIuz+
+GGv6iJPgkttKl5D2/nIC46jrnsc16d7Y4XcNdlII9ocPtE0wKcqbHSoo2B6nPMFz
+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
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=snapshot-D-c-small.jpg
+Content-Type: image/jpeg; name=snapshot-D-c-small.jpg
+Content-Location: http://artis.imag.fr/Membres/Xavier.Decoret/resources/ode/img/snapshot-D-c-small.jpg
+Content-Transfer-Encoding: Base64
+
+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
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=valid-xhtml10.png
+Content-Type: image/png; name=valid-xhtml10.png
+Content-Location: http://artis.imag.fr/images/valid-xhtml10.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAAEjEcpEAAACiFBMVEUAAADe5+fO
+ezmtra3ejEKlhELvvWO9WlrehELOe3vepaWclHvetVLGc3PerVKcCAj3vVqUjHOU
+e1JjlL0xOUpjjL2UAAC91ueMrc7vrVKlvdbW3u+EpcbO3ufO1ucYWpSMKQi9SiF7
+e3taWkoQEAiMczkQSoxaUkpzc3O1lEoICACEazEhGAgIAACEYzFra2utjELWcznG
+nEr/7+9jY2POazHOYzGta2NShLVrlL05OUqctdacCADGa2ucAADGpVqUtc61ORg5
+OTmlUikYGAiUezl7YzEYEAiUczkxMTG9nEqtIRDe3t4AMXu9lEoQCACMazEAKXsp
+KSmljFrW1ta1jELOzs7n7/fGxsa9pVqEOSkpY5xznL29tZxahLXOpVr/99ZrY1L/
+79ZjUiljSikAOYTvxmMAMYScezmchFqUczGtlFp7c2utjFqUlJStxt73///39/9C
+e61CSkq9xsZznMbW5+9Cc62MjIxCQkrv9/fv7/fOzsbnlErWjIz/3mtCORhza1Ip
+IRBzWjH/1mtCMRhzY1L/zmvnvVpSQiHOpVJrUinntVr3zmOEc1L3xmNaWlq1nFo5
+QkrGWim1lFoISpRSUlK1zt4hWpwASoz///////8xa6WUaykAQoxKe61KSkp7nMbW
+tWPe5+9jWlL39/f39/fWrWNCQkLera3nvWPv7+85MRjntWPetVp7c1IxKRCUlHtK
+ORh7a1IxIRCUjHtaSiHWrVIpIQhzWinvvVpaQiH/1mPWpVKMe1L/zmP/xmNrUiGE
+rc4YGBj/73PG1ucQWpT/53O9nFoQUpS1SiEQEBC9zt69vb05c6UISoxSUko5a6UI
+CAhSSkohUpS1tbXetWMAQoSUgD+kAAAA2HRSTlP/////////iP9sSf//dP//////
+//////////////////////////////////////////8M////////////ef//////
+////////////////////////////////////////////////////////////////
+//////////////9d////////////////////////////////////AP//////////
+////CP//RP//////////////////////////////////////////////////////
+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
+AJsAAAAASUVORK5CYII=
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs
+Content-Disposition: inline; filename=vcss.png
+Content-Type: image/png; name=vcss.png
+Content-Location: http://artis.imag.fr/images/vcss.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAABKVBMVEUAAAAjIx8M
+R51ZVUqAdlmdnZ3ejEWLDAuNjY1kiMG0n2d9fX19Ghfrp1FtbW3y39+3Ph6lIRNd
+XV2qJBFcVUhcVUhPT0/dsmpUfLr57+/u7u4/PDWZAACZAADOp1GdGxG+SyTgvnNd
+SySzk16+mkuxw+BOS0BOS0DOzs7MzMy4T09RRDwsJBG+vr73wV6fkG6eCQRFcLSu
+rq6/X1+ht9nXfz5sepHuwV59ZTHetFjQ2+wMCQQ2ZK5tWCsmWajsz8+Sq9NMPh4h
+VaY8MRj///////////////////////9MTEyOp9Lu8vhXU1A8PDyjOSTBz+YLRJ2r
+Ly8sLCwXTaKujEUcHByDn82dfz7/zGafDw+fDw+zRSlzlMcMDAyNcji1tbXf5vIc
+FgvATJOjAAAAY3RSTlP/8/////////////////8A//////P/////ov//8///////
+///////z///T//////////+i//////////////8w/////6IA/xAgMP//////////
+8/////////8w0/////////+zehebAAACkUlEQVR42u2VfVPTQBDG19VqC6LY+lKr
+RIxFQaFSBPuSvhBPF8SIUZK2J5Yav/+HcO8uZdLqTCsU/nKnyWwvk1/unnt2D9Zm
+H+8/cMAaTRFy+ng69/yiwC/+gy8R3McGv5zHvGJEGAdR4eBgi1IbZwevIEZE24pF
+tBtzG1Q4AoD5zvw5pEDcJvIQV/TE3/l+H9GnNJwcdABS5wAbFQLMqI98/UReoAaO
+TlaJsp0zaHx7LwZvY0BUR2xpWTzqam0gzY8KGzG4MhBCNGucha4QbpETy+Yk/BP8
+5nt734AjpQLTsE4ZFpf/dnkUCglXVNYB+OfUZJHvAqAoa45OeuPgm4+Xjtv7xm4N
+7PMV4C61+Mrz3H2WImm3ATiWrAiwZRWcUA5Ej4dgIEMxDv6yxHHcNuAutnjv2HZ1
+NeuycoVPh0mwC834zZC9Ao5dkZZKwLVGwT+WdLw0YOZ1saEkUDoT+QGWKZ0E2xpc
+rPakVW2KXwyUtYEtlEAj3GXD/fYwrryAdeiyGqidQSw1eqtJcA8cZq4zXqhPuCBY
+E1fKJjh/5X6MwRm9c2xf7WVdLf5oSdt64esVIwVAKC1HJ2oli8vj3L0YzC4zjkMa
+gt+arDAs6bApbL1RVlWIqrJbreqKZmh4y6VR7rAJeUYDVRj9VqRXkErpJ9lbEwtE
+83KlIfeG4p52t7zWIMO1XcaGz54uUyet+hBM7BXXDS8Xc5+8Gmmbu1xwSoGIokA3
+oTptQecQ4Iimm/Ew7jwbPfMi3TM91T9XVIGo+W9xC8oWpugVCXLuwXijjxJ3r/6P
+jX7nlFua8QmyM+TO/Gja2TTc2Z95C5uaewGH6cJi6bJO6Z+TY276eH3tbgy+/3ly
+3Js+rj66osG/AV5htgaQ9SeRAAAAAElFTkSuQmCC
+
+------------3q8ZfzC4S4Ewp3l2cgTpLs--
